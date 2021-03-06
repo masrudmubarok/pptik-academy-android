@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backwhite"
     tools:context=".SplashScreen"
     android:id="@+id/splash_screen">
 
@@ -26,9 +27,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="245dp"
-        android:layout_marginTop="527dp"
-        android:layout_marginEnd="250dp"
-        android:layout_marginBottom="291dp" />
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="233dp" />
 
 </RelativeLayout>

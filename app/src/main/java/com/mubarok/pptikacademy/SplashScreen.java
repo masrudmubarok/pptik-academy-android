@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import static java.lang.Thread.sleep;
-
 public class SplashScreen extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+        setContentView(R.layout.activity_splashscreen);
         Thread thread = new Thread() {
             public void run(){
                 try {
@@ -19,7 +17,7 @@ public class SplashScreen extends Activity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                    startActivity(new Intent(SplashScreen.this, IntroActivity.class));
                     finish();
                 }
             }
