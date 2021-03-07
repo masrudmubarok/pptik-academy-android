@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PPTIK Academy</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="fullname">Fullname</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="city">City</string>
 </resources>
