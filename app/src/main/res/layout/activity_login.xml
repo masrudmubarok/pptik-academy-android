@@ -92,7 +92,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnlogin2"
+        android:id="@+id/btnsignin2"
         android:layout_width="293dp"
         android:layout_height="50dp"
         android:layout_marginLeft="30dp"

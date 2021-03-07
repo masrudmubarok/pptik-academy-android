@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.mubarok.pptikacademy"
         minSdkVersion 19
@@ -17,6 +18,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
 }
 
 dependencies {
@@ -24,6 +35,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     testImplementation 'junit:junit:4.12'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.bumptech.glide:volley-integration:1.4.0'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.0.0'
