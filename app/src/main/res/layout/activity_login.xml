@@ -98,7 +98,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/bluebtn"
-        android:text="Login"
+        android:text="Sign In"
         android:textColor="@color/colorTextWhite"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="@+id/textToolbarSignin"

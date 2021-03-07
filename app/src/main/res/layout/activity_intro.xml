@@ -61,7 +61,7 @@
         android:layout_width="112dp"
         android:layout_height="44dp"
         android:background="@drawable/bluebtn"
-        android:text="Login"
+        android:text="Sign In"
         android:textColor="@color/colorTextWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
