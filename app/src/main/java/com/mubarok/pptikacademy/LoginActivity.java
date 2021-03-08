@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),
                 "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
-        //inisialisasi button
+        //inisialisasi button & text input
         mBtn_signin = (Button) findViewById(R.id.btnsignin2);
         mTxt_username = (TextInputLayout) findViewById(R.id.textInputUsernameL);
         mTxt_password = (TextInputLayout) findViewById(R.id.textInputPasswordL);
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                url = "http://192.168.100.4/pptik-academy-android/login.php?" + "username=" + mTxt_username.getEditText().getText().toString() + "&password=" + mTxt_password.getEditText().getText().toString();
+                url = "http://192.168.1.25/pptik-academy-android/login.php?" + "username=" + mTxt_username.getEditText().getText().toString() + "&password=" + mTxt_password.getEditText().getText().toString();
                 if (mTxt_username.getEditText().getText().toString().trim().length() > 0 && mTxt_password.getEditText().getText().toString().trim().length() > 0) {
                     new Masuk(getApplicationContext()).execute();
                 }
@@ -88,9 +88,9 @@ public class LoginActivity extends AppCompatActivity {
                     JSONArray hasil = json.getJSONArray("login");
                     for (int i = 0; i < hasil.length(); i++) {
                         JSONObject c = hasil.getJSONObject(i);
-                        String nama = c.getString("username").trim();
-                        String email = c.getString("password").trim();
-                        session.createLoginSession(nama, email);
+                        String username = c.getString("username").trim();
+                        String password = c.getString("password").trim();
+                        session.createLoginSession(username, password);
                         Log.e("ok", " ambil = data");
                     }
                 } else {
