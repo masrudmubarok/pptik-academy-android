@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -110,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             if (success!=null && success.equals("1")) {
-                a = new Intent(LoginActivity.this, MyCoursesActivity.class);
+                a = new Intent(LoginActivity.this, CourseActivity.class);
                 startActivity(a);
                 finish();
             } else {
