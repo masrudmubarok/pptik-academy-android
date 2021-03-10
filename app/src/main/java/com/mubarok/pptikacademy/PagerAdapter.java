@@ -1,27 +1,26 @@
 package com.mubarok.pptikacademy;
 
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+public class PagerAdapter extends FragmentPagerAdapter {
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
-        super(fm);
-        this.mNumOfTabs = NumOfTabs;
+    private int numOfTabs;
+
+    public PagerAdapter(FragmentManager fm, int numOfTabs) {
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        this.numOfTabs = numOfTabs;
     }
 
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case 0:
-                MyCoursesFragmentActivity tab1 = new MyCoursesFragmentActivity();
-                return tab1;
+               return new MyCoursesFragment();
             case 1:
-                DiscoveryFragmentActivity tab2 = new DiscoveryFragmentActivity();
-                return tab2;
+                 return new DiscoveryFragment();
             default:
                 return null;
         }
@@ -29,6 +28,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mNumOfTabs;
+        return numOfTabs;
     }
 }

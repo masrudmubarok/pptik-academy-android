@@ -1,8 +1,9 @@
 package com.mubarok.pptikacademy;
 
 import android.os.Bundle;
+
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,20 +12,16 @@ public class CourseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitle("Select Your Favorite IDE");
-        setSupportActionBar(toolbar);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        setContentView(R.layout.activity_course);
 
-//        tabLayout.addTab(tabLayout.newTab().setText("MyCourses"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Discovery"));
-//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        TabItem tabMyCourses = findViewById(R.id.tabMyCourses);
+        TabItem tabDiscovery = findViewById(R.id.tabDiscovery);
+        final ViewPager viewPager = findViewById(R.id.pager);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
