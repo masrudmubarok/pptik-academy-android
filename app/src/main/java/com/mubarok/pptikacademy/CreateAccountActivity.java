@@ -25,7 +25,7 @@ import java.util.List;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    String HttpURL = "http://192.168.1.25/pptik-academy-android/createaccount.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/createaccount.php";
     TextInputLayout mTxt_fullnamec, mTxt_usernamec, mTxt_passwordc, mTxt_emailc, mTxt_cityc, mTxt_countryc;
     Button mBtn_create;
     String TempFullname, TempUsername, TempPassword, TempEmail, TempCity, TempCountry;
@@ -76,28 +76,28 @@ public class CreateAccountActivity extends AppCompatActivity {
         TempCountry = mTxt_countryc.getEditText().getText().toString();
     }
 
-    public void InsertData(final String fullname, final String username, final String password, final String email, final String city, final String country) {
+    public void InsertData(final String nama_siswa, final String username, final String password, final String email, final String kota, final String negara) {
 
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @SuppressLint("WrongThread")
             @Override
             protected String doInBackground(String... params) {
 
-                String FullnameHolder = fullname;
+                String FullnameHolder = nama_siswa;
                 String UsernameHolder = username;
                 String PasswordHolder = password;
                 String EmailHolder = email;
-                String CityHolder = city;
-                String CountryHolder = country;
+                String CityHolder = kota;
+                String CountryHolder = negara;
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-                nameValuePairs.add(new BasicNameValuePair("fullname", FullnameHolder));
+                nameValuePairs.add(new BasicNameValuePair("nama_siswa", FullnameHolder));
                 nameValuePairs.add(new BasicNameValuePair("username", UsernameHolder));
                 nameValuePairs.add(new BasicNameValuePair("password", PasswordHolder));
                 nameValuePairs.add(new BasicNameValuePair("email", EmailHolder));
-                nameValuePairs.add(new BasicNameValuePair("city", CityHolder));
-                nameValuePairs.add(new BasicNameValuePair("country", CountryHolder));
+                nameValuePairs.add(new BasicNameValuePair("kota", CityHolder));
+                nameValuePairs.add(new BasicNameValuePair("negara", CountryHolder));
 
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
@@ -131,7 +131,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-        sendPostReqAsyncTask.execute(fullname, username, password, email, city, country);
+        sendPostReqAsyncTask.execute(nama_siswa, username, password, email, kota, negara);
     }
 
 }
