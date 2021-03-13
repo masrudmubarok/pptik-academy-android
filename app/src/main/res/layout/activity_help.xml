@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backwhite"
     tools:context=".HelpActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -38,7 +39,63 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         tools:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/contactusimg"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
+        android:src="@drawable/call"
+        app:layout_constraintEnd_toStartOf="@+id/contactusbutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/contactusbutton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="111dp"
+        android:layout_height="46dp"
+        android:fontFamily="serif"
+        android:text="@string/contactusbtn"
+        android:textAllCaps="false"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textToolbarHelp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_help"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <ImageView
+        android:id="@+id/aboutimg"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/seru"
+        app:layout_constraintEnd_toStartOf="@+id/aboutbutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactusimg" />
+
+    <Button
+        android:id="@+id/aboutbutton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="73dp"
+        android:layout_height="49dp"
+        android:fontFamily="serif"
+        android:text="@string/aboutybtn"
+        android:textAllCaps="false"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textToolbarHelp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactusbutton"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

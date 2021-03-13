@@ -17,4 +17,6 @@
     <string name="secirtybtn"><![CDATA[Sign in & security]]></string>
     <string name="helpbtn">Help</string>
     <string name="logoutbtn">Logout</string>
+    <string name="contactusbtn">Contact us</string>
+    <string name="aboutybtn">About</string>
 </resources>
