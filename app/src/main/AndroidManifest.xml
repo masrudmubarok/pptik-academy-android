@@ -12,6 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SecurityActivity"
+            android:parentActivityName=".AccountActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AccountActivity" />
+        </activity>
+        <activity
             android:name=".ProfileActivity"
             android:parentActivityName=".AccountActivity"
             android:theme="@style/AppTheme.NoActionBar">

@@ -37,13 +37,13 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(iProfile);
             }
         });
-//        mBtn_security.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent iSecurity = new Intent(getApplicationContext(),SecurityActivity.class);
-//                startActivity(iSecurity);
-//            }
-//        });
+        mBtn_security.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iSecurity = new Intent(getApplicationContext(),SecurityActivity.class);
+                startActivity(iSecurity);
+            }
+        });
 //        mBtn_help.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
