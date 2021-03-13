@@ -6,12 +6,44 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackWhite">
 
-    <include
+<!--    <include-->
+<!--        android:id="@+id/toolbar_main1"-->
+<!--        layout="@layout/toolbar_main_menu"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main1"
-        layout="@layout/toolbar_main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:src="@drawable/pptik_academy2"
+        app:layout_constraintBottom_toBottomOf="@+id/pager"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_main1"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_main1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.017" />
+
+    <Button
+        android:id="@+id/settingbutton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/setting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_main1"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar_main1"
+        app:layout_constraintVertical_bias="0.039" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"

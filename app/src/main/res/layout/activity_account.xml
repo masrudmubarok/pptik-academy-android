@@ -42,52 +42,117 @@
         app:layout_constraintVertical_bias="1.0"
         tools:textStyle="bold" />
 
-    <ImageButton
+    <ImageView
+        android:id="@+id/profileimg"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
+        android:src="@drawable/profile"
+        app:layout_constraintEnd_toStartOf="@+id/profilebutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/profilebutton"
-        android:layout_width="99dp"
-        android:layout_height="24dp"
-        android:background="@drawable/profil_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="82dp"
+        android:layout_height="48dp"
+        android:fontFamily="serif"
+        android:text="@string/profilebtn"
+        android:textAllCaps="false"
+        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="@+id/textToolbarAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_account"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.045" />
 
-    <ImageButton
+    <ImageView
+        android:id="@+id/securityimg"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/security"
+        app:layout_constraintEnd_toStartOf="@+id/securitybutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileimg" />
+
+    <Button
         android:id="@+id/securitybutton"
-        android:layout_width="181dp"
-        android:layout_height="30dp"
-        android:background="@drawable/security_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="169dp"
+        android:layout_height="47dp"
+        android:fontFamily="serif"
+        android:text="@string/secirtybtn"
+        android:textAllCaps="false"
+        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="@+id/textToolbarAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintHorizontal_bias="0.261"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilebutton"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ImageButton
+    <ImageView
+        android:id="@+id/helpimg"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/help"
+        app:layout_constraintEnd_toStartOf="@+id/helpbutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/securityimg" />
+
+    <Button
         android:id="@+id/helpbutton"
-        android:layout_width="82dp"
-        android:layout_height="23dp"
-        android:background="@drawable/help_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="67dp"
+        android:layout_height="46dp"
+        android:fontFamily="serif"
+        android:text="@string/helpbtn"
+        android:textAllCaps="false"
+        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="@+id/textToolbarAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/securitybutton"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ImageButton
+    <ImageView
+        android:id="@+id/logoutimg"
+        android:layout_width="25dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logout"
+        app:layout_constraintEnd_toStartOf="@+id/logoutbutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpimg" />
+
+    <Button
         android:id="@+id/logoutbutton"
-        android:layout_width="97dp"
-        android:layout_height="23dp"
-        android:background="@drawable/logout_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/logoutbtn"
+        android:textAllCaps="false"
+        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="@+id/textToolbarAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helpbutton"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

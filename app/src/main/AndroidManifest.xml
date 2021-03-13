@@ -11,12 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AccountActivity"></activity>
+        <activity
+            android:name=".AccountActivity"
+            android:parentActivityName=".CourseActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CourseActivity" />
+        </activity>
         <activity
             android:name=".CourseActivity"
             android:label="@string/title_activity_course"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MyCoursesFragmentActivity" />
         <activity
             android:name=".CreateAccountActivity"
             android:parentActivityName=".IntroActivity"
