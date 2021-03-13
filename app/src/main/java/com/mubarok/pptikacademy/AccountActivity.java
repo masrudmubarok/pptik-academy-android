@@ -30,13 +30,13 @@ public class AccountActivity extends AppCompatActivity {
         mBtn_logout = (Button) findViewById(R.id.logoutbutton);
 
         //function button
-//        mBtn_profile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent iProfile = new Intent(getApplicationContext(),ProfileActivity.class);
-//                startActivity(iProfile);
-//            }
-//        });
+        mBtn_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iProfile = new Intent(getApplicationContext(),ProfileActivity.class);
+                startActivity(iProfile);
+            }
+        });
 //        mBtn_security.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
