@@ -55,7 +55,7 @@
         tools:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textUserameS"
+        android:id="@+id/textUsernameS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -69,6 +69,20 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_securtiy" />
 
     <TextView
+        android:id="@+id/textUsernameSD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="serif"
+        android:text="Username from DB"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toEndOf="@+id/textUsernameS"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_securtiy" />
+
+    <TextView
         android:id="@+id/textPasswordS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,8 +92,22 @@
         android:textAllCaps="false"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textUserameS" />
+        app:layout_constraintTop_toBottomOf="@+id/textUsernameS" />
+
+    <TextView
+        android:id="@+id/textPasswordSD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="serif"
+        android:text="Password from DB"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintStart_toEndOf="@+id/textPasswordS"
+        app:layout_constraintTop_toBottomOf="@+id/textUsernameSD" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
