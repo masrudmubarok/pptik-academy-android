@@ -2,20 +2,23 @@ package com.mubarok.pptikacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button mBtn_profile, mBtn_security, mBtn_help, mBtn_logout;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        session = new SessionManager(getApplicationContext());
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar ToolBarAtasAccount = (Toolbar)findViewById(R.id.toolbar_account);
@@ -51,13 +54,35 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(iHelp);
             }
         });
-//        mBtn_logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent iLogout = new Intent(getApplicationContext(),LogoutActivity.class);
-//                startActivity(iLogout);
-//            }
-//        });
+        mBtn_logout.setOnClickListener((View.OnClickListener) this);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.logoutbutton:
+                //Creating
+                AlertDialog.Builder alertLogout = new AlertDialog.Builder(this);
+                //Setting Dialog
+                alertLogout.setTitle("Keluar");
+                alertLogout.setMessage("Apa anda yakin ingin keluar?");
+                alertLogout.setIcon(R.drawable.logout);
+                alertLogout.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        session.logoutUser();
+                        finish();
+                    }
+                });
+                alertLogout.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent iDashboard = new Intent(getApplicationContext(), IntroActivity.class);
+                        startActivity(iDashboard);
+                        finish();
+                    }
+                });
+                alertLogout.show();
+                break;
+        }
     }
 }
