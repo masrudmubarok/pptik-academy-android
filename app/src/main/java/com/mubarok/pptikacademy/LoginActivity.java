@@ -33,9 +33,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
-        Toolbar ToolBarAtas2 = (Toolbar)findViewById(R.id.toolbar_signin);
-        setSupportActionBar(ToolBarAtas2);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        Toolbar ToolBarLogin = (Toolbar)findViewById(R.id.toolbar_signin);
+        setSupportActionBar(ToolBarLogin);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         session = new SessionManager(getApplicationContext());
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                url = "http://192.168.43.206/pptik-academy-android/login.php?" + "username=" + mTxt_username.getEditText().getText().toString() + "&password=" + mTxt_password.getEditText().getText().toString();
+                url = "http://192.168.1.25/pptik-academy-android/login.php?" + "username=" + mTxt_username.getEditText().getText().toString() + "&password=" + mTxt_password.getEditText().getText().toString();
                 if (mTxt_username.getEditText().getText().toString().trim().length() > 0 && mTxt_password.getEditText().getText().toString().trim().length() > 0) {
                     new Masuk(getApplicationContext()).execute();
                 }

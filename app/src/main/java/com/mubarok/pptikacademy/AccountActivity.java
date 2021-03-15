@@ -65,18 +65,18 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
                 //Creating
                 AlertDialog.Builder alertLogout = new AlertDialog.Builder(this);
                 //Setting Dialog
-                alertLogout.setTitle("Keluar");
-                alertLogout.setMessage("Apa anda yakin ingin keluar?");
+                alertLogout.setTitle("Logout");
+                alertLogout.setMessage("Are you sure to logout?");
                 alertLogout.setIcon(R.drawable.logout);
-                alertLogout.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                alertLogout.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         session.logoutUser();
                         finish();
                     }
                 });
-                alertLogout.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                alertLogout.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent iDashboard = new Intent(getApplicationContext(), IntroActivity.class);
+                        Intent iDashboard = new Intent(getApplicationContext(), AccountActivity.class);
                         startActivity(iDashboard);
                         finish();
                     }
