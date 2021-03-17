@@ -28,19 +28,19 @@ public class HelpActivity extends AppCompatActivity {
         mBtn_about = (Button) findViewById(R.id.aboutbutton);
 
         //function button
-//        mBtn_contactus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent iContactus = new Intent(getApplicationContext(),ContactusActivity.class);
-//                startActivity(iContactus);
-//            }
-//        });
-//        mBtn_about.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent iAbout = new Intent(getApplicationContext(),AboutActivity.class);
-//                startActivity(iAbout);
-//            }
-//        });
+        mBtn_contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iContactus = new Intent(getApplicationContext(),ContactUsActivity.class);
+                startActivity(iContactus);
+            }
+        });
+        mBtn_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iAbout = new Intent(getApplicationContext(),AboutActivity.class);
+                startActivity(iAbout);
+            }
+        });
     }
 }
