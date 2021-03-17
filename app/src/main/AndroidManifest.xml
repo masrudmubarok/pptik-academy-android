@@ -11,8 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutActivity"></activity>
-        <activity android:name=".ContactUsActivity" />
+        <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".HelpActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HelpActivity" />
+        </activity>
+        <activity
+            android:name=".ContactUsActivity"
+            android:parentActivityName=".HelpActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HelpActivity" />
+        </activity>
         <activity
             android:name=".EditSecurityActivity"
             android:parentActivityName=".SecurityActivity"
