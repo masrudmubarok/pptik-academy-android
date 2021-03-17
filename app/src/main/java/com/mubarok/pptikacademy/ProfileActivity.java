@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -46,13 +48,13 @@ public class ProfileActivity extends AppCompatActivity {
         mBtn_editP = (Button) findViewById(R.id.editbtnP);
 
         //functin button
-//        mBtn_editP.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent iEditP = new Intent(getApplicationContext(),EditProfileActivity.class);
-//                startActivity(iEditP);
-//            }
-//        });
+        mBtn_editP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iEditP = new Intent(getApplicationContext(),EditProfileActivity.class);
+                startActivity(iEditP);
+            }
+        });
 
         // inisialisasi textview
         mTxt_idP = (TextView)findViewById(R.id.textIdPD);

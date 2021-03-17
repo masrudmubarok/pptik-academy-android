@@ -30,8 +30,8 @@ public class SecurityActivity extends AppCompatActivity {
         mBtn_editS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iEdits = new Intent(getApplicationContext(),EditSecurityActivity.class);
-                startActivity(iEdits);
+                Intent iEditS = new Intent(getApplicationContext(),EditSecurityActivity.class);
+                startActivity(iEditS);
             }
         });
     }
