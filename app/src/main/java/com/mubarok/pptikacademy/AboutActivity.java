@@ -13,7 +13,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
-        Toolbar ToolBarAtasAccount = (Toolbar)findViewById(R.id.toolbar_account);
+        Toolbar ToolBarAtasAccount = (Toolbar)findViewById(R.id.toolbar_about);
         setSupportActionBar(ToolBarAtasAccount);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

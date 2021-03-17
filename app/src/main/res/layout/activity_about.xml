@@ -43,13 +43,12 @@
         tools:textStyle="bold" />
 
     <ImageView
-        android:layout_width="302dp"
-        android:layout_height="362dp"
+        android:layout_width="265dp"
+        android:layout_height="300dp"
         android:layout_marginTop="68dp"
         android:src="@drawable/about"
         app:layout_constraintBottom_toBottomOf="@+id/textToolbarAbout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_about"
         app:layout_constraintVertical_bias="0.0">

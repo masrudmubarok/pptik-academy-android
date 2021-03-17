@@ -13,7 +13,7 @@ public class EditSecurityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_security);
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
-        Toolbar ToolBarAtasAccount = (Toolbar)findViewById(R.id.toolbar_editprofile);
+        Toolbar ToolBarAtasAccount = (Toolbar)findViewById(R.id.toolbar_editsecurity);
         setSupportActionBar(ToolBarAtasAccount);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
