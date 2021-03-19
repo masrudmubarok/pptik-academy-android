@@ -78,6 +78,7 @@
         android:text="Username from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toEndOf="@+id/textUsernameS"
@@ -106,9 +107,41 @@
         android:text="Password from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
+        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toEndOf="@+id/textPasswordS"
         app:layout_constraintTop_toBottomOf="@+id/textUsernameSD" />
+
+    <TextView
+        android:id="@+id/textIdS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="serif"
+        android:text="ID                   : "
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPasswordS" />
+
+    <TextView
+        android:id="@+id/textIdSD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="serif"
+        android:text="ID from DB"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@+id/textToolbarProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toEndOf="@+id/textIdS"
+        app:layout_constraintTop_toBottomOf="@+id/textPasswordSD"
+        app:layout_constraintVertical_bias="0.002" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
