@@ -104,7 +104,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-                nameValuePairs.add(new BasicNameValuePair("id", IdHolder));
+                nameValuePairs.add(new BasicNameValuePair("id_siswa", IdHolder));
                 nameValuePairs.add(new BasicNameValuePair("nama_siswa", FullnamepHolder));
                 nameValuePairs.add(new BasicNameValuePair("email", EmailpHolder));
                 nameValuePairs.add(new BasicNameValuePair("kota", CitypHolder));
