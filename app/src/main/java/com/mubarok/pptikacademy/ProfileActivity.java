@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     JSONObject jsonObject = null ;
     String StringHolder = "" ;
     // Adding HTTP Server URL to string variable.
-    String HttpURL1 = "http://192.168.1.25/pptik-academy-android/profile-read.php";
+    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/profile-read.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

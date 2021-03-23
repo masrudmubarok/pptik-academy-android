@@ -27,11 +27,11 @@ public class SecurityActivity extends AppCompatActivity {
 
     private Button mBtn_editS;
     HttpResponse httpResponse;
-    TextView mTxt_idP, mTxt_usernameS, mTxt_passwordS;
+    TextView mTxt_idS, mTxt_usernameS, mTxt_passwordS;
     JSONObject jsonObject = null ;
     String StringHolder = "" ;
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.1.25/pptik-academy-android/security-read.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/security-read.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class SecurityActivity extends AppCompatActivity {
         });
 
         // inisialisasi textview
-        mTxt_idP = (TextView)findViewById(R.id.textIdPD);
+        mTxt_idS = (TextView)findViewById(R.id.textIdSD);
         mTxt_usernameS = (TextView)findViewById(R.id.textUsernameSD);
         mTxt_passwordS = (TextView)findViewById(R.id.textPasswordSD);
 
@@ -119,7 +119,7 @@ public class SecurityActivity extends AppCompatActivity {
             try {
 
                 // Adding JSOn string to textview after done loading.
-                mTxt_idP.setText(jsonObject.getString("id_siswa"));
+                mTxt_idS.setText(jsonObject.getString("id_siswa"));
                 mTxt_usernameS.setText(jsonObject.getString("username"));
                 mTxt_passwordS.setText(jsonObject.getString("password"));
 

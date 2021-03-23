@@ -30,7 +30,7 @@ import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    String HttpURL = "http://192.168.43.114/pptik-academy-android/profile-edit.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/profile-edit.php";
     Button mBtn_savep, mBtn_cancelp;
     TextInputLayout mTxt_fullnamep, mTxt_emailp, mTxt_cityp, mTxt_countryp;
     String TempFullnamep, TempEmailp, TempCityp, TempCountryp, Id;

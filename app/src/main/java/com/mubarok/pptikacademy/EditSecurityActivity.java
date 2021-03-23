@@ -28,7 +28,7 @@ import java.util.List;
 
 public class EditSecurityActivity extends AppCompatActivity {
 
-    String HttpURL = "http://192.168.43.114/pptik-academy-android/security-edit.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/security-edit.php";
     Button mBtn_saves, mBtn_cancels;
     TextInputLayout mTxt_usernames, mTxt_passwords;
     String TempUsernames, TempPasswords, Id;
