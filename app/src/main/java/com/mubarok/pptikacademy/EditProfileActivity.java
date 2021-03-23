@@ -58,8 +58,10 @@ public class EditProfileActivity extends AppCompatActivity {
         Id = getIntent().getStringExtra("id_siswa");
         mTxt_fullnamep.setText(getIntent().getStringExtra("nama_siswa"));
         mTxt_emailp.setText(getIntent().getStringExtra("email"));
-        mTxt_cityp.setText(getIntent().getStringExtra("city"));
-        mTxt_countryp.setText(getIntent().getStringExtra("country"));
+        mTxt_cityp.setText(getIntent().getStringExtra("kota"));
+        mTxt_countryp.setText(getIntent().getStringExtra("negara"));
+
+
 
         //function button
         mBtn_savep.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +70,15 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 GetData();
                 UpdateData(Id, TempFullnamep, TempEmailp, TempCityp, TempCountryp);
-//                reset();
+                reset();
+            }
+
+        });
+
+        mBtn_cancelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset();
             }
 
         });
@@ -83,7 +93,7 @@ public class EditProfileActivity extends AppCompatActivity {
         TempCountryp = mTxt_countryp.getText().toString();
     }
 
-    public void UpdateData(final String id, final String fullnamep, final String emailp, final String cityp, final String countryp) {
+    public void UpdateData(final String id, final String nama_siswa, final String email, final String kota, final String negara) {
 
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @SuppressLint("WrongThread")
@@ -91,16 +101,16 @@ public class EditProfileActivity extends AppCompatActivity {
             protected String doInBackground(String... params) {
 
                 String IdHolder = id;
-                String FullnamepHolder = fullnamep;
-                String EmailpHolder = emailp;
-                String CitypHolder = cityp;
-                String CountrypHolder = countryp;
+                String FullnamepHolder = nama_siswa;
+                String EmailpHolder = email;
+                String CitypHolder = kota;
+                String CountrypHolder = negara;
 
                 Log.d(TAG, "doInBackground: IdHolder"+id);
-                Log.d(TAG, "doInBackground: FullnamepHolder"+fullnamep);
-                Log.d(TAG, "doInBackground: EmailpHolder"+emailp);
-                Log.d(TAG, "doInBackground: CitypHolder"+cityp);
-                Log.d(TAG, "doInBackground: CountrypHolder"+countryp);
+                Log.d(TAG, "doInBackground: FullnamepHolder"+nama_siswa);
+                Log.d(TAG, "doInBackground: EmailpHolder"+email);
+                Log.d(TAG, "doInBackground: CitypHolder"+kota);
+                Log.d(TAG, "doInBackground: CountrypHolder"+negara);
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
@@ -146,7 +156,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-        sendPostReqAsyncTask.execute(id, fullnamep, emailp, cityp, countryp);
+        sendPostReqAsyncTask.execute(id, nama_siswa, email, kota, negara);
+    }
+
+    public void reset(){
+        mTxt_fullnamep.setText("");
+        mTxt_emailp.setText("");
+        mTxt_cityp.setText("");
+        mTxt_countryp.setText("");
     }
 
     private static final String TAG = "EditProfileActivity";

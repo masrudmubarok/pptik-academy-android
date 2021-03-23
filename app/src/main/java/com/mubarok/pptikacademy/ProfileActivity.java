@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -32,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     String StringHolder = "" ;
     // Adding HTTP Server URL to string variable.
     String HttpURL1 = "http://192.168.43.206/pptik-academy-android/profile-read.php";
+    String HttpURL2 = "http://192.168.43.206/pptik-academy-android/profile-read1.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         mTxt_countryP = (TextView)findViewById(R.id.textCountryPD);
 
         new GetDataFromServerIntoTextView(ProfileActivity.this).execute();
+
     }
 
     // Declaring GetDataFromServerIntoTextView method with AsyncTask.
