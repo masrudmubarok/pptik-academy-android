@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewCountryP" />
 
     <Button
-        android:id="@+id/savebtnEP"
+        android:id="@+id/savebtnep"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="101dp"
         android:layout_height="36dp"
@@ -148,7 +148,7 @@
         app:layout_constraintVertical_bias="0.177" />
 
     <Button
-        android:id="@+id/cancelbtnEP"
+        android:id="@+id/cancelbtnep"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="101dp"
         android:layout_height="36dp"

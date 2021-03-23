@@ -32,7 +32,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     String HttpURL = "http://192.168.43.206/pptik-academy-android/profile-edit.php";
     Button mBtn_savep, mBtn_cancelp;
-    TextInputLayout mTxt_fullnamep, mTxt_emailp, mTxt_cityp, mTxt_countryp;
+    EditText mTxt_fullnamep, mTxt_emailp, mTxt_cityp, mTxt_countryp;
     String TempFullnamep, TempEmailp, TempCityp, TempCountryp, Id;
 
     @Override
@@ -47,19 +47,19 @@ public class EditProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //inisialisasi button & edit text
-        mBtn_savep = (Button) findViewById(R.id.savebtnEP);
-        mBtn_cancelp = (Button) findViewById(R.id.cancelbtnEP);
-        mTxt_fullnamep = (TextInputLayout) findViewById(R.id.textInputFullNameEP);
-        mTxt_emailp = (TextInputLayout) findViewById(R.id.textInputEmailEP);
-        mTxt_cityp = (TextInputLayout) findViewById(R.id.textInputCityEP);
-        mTxt_countryp = (TextInputLayout) findViewById(R.id.textInputCountryEP);
+        mBtn_savep = (Button) findViewById(R.id.savebtnep);
+        mBtn_cancelp = (Button) findViewById(R.id.cancelbtnep);
+        mTxt_fullnamep = (EditText) findViewById(R.id.editTextFullnameP);
+        mTxt_emailp = (EditText) findViewById(R.id.editTextEmailP);
+        mTxt_cityp = (EditText) findViewById(R.id.editTextCityP);
+        mTxt_countryp = (EditText) findViewById(R.id.editTextCountryP);
 
         // Receive Data from ProfileActivity
         Id = getIntent().getStringExtra("id_siswa");
-        mTxt_fullnamep.getEditText().setText(getIntent().getStringExtra("nama_siswa"));
-        mTxt_emailp.getEditText().setText(getIntent().getStringExtra("email"));
-        mTxt_cityp.getEditText().setText(getIntent().getStringExtra("city"));
-        mTxt_countryp.getEditText().setText(getIntent().getStringExtra("country"));
+        mTxt_fullnamep.setText(getIntent().getStringExtra("nama_siswa"));
+        mTxt_emailp.setText(getIntent().getStringExtra("email"));
+        mTxt_cityp.setText(getIntent().getStringExtra("city"));
+        mTxt_countryp.setText(getIntent().getStringExtra("country"));
 
         //function button
         mBtn_savep.setOnClickListener(new View.OnClickListener() {
@@ -77,10 +77,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
     public void GetData() {
 
-        TempFullnamep = mTxt_fullnamep.getEditText().getText().toString();
-        TempEmailp = mTxt_emailp.getEditText().getText().toString();
-        TempCityp = mTxt_cityp.getEditText().getText().toString();
-        TempCountryp = mTxt_countryp.getEditText().getText().toString();
+        TempFullnamep = mTxt_fullnamep.getText().toString();
+        TempEmailp = mTxt_emailp.getText().toString();
+        TempCityp = mTxt_cityp.getText().toString();
+        TempCountryp = mTxt_countryp.getText().toString();
     }
 
     public void UpdateData(final String id, final String fullnamep, final String emailp, final String cityp, final String countryp) {
