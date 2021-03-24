@@ -76,10 +76,6 @@
                 android:value=".CourseActivity" />
         </activity>
         <activity
-            android:name=".CourseActivity"
-            android:label="@string/title_activity_course"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".CreateAccountActivity"
             android:parentActivityName=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -96,8 +92,10 @@
                 android:value=".IntroActivity" />
         </activity>
         <activity android:name=".IntroActivity" />
+        <activity android:name=".SplashScreen"/>
         <activity
-            android:name=".SplashScreen"
+            android:name=".CourseActivity"
+            android:label="@string/title_activity_course"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
