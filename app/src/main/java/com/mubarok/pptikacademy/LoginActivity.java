@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     Intent a;
     TextInputLayout mTxt_username, mTxt_password;
     String url, success;
-    SessionManager session;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        session = new SessionManager(getApplicationContext());
+        sessionManager = new SessionManager(getApplicationContext());
         Toast.makeText(getApplicationContext(),
-                "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+                "User Login Status: " + sessionManager.isLoggedIn(), Toast.LENGTH_LONG).show();
 
         //inisialisasi button & text input
         mBtn_signin = (Button) findViewById(R.id.btnsignin2);
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject c = hasil.getJSONObject(i);
                         String username = c.getString("username").trim();
                         String password = c.getString("password").trim();
-                        session.createLoginSession(username, password);
+                        sessionManager.createLoginSession(username, password);
                         Log.e("ok", " ambil = data");
                     }
                 } else {

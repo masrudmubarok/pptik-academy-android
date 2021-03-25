@@ -12,10 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CourseActivity extends AppCompatActivity {
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.checkLogin();
 
         Button mBtn_account = findViewById(R.id.settingbutton);
         mBtn_account.setOnClickListener(new View.OnClickListener() {
