@@ -15,6 +15,7 @@ import android.view.ViewGroup;
  */
 public class MyCoursesFragment extends Fragment {
 
+    View v;
 
     public MyCoursesFragment() {
         // Required empty public constructor
@@ -22,10 +23,9 @@ public class MyCoursesFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_courses, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.fragment_my_courses, container, false);
+        return v;
     }
 
 }
