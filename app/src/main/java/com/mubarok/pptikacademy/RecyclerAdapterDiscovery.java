@@ -16,11 +16,11 @@ import java.util.HashMap;
 public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapterDiscovery.ViewHolder> {
 
     ArrayList<HashMap<String ,String >> listdata;
-    private Context context;
+    private DiscoveryFragment context;
 
 //    private int lastSelectedPosition = -1;
 
-    public RecyclerAdapterDiscovery(Context context, ArrayList<HashMap<String , String >> listdata) {
+    public RecyclerAdapterDiscovery(DiscoveryFragment context, ArrayList<HashMap<String , String >> listdata) {
         this.listdata = listdata;
         this.context = context;
     }

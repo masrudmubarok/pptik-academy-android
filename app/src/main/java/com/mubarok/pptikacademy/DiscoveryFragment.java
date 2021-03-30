@@ -2,17 +2,29 @@ package com.mubarok.pptikacademy;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.apache.http.HttpResponse;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -42,13 +54,61 @@ public class DiscoveryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_discovery, container, false);
+
+        // --------------------
+        // RecyclerView Kursus (Discovery)
+        // --------------------
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewDiscovery);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        listdata = new ArrayList<HashMap<String, String>>();
+
+        stringRequest = new StringRequest(Request.Method.GET, HttpURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Respon", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("transaksi");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject json = jsonArray.getJSONObject(i);
+                        HashMap<String, String> itemt = new HashMap<String, String>();
+                        itemt.put("id_transaksi", json.getString("id_transaksi"));
+                        itemt.put("tanggal", json.getString("tanggal"));
+                        itemt.put("keterangan", json.getString("keterangan"));
+                        itemt.put("pemasukan", json.getString("pemasukan"));
+                        itemt.put("pengeluaran", json.getString("pengeluaran"));
+                        itemt.put("jenis", json.getString("jenis"));
+                        itemt.put("jumlah", json.getString("jumlah"));
+                        listdata.add(itemt);
+                        RecyclerAdapterDiscovery adapter = new RecyclerAdapterDiscovery(DiscoveryFragment.this, listdata);
+                        recyclerView.setAdapter(adapter);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(stringRequest);
         return v;
-
-
     }
 
 }
