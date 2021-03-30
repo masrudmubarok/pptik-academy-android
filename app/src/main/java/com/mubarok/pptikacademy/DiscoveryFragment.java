@@ -48,7 +48,7 @@ public class DiscoveryFragment extends Fragment {
     ArrayList<HashMap<String , String >> listdata;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.114/pptik-academy-android/transaksiview.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/discovery-read.php";
 
     public DiscoveryFragment() {
         // Required empty public constructor
@@ -82,17 +82,14 @@ public class DiscoveryFragment extends Fragment {
                 Log.d("Respon", response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("transaksi");
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject json = jsonArray.getJSONObject(i);
                         HashMap<String, String> itemt = new HashMap<String, String>();
-                        itemt.put("id_transaksi", json.getString("id_transaksi"));
-                        itemt.put("tanggal", json.getString("tanggal"));
-                        itemt.put("keterangan", json.getString("keterangan"));
-                        itemt.put("pemasukan", json.getString("pemasukan"));
-                        itemt.put("pengeluaran", json.getString("pengeluaran"));
-                        itemt.put("jenis", json.getString("jenis"));
-                        itemt.put("jumlah", json.getString("jumlah"));
+                        itemt.put("id_kursus", json.getString("id_kursus"));
+                        itemt.put("nama_kursus", json.getString("nama_kursus"));
+                        itemt.put("harga", json.getString("harga"));
+                        itemt.put("icon", json.getString("icon"));
                         listdata.add(itemt);
                         RecyclerAdapterDiscovery adapter = new RecyclerAdapterDiscovery(DiscoveryFragment.this, listdata);
                         recyclerView.setAdapter(adapter);
