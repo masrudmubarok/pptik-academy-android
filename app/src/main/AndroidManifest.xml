@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".LearningActivity"></activity>
         <activity
             android:name=".AboutActivity"
             android:parentActivityName=".HelpActivity"
@@ -75,7 +76,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CourseActivity" />
         </activity>
-        <activity android:name=".CourseActivity"/>
+        <activity android:name=".CourseActivity" />
         <activity
             android:name=".CreateAccountActivity"
             android:parentActivityName=".IntroActivity"
