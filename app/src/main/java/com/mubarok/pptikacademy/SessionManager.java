@@ -19,6 +19,7 @@ public class SessionManager {
     private static final String LOGIN = "IS_LOGIN";
     public static final String NAME = "NAME";
     public static final String EMAIL = "EMAIL";
+    public static final String ID = "ID";
 
     // Constructor
     public SessionManager(Context context){
@@ -30,11 +31,12 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String name, String email){
+    public void createLoginSession(String name, String email, String id){
         // Storing login value as TRUE
         editor.putBoolean(LOGIN, true);
         editor.putString(NAME, name);
         editor.putString(EMAIL, email);
+        editor.putString(ID, id);
         editor.apply();
     }
 
@@ -49,12 +51,16 @@ public class SessionManager {
      * * */
     public void checkLogin()  {
         // Check login status
-        if (!this.isLoggedIn()) {
+        if (!this.isLoggedIn()){
             Intent i = new Intent(context, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
-            ((CourseActivity) context).finish();
+        }else {
+            Intent i = new Intent(context, CourseActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
         }
     }
 
@@ -65,6 +71,7 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<String, String > ();
         user.put(NAME, sharedPreferences.getString(NAME, null));
         user.put(EMAIL, sharedPreferences.getString(EMAIL, null));
+        user.put(ID, sharedPreferences.getString(ID, null));
         return user;
     }
 
@@ -75,7 +82,7 @@ public class SessionManager {
         // Clearing all data from Shared Preferences
         editor.clear();
         editor.commit();
-        Intent i = new Intent(context, IntroActivity.class);
+        Intent i = new Intent(context, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
