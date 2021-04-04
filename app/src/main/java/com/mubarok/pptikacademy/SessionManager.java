@@ -17,9 +17,9 @@ public class SessionManager {
 
     // All Shared Preferences Keys
     private static final String LOGIN = "IS_LOGIN";
-    public static final String NAME = "NAME";
-    public static final String EMAIL = "EMAIL";
-    public static final String ID = "ID";
+    public static final String NAMA_SISWA = "NAMA_SISWA";
+    public static final String USERNAME = "USERNAME";
+    public static final String ID_SISWA = "ID_SISWA";
 
     // Constructor
     public SessionManager(Context context){
@@ -31,12 +31,12 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String name, String email, String id){
+    public void createLoginSession(String nama_siswa, String username, String id_siswa){
         // Storing login value as TRUE
         editor.putBoolean(LOGIN, true);
-        editor.putString(NAME, name);
-        editor.putString(EMAIL, email);
-        editor.putString(ID, id);
+        editor.putString(NAMA_SISWA, nama_siswa);
+        editor.putString(USERNAME, username);
+        editor.putString(ID_SISWA, id_siswa);
         editor.apply();
     }
 
@@ -52,7 +52,7 @@ public class SessionManager {
     public void checkLogin()  {
         // Check login status
         if (!this.isLoggedIn()){
-            Intent i = new Intent(context, LoginActivity.class);
+            Intent i = new Intent(context, IntroActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
@@ -69,9 +69,9 @@ public class SessionManager {
      * */
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<String, String > ();
-        user.put(NAME, sharedPreferences.getString(NAME, null));
-        user.put(EMAIL, sharedPreferences.getString(EMAIL, null));
-        user.put(ID, sharedPreferences.getString(ID, null));
+        user.put(NAMA_SISWA, sharedPreferences.getString(NAMA_SISWA, null));
+        user.put(USERNAME, sharedPreferences.getString(USERNAME, null));
+        user.put(ID_SISWA, sharedPreferences.getString(ID_SISWA, null));
         return user;
     }
 
@@ -82,7 +82,7 @@ public class SessionManager {
         // Clearing all data from Shared Preferences
         editor.clear();
         editor.commit();
-        Intent i = new Intent(context, LoginActivity.class);
+        Intent i = new Intent(context, IntroActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
