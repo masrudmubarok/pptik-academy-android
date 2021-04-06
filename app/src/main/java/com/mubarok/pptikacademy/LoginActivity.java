@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         sessionManager = new SessionManager(this);
-        Toast.makeText(getApplicationContext(),
-                "User Login Status: " + sessionManager.isLoggedIn(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),
+//                "User Login Status: " + sessionManager.isLoggedIn(), Toast.LENGTH_LONG).show();
 
         //inisialisasi button & text input
         mBtn_signin = (Button) findViewById(R.id.btnsignin2);
@@ -97,22 +98,15 @@ public class LoginActivity extends AppCompatActivity {
 
                                     String nama_siswa = object.getString("nama_siswa").trim();
                                     String username = object.getString("username").trim();
+                                    String id_siswa = object.getString("id_siswa").trim();
 
-                                    Toast.makeText(LoginActivity.this,
-                                            "Success login. \nYour name : "
-                                                    +nama_siswa+"\nUsername : "+username, Toast.LENGTH_SHORT)
-                                            .show();
+                                    sessionManager.createLoginSession(nama_siswa, username, id_siswa);
 
-//                                    String id_siswa = object.getString("id_siswa").trim();
-//
-//                                    sessionManager.createLoginSession(nama_siswa, username, id_siswa);
-//
-//                                    Intent intent = new Intent(LoginActivity.this, CourseActivity.class);
-//                                    intent.putExtra("nama_siswa", nama_siswa);
-//                                    intent.putExtra("username", username);
-//                                    startActivity(intent);
-//                                    finish();
-//                                    loading.setVisibility(View.GONE);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("nama_siswa", nama_siswa);
+                                    intent.putExtra("username", username);
+                                    startActivity(intent);
+                                    finish();
                                 }
 
                             }
@@ -120,8 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("anyText",response);
-//                            loading.setVisibility(View.GONE);
-//                            btn_login.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginActivity.this, "Error " +e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -130,14 +122,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-//                        loading.setVisibility(View.GONE);
-//                        btn_login.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Error " +error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("password", password);

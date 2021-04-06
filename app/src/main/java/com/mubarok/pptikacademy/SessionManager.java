@@ -12,14 +12,11 @@ public class SessionManager {
     public Context context;
     int PRIVATE_MODE = 0;
 
-    // nama sharepreference
     private static final String PREF_NAME = "LOGIN";
-
-    // All Shared Preferences Keys
     private static final String LOGIN = "IS_LOGIN";
     public static final String NAMA_SISWA = "NAMA_SISWA";
     public static final String USERNAME = "USERNAME";
-    public static final String ID_SISWA = "ID_SISWA";
+    public static final String ID_SISWA= "ID_SISWA";
 
     // Constructor
     public SessionManager(Context context){
@@ -57,7 +54,7 @@ public class SessionManager {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         }else {
-            Intent i = new Intent(context, CourseActivity.class);
+            Intent i = new Intent(context, MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
@@ -67,11 +64,13 @@ public class SessionManager {
     /**
      *  Get stored session data
      * */
-    public HashMap<String, String> getUserDetails() {
-        HashMap<String, String> user = new HashMap<String, String > ();
+    public HashMap<String, String> getUserDetail(){
+
+        HashMap<String, String> user = new HashMap<>();
         user.put(NAMA_SISWA, sharedPreferences.getString(NAMA_SISWA, null));
         user.put(USERNAME, sharedPreferences.getString(USERNAME, null));
         user.put(ID_SISWA, sharedPreferences.getString(ID_SISWA, null));
+
         return user;
     }
 
@@ -82,7 +81,7 @@ public class SessionManager {
         // Clearing all data from Shared Preferences
         editor.clear();
         editor.commit();
-        Intent i = new Intent(context, IntroActivity.class);
+        Intent i = new Intent(context, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
