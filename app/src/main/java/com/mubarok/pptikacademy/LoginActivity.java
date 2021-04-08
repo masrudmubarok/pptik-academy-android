@@ -7,35 +7,24 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button mBtn_signin;
     Intent a;
     TextInputLayout mTxt_username, mTxt_password;
-    private static String url_login = "http://192.168.43.206/pptik-academy-android/login1.php";
+    String url, success;
     SessionManager sessionManager;
 
     @Override
@@ -49,9 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        sessionManager = new SessionManager(this);
-//        Toast.makeText(getApplicationContext(),
-//                "User Login Status: " + sessionManager.isLoggedIn(), Toast.LENGTH_LONG).show();
+        sessionManager = new SessionManager(getApplicationContext());
+        Toast.makeText(getApplicationContext(),
+                "User Login Status: " + sessionManager.isLoggedIn(), Toast.LENGTH_LONG).show();
 
         //inisialisasi button & text input
         mBtn_signin = (Button) findViewById(R.id.btnsignin2);
@@ -63,80 +52,72 @@ public class LoginActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                String mUsername = mTxt_username.getEditText().getText().toString().trim();
-                String mPassword = mTxt_password.getEditText().getText().toString().trim();
-
-                if (!mUsername.isEmpty() || !mPassword.isEmpty()) {
-                    Login(mUsername, mPassword);
-                } else {
-                    mTxt_username.setError("Please insert email");
-                    mTxt_password.setError("Please insert password");
+                url = "http://192.168.43.206/pptik-academy-android/login.php?" + "username=" + mTxt_username.getEditText().getText().toString() + "&password=" + mTxt_password.getEditText().getText().toString();
+                if (mTxt_username.getEditText().getText().toString().trim().length() > 0 && mTxt_password.getEditText().getText().toString().trim().length() > 0) {
+                    new Masuk(getApplicationContext()).execute();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Username/password masih kosong gan.!!", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    private void Login(final String username, final String password) {
+    public class Masuk extends AsyncTask<String, String, String> {
+        ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
+        ProgressDialog pDialog;
+        android.content.Context context;
+        public Masuk (android.content.Context context){
+            this.context = context;
+        }
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(String... arg0) {
+            JSONParser jParser = new JSONParser();
+            JSONObject json = jParser.getJSONFromUrl(url);
+            try {
+                success = json.getString("success");
+                Log.e("error", "nilai sukses=" + success);
 
-//        loading.setVisibility(View.VISIBLE);
-//        btn_login.setVisibility(View.GONE);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url_login,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.getString("success");
-                            JSONArray jsonArray = jsonObject.getJSONArray("login");
-
-                            if (success.equals("1")) {
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-
-                                    JSONObject object = jsonArray.getJSONObject(i);
-
-                                    String nama_siswa = object.getString("nama_siswa").trim();
-                                    String username = object.getString("username").trim();
-                                    String id_siswa = object.getString("id_siswa").trim();
-
-                                    sessionManager.createLoginSession(nama_siswa, username, id_siswa);
-
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.putExtra("nama_siswa", nama_siswa);
-                                    intent.putExtra("username", username);
-                                    startActivity(intent);
-                                    finish();
-                                }
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.e("anyText",response);
-                            Toast.makeText(LoginActivity.this, "Error " +e.toString(), Toast.LENGTH_SHORT).show();
-                        }
+                if (success.equals("1")) {
+                    JSONArray hasil = json.getJSONArray("login");
+                    for (int i = 0; i < hasil.length(); i++) {
+                        JSONObject c = hasil.getJSONObject(i);
+                        String name = c.getString("nama_siswa").trim();
+                        String username = c.getString("username").trim();
+                        String password = c.getString("password").trim();
+                        String id = c.getString("id_siswa").trim();
+                        sessionManager.createLoginSession(name, username, password, id);
+                        Log.e("ok", " ambil = data");
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(LoginActivity.this, "Error " +error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("password", password);
-                return params;
+                } else {
+                    Log.e("erro", "tidak bisa ambil data 0");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+
+                e.printStackTrace();
+                Log.e("erro", "tidak bisa ambil data 1");
             }
-        };
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
+            if (success!=null && success.equals("1")) {
+                a = new Intent(LoginActivity.this, CourseActivity.class);
+                startActivity(a);
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Username/password salah gan.!!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

@@ -3,11 +3,8 @@ package com.mubarok.pptikacademy;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends Activity {
 
     SessionManager sessionManager;
 
@@ -18,13 +15,18 @@ public class SplashScreen extends AppCompatActivity {
 
         sessionManager = new SessionManager(getApplicationContext());
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                sessionManager.checkLogin();
-                finish();
+        Thread thread = new Thread() {
+            public void run(){
+                try {
+                    sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    sessionManager.checkLogin();
+                    finish();
+                }
             }
-        },2000);
+        };
+        thread.start();
     }
 }

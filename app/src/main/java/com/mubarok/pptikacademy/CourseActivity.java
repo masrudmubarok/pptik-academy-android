@@ -20,7 +20,7 @@ public class CourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course);
 
         sessionManager = new SessionManager(getApplicationContext());
-        sessionManager.checkLogin();
+        sessionManager.loginCheck();
 
         Button mBtn_account = findViewById(R.id.settingbutton);
         mBtn_account.setOnClickListener(new View.OnClickListener() {

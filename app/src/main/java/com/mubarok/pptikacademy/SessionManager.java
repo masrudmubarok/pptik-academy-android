@@ -12,11 +12,15 @@ public class SessionManager {
     public Context context;
     int PRIVATE_MODE = 0;
 
+    // nama sharepreference
     private static final String PREF_NAME = "LOGIN";
+
+    // All Shared Preferences Keys
     private static final String LOGIN = "IS_LOGIN";
-    public static final String NAMA_SISWA = "NAMA_SISWA";
-    public static final String USERNAME = "USERNAME";
-    public static final String ID_SISWA= "ID_SISWA";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_ID = "id";
 
     // Constructor
     public SessionManager(Context context){
@@ -28,12 +32,13 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String nama_siswa, String username, String id_siswa){
+    public void createLoginSession(String name, String username, String password, String id){
         // Storing login value as TRUE
         editor.putBoolean(LOGIN, true);
-        editor.putString(NAMA_SISWA, nama_siswa);
-        editor.putString(USERNAME, username);
-        editor.putString(ID_SISWA, id_siswa);
+        editor.putString(KEY_NAME, name);
+        editor.putString(KEY_USERNAME, username);
+        editor.putString(KEY_PASSWORD, password);
+        editor.putString(KEY_ID, id);
         editor.apply();
     }
 
@@ -48,15 +53,25 @@ public class SessionManager {
      * * */
     public void checkLogin()  {
         // Check login status
-        if (!this.isLoggedIn()){
-            Intent i = new Intent(context, IntroActivity.class);
+        if (!this.isLoggedIn()) {
+            Intent i = new Intent(context, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
-        }else {
-            Intent i = new Intent(context, MainActivity.class);
+        } else {
+            Intent i = new Intent(context, CourseActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+        }
+    }
+
+    public void loginCheck() {
+        // Check login status
+        if (!this.isLoggedIn()) {
+            Intent i = new Intent(context, LoginActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         }
     }
@@ -64,13 +79,12 @@ public class SessionManager {
     /**
      *  Get stored session data
      * */
-    public HashMap<String, String> getUserDetail(){
-
-        HashMap<String, String> user = new HashMap<>();
-        user.put(NAMA_SISWA, sharedPreferences.getString(NAMA_SISWA, null));
-        user.put(USERNAME, sharedPreferences.getString(USERNAME, null));
-        user.put(ID_SISWA, sharedPreferences.getString(ID_SISWA, null));
-
+    public HashMap<String, String> getUserDetail() {
+        HashMap<String, String> user = new HashMap<String, String > ();
+        user.put(KEY_NAME, sharedPreferences.getString(KEY_NAME, null));
+        user.put(KEY_USERNAME, sharedPreferences.getString(KEY_USERNAME, null));
+        user.put(KEY_PASSWORD, sharedPreferences.getString(KEY_PASSWORD, null));
+        user.put(KEY_ID, sharedPreferences.getString(KEY_ID, null));
         return user;
     }
 
@@ -81,7 +95,7 @@ public class SessionManager {
         // Clearing all data from Shared Preferences
         editor.clear();
         editor.commit();
-        Intent i = new Intent(context, LoginActivity.class);
+        Intent i = new Intent(context, IntroActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
