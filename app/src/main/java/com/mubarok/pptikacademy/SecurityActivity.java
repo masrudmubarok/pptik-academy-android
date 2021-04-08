@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class SecurityActivity extends AppCompatActivity {
 
@@ -33,16 +34,37 @@ public class SecurityActivity extends AppCompatActivity {
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/security-read.php";
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_security);
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.loginCheck();
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar ToolBarAtasAccount = (Toolbar)findViewById(R.id.toolbar_securtiy);
         setSupportActionBar(ToolBarAtasAccount);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // inisialisasi textview
+        mTxt_idS = (TextView)findViewById(R.id.textIdSD);
+        mTxt_usernameS = (TextView)findViewById(R.id.textUsernameSD);
+        mTxt_passwordS = (TextView)findViewById(R.id.textPasswordSD);
+
+        // Retrieve data from sessionManager
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        final String username = user.get(SessionManager.KEY_USERNAME);
+        final String password = user.get(SessionManager.KEY_PASSWORD);
+        final String id = user.get(SessionManager.KEY_ID);
+
+        // displaying user data
+        mTxt_idS.setText(id);
+        mTxt_usernameS.setText(username);
+        mTxt_passwordS.setText(password);
 
         //inialisasi button
         mBtn_editS = (Button) findViewById(R.id.editbtnS);
@@ -51,17 +73,15 @@ public class SecurityActivity extends AppCompatActivity {
         mBtn_editS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iEditS = new Intent(getApplicationContext(),EditSecurityActivity.class);
+                Intent iEditS = new Intent(SecurityActivity.this,EditSecurityActivity.class);
+                iEditS.putExtra("username", username);
+                iEditS.putExtra("password", password);
+                iEditS.putExtra("id", id);
                 startActivity(iEditS);
             }
         });
 
-        // inisialisasi textview
-        mTxt_idS = (TextView)findViewById(R.id.textIdSD);
-        mTxt_usernameS = (TextView)findViewById(R.id.textUsernameSD);
-        mTxt_passwordS = (TextView)findViewById(R.id.textPasswordSD);
-
-        new GetDataFromServerIntoTextView(SecurityActivity.this).execute();
+//        new GetDataFromServerIntoTextView(SecurityActivity.this).execute();
     }
 
     // Declaring GetDataFromServerIntoTextView method with AsyncTask.

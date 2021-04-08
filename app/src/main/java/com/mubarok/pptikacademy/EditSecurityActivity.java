@@ -51,7 +51,7 @@ public class EditSecurityActivity extends AppCompatActivity {
         mTxt_passwords = (TextInputLayout) findViewById(R.id.textInputPasswordES);
 
         // Receive Data from ProfileActivity
-        Id = getIntent().getStringExtra("id_siswa");
+        Id = getIntent().getStringExtra("id");
         mTxt_usernames.getEditText().setText(getIntent().getStringExtra("username"));
         mTxt_passwords.getEditText().setText(getIntent().getStringExtra("password"));
 
