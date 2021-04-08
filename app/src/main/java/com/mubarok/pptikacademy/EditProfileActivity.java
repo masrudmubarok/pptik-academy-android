@@ -55,11 +55,11 @@ public class EditProfileActivity extends AppCompatActivity {
         mTxt_countryp = (EditText) findViewById(R.id.editTextCountryP);
 
         // Receive Data from ProfileActivity
-        Id = getIntent().getStringExtra("id_siswa");
-        mTxt_fullnamep.setText(getIntent().getStringExtra("nama_siswa"));
+        Id = getIntent().getStringExtra("id");
+        mTxt_fullnamep.setText(getIntent().getStringExtra("name"));
         mTxt_emailp.setText(getIntent().getStringExtra("email"));
-        mTxt_cityp.setText(getIntent().getStringExtra("kota"));
-        mTxt_countryp.setText(getIntent().getStringExtra("negara"));
+        mTxt_cityp.setText(getIntent().getStringExtra("city"));
+        mTxt_countryp.setText(getIntent().getStringExtra("country"));
 
 
 

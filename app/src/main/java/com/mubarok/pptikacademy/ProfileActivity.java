@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -33,28 +34,21 @@ public class ProfileActivity extends AppCompatActivity {
     String HttpURL1 = "http://192.168.43.206/pptik-academy-android/profile-read.php";
     String HttpURL2 = "http://192.168.43.206/pptik-academy-android/profile-read1.php";
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.loginCheck();
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar ToolBarAtasAccount = (Toolbar)findViewById(R.id.toolbar_profile);
         setSupportActionBar(ToolBarAtasAccount);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        //inialisasi button
-        mBtn_editP = (Button) findViewById(R.id.editbtnP);
-
-        //functin button
-        mBtn_editP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent iEditP = new Intent(getApplicationContext(),EditProfileActivity.class);
-                startActivity(iEditP);
-            }
-        });
 
         // inisialisasi textview
         mTxt_idP = (TextView)findViewById(R.id.textIdPD);
@@ -63,7 +57,39 @@ public class ProfileActivity extends AppCompatActivity {
         mTxt_cityP = (TextView)findViewById(R.id.textCityPD);
         mTxt_countryP = (TextView)findViewById(R.id.textCountryPD);
 
-        new GetDataFromServerIntoTextView(ProfileActivity.this).execute();
+        // Retrieve data from sessionManager
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        final String name = user.get(SessionManager.KEY_NAME);
+        final String email = user.get(SessionManager.KEY_EMAIL);
+        final String city = user.get(SessionManager.KEY_CITY);
+        final String country = user.get(SessionManager.KEY_COUNTRY);
+        final String id = user.get(SessionManager.KEY_ID);
+
+        // displaying user data
+        mTxt_idP.setText(id);
+        mTxt_nameP.setText(name);
+        mTxt_emailP.setText(email);
+        mTxt_cityP.setText(city);
+        mTxt_countryP.setText(country);
+
+        //inialisasi button
+        mBtn_editP = (Button) findViewById(R.id.editbtnP);
+
+        //functin button
+        mBtn_editP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iEditP = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                iEditP.putExtra("name", name);
+                iEditP.putExtra("email", email);
+                iEditP.putExtra("city", city);
+                iEditP.putExtra("country", country);
+                iEditP.putExtra("id", id);
+                startActivity(iEditP);
+            }
+        });
+
+//        new GetDataFromServerIntoTextView(ProfileActivity.this).execute();
 
     }
 

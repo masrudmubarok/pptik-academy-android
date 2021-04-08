@@ -20,6 +20,9 @@ public class SessionManager {
     public static final String KEY_NAME = "name";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_CITY = "city";
+    public static final String KEY_COUNTRY = "country";
     public static final String KEY_ID = "id";
 
     // Constructor
@@ -32,12 +35,15 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String name, String username, String password, String id){
+    public void createLoginSession(String name, String username, String password, String email, String city, String country, String id){
         // Storing login value as TRUE
         editor.putBoolean(LOGIN, true);
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_USERNAME, username);
         editor.putString(KEY_PASSWORD, password);
+        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_CITY, city);
+        editor.putString(KEY_COUNTRY, country);
         editor.putString(KEY_ID, id);
         editor.apply();
     }
@@ -84,6 +90,9 @@ public class SessionManager {
         user.put(KEY_NAME, sharedPreferences.getString(KEY_NAME, null));
         user.put(KEY_USERNAME, sharedPreferences.getString(KEY_USERNAME, null));
         user.put(KEY_PASSWORD, sharedPreferences.getString(KEY_PASSWORD, null));
+        user.put(KEY_EMAIL, sharedPreferences.getString(KEY_EMAIL, null));
+        user.put(KEY_CITY, sharedPreferences.getString(KEY_CITY, null));
+        user.put(KEY_COUNTRY, sharedPreferences.getString(KEY_COUNTRY, null));
         user.put(KEY_ID, sharedPreferences.getString(KEY_ID, null));
         return user;
     }
