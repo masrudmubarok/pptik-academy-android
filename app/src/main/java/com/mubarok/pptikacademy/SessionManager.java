@@ -62,6 +62,18 @@ public class SessionManager {
         editor.apply();
     }
 
+    /**
+     * Update security login session
+     * */
+    public void updateSecuritySession(String username, String password, String id_siswa){
+        // Storing login value as TRUE
+        editor.putBoolean(LOGIN, true);
+        editor.putString(KEY_USERNAME, username);
+        editor.putString(KEY_PASSWORD, password);
+        editor.putString(KEY_ID, id_siswa);
+        editor.apply();
+    }
+
     public boolean isLoggedIn() {
         return sharedPreferences.getBoolean(LOGIN, false);
     }

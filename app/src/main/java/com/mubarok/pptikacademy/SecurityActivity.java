@@ -2,35 +2,37 @@ package com.mubarok.pptikacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SecurityActivity extends AppCompatActivity {
 
+    private static final String TAG = SecurityActivity.class.getSimpleName(); //getting the info
     private Button mBtn_editS;
     HttpResponse httpResponse;
     TextView mTxt_idS, mTxt_usernameS, mTxt_passwordS;
     JSONObject jsonObject = null ;
     String StringHolder = "" ;
+    String getId;
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/security-read.php";
 
@@ -55,98 +57,147 @@ public class SecurityActivity extends AppCompatActivity {
         mTxt_usernameS = (TextView)findViewById(R.id.textUsernameSD);
         mTxt_passwordS = (TextView)findViewById(R.id.textPasswordSD);
 
-        // Retrieve data from sessionManager
-        HashMap<String, String> user = sessionManager.getUserDetail();
-        final String username = user.get(SessionManager.KEY_USERNAME);
-        final String password = user.get(SessionManager.KEY_PASSWORD);
-        final String id = user.get(SessionManager.KEY_ID);
-
-        // displaying user data
-        mTxt_idS.setText(id);
-        mTxt_usernameS.setText(username);
-        mTxt_passwordS.setText(password);
-
         //inialisasi button
         mBtn_editS = (Button) findViewById(R.id.editbtnS);
+
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getId = user.get(sessionManager.KEY_ID);
+        mTxt_idS.setText(getId);
 
         //functin button
         mBtn_editS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iEditS = new Intent(SecurityActivity.this,EditSecurityActivity.class);
-                iEditS.putExtra("username", username);
-                iEditS.putExtra("password", password);
-                iEditS.putExtra("id", id);
-                startActivity(iEditS);
+                getUserDetails();
             }
         });
 
-//        new GetDataFromServerIntoTextView(SecurityActivity.this).execute();
     }
 
-    // Declaring GetDataFromServerIntoTextView method with AsyncTask.
-    public class GetDataFromServerIntoTextView extends AsyncTask<Void, Void, Void> {
+    //getUserDetail
+    private void getUserDetail(){
 
-        // Declaring CONTEXT.
-        public Context context;
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
-        public GetDataFromServerIntoTextView(Context context)
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Log.i(TAG, response.toString());
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (success.equals("1")){
+
+                                for (int i =0; i < jsonArray.length(); i++){
+
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String username = object.getString("username").trim();
+                                    String password = object.getString("password").trim();
+
+                                    mTxt_usernameS.setText(username);
+                                    mTxt_passwordS.setText(password);
+
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(SecurityActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(SecurityActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
         {
-            this.context = context;
-        }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > params = new HashMap<>();
+                params.put("id_siswa", getId);
+                return params;
+            }
+        };
 
-        @Override
-        protected void onPreExecute()
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserDetail();
+    }
+
+    private void getUserDetails() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG, response.toString());
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (success.equals("1")){
+
+                                for (int i =0; i < jsonArray.length(); i++){
+
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String username = object.getString("username").trim();
+                                    String password = object.getString("password").trim();
+
+                                    Intent intent = new Intent(SecurityActivity.this, EditSecurityActivity.class);
+                                    intent.putExtra("username", username);
+                                    intent.putExtra("password", password);
+                                    startActivity(intent);
+                                    finish();
+
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(SecurityActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SecurityActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
         {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-
-            HttpClient httpClient = new DefaultHttpClient();
-
-            // Adding HttpURL to my HttpPost oject.
-            HttpPost httpPost = new HttpPost(HttpURL);
-
-            try {
-                httpResponse = httpClient.execute(httpPost);
-
-                StringHolder = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > params = new HashMap<>();
+                params.put("id_siswa", getId);
+                return params;
             }
+        };
 
-            try {
-                // Passing string holder variable to JSONArray.
-                JSONArray jsonArray = new JSONArray(StringHolder);
-                jsonObject = jsonArray.getJSONObject(0);
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return null;
-        }
-        protected void onPostExecute(Void result)
-        {
-            try {
-
-                // Adding JSOn string to textview after done loading.
-                mTxt_idS.setText(jsonObject.getString("id_siswa"));
-                mTxt_usernameS.setText(jsonObject.getString("username"));
-                mTxt_passwordS.setText(jsonObject.getString("password"));
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }

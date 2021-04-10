@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.http.HttpResponse;
@@ -21,17 +30,23 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditSecurityActivity extends AppCompatActivity {
 
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/security-edit.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/security-update.php";
     Button mBtn_saves, mBtn_cancels;
     TextInputLayout mTxt_usernames, mTxt_passwords;
-    String TempUsernames, TempPasswords, Id;
+    String getId;
+
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +59,8 @@ public class EditSecurityActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        sessionManager = new SessionManager(this);
+
         //inisialisasi button & edit text
         mBtn_saves = (Button) findViewById(R.id.savebtnES);
         mBtn_cancels = (Button) findViewById(R.id.cancelbtnES);
@@ -51,90 +68,88 @@ public class EditSecurityActivity extends AppCompatActivity {
         mTxt_passwords = (TextInputLayout) findViewById(R.id.textInputPasswordES);
 
         // Receive Data from ProfileActivity
-        Id = getIntent().getStringExtra("id");
         mTxt_usernames.getEditText().setText(getIntent().getStringExtra("username"));
         mTxt_passwords.getEditText().setText(getIntent().getStringExtra("password"));
+
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getId = user.get(sessionManager.KEY_ID);
 
         //function button
         mBtn_saves.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Update();
+            }
 
-                GetData();
-                UpdateData(Id, TempUsernames, TempPasswords);
-//                reset();
+        });
+
+        mBtn_cancels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditSecurityActivity.this, SecurityActivity.class);
+                startActivity(intent);
+                finish();
             }
 
         });
 
     }
 
-    public void GetData() {
+    //save
+    private void Update() {
 
-        TempUsernames = mTxt_usernames.getEditText().getText().toString();
-        TempPasswords = mTxt_passwords.getEditText().getText().toString();
+        final String username = this.mTxt_usernames.getEditText().getText().toString().trim();
+        final String password = this.mTxt_passwords.getEditText().getText().toString().trim();;
+        final String id_siswa = getId;
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if (success.equals("1")){
+                                Toast.makeText(EditSecurityActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                                sessionManager.updateSecuritySession(username, password, id_siswa);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(EditSecurityActivity.this, "Error "+ e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(EditSecurityActivity.this, "Error "+ error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
+                params.put("id_siswa", id_siswa);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 
-    public void UpdateData(final String id, final String usernames, final String passwords) {
-
-        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
-            @SuppressLint("WrongThread")
-            @Override
-            protected String doInBackground(String... params) {
-
-                String IdHolder = id;
-                String UsernamesHolder = usernames;
-                String PasswordsHolder = passwords;
-
-                Log.d(TAG, "doInBackground: IdHolder"+id);
-                Log.d(TAG, "doInBackground: UsernamesHolder"+usernames);
-                Log.d(TAG, "doInBackground: PasswordsHolder"+passwords);
-
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-                nameValuePairs.add(new BasicNameValuePair("id_siswa", IdHolder));
-                nameValuePairs.add(new BasicNameValuePair("username", UsernamesHolder));
-                nameValuePairs.add(new BasicNameValuePair("password", PasswordsHolder));
-
-                try {
-                    HttpClient httpClient = new DefaultHttpClient();
-
-                    HttpPost httpPost = new HttpPost(HttpURL);
-
-                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-                    HttpResponse httpResponse = httpClient.execute(httpPost);
-
-                    httpResponse.getEntity();
-                    Log.d(TAG, "doInBackground: "+httpResponse.toString());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getParams());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getAllHeaders().toString());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getAllHeaders());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getEntity().getContent());
-
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                return "Data Inserted Successfully";
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-
-                super.onPostExecute(result);
-                Log.d(TAG, "onPostExecute: "+result);
-                Toast.makeText(EditSecurityActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
-
-            }
-        }
-
-        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-
-        sendPostReqAsyncTask.execute(id, usernames, passwords);
-    }
-
-    private static final String TAG = "EditSecurityActivity";
 }
