@@ -85,8 +85,8 @@
     <Button
         android:id="@+id/aboutbutton"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="73dp"
-        android:layout_height="49dp"
+        android:layout_width="91dp"
+        android:layout_height="47dp"
         android:fontFamily="serif"
         android:text="@string/aboutybtn"
         android:textAllCaps="false"

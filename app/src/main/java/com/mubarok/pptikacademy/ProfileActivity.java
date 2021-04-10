@@ -3,36 +3,35 @@ package com.mubarok.pptikacademy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+import android.widget.Toast;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private static final String TAG = ProfileActivity.class.getSimpleName(); //getting the info
     private Button mBtn_editP;
-    HttpResponse httpResponse;
     TextView mTxt_idP, mTxt_nameP, mTxt_emailP, mTxt_cityP, mTxt_countryP;
-    JSONObject jsonObject = null ;
-    String StringHolder = "" ;
+    String getId;
     // Adding HTTP Server URL to string variable.
     String HttpURL1 = "http://192.168.43.206/pptik-academy-android/profile-read.php";
-    String HttpURL2 = "http://192.168.43.206/pptik-academy-android/profile-read1.php";
 
     SessionManager sessionManager;
 
@@ -57,107 +56,156 @@ public class ProfileActivity extends AppCompatActivity {
         mTxt_cityP = (TextView)findViewById(R.id.textCityPD);
         mTxt_countryP = (TextView)findViewById(R.id.textCountryPD);
 
-        // Retrieve data from sessionManager
-        HashMap<String, String> user = sessionManager.getUserDetail();
-        final String name = user.get(SessionManager.KEY_NAME);
-        final String email = user.get(SessionManager.KEY_EMAIL);
-        final String city = user.get(SessionManager.KEY_CITY);
-        final String country = user.get(SessionManager.KEY_COUNTRY);
-        final String id = user.get(SessionManager.KEY_ID);
-
-        // displaying user data
-        mTxt_idP.setText(id);
-        mTxt_nameP.setText(name);
-        mTxt_emailP.setText(email);
-        mTxt_cityP.setText(city);
-        mTxt_countryP.setText(country);
-
         //inialisasi button
         mBtn_editP = (Button) findViewById(R.id.editbtnP);
+
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getId = user.get(sessionManager.KEY_ID);
+        mTxt_idP.setText(getId);
 
         //functin button
         mBtn_editP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iEditP = new Intent(ProfileActivity.this, EditProfileActivity.class);
-                iEditP.putExtra("name", name);
-                iEditP.putExtra("email", email);
-                iEditP.putExtra("city", city);
-                iEditP.putExtra("country", country);
-                iEditP.putExtra("id", id);
-                startActivity(iEditP);
+                getUserDetails();
             }
         });
 
-//        new GetDataFromServerIntoTextView(ProfileActivity.this).execute();
 
     }
 
-    // Declaring GetDataFromServerIntoTextView method with AsyncTask.
-    public class GetDataFromServerIntoTextView extends AsyncTask<Void, Void, Void> {
+    //getUserDetail
+    private void getUserDetail(){
 
-        // Declaring CONTEXT.
-        public Context context;
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
-        public GetDataFromServerIntoTextView(Context context)
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Log.i(TAG, response.toString());
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (success.equals("1")){
+
+                                for (int i =0; i < jsonArray.length(); i++){
+
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String nama_siswa = object.getString("nama_siswa").trim();
+                                    String email = object.getString("email").trim();
+                                    String kota = object.getString("kota").trim();
+                                    String negara = object.getString("negara").trim();
+
+                                    mTxt_nameP.setText(nama_siswa);
+                                    mTxt_emailP.setText(email);
+                                    mTxt_cityP.setText(kota);
+                                    mTxt_countryP.setText(negara);
+
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(ProfileActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(ProfileActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
         {
-            this.context = context;
-        }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > params = new HashMap<>();
+                params.put("id_siswa", getId);
+                return params;
+            }
+        };
 
-        @Override
-        protected void onPreExecute()
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserDetail();
+    }
+
+    private void getUserDetails() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(TAG, response.toString());
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (success.equals("1")){
+
+                                for (int i =0; i < jsonArray.length(); i++){
+
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String nama_siswa = object.getString("nama_siswa").trim();
+                                    String email = object.getString("email").trim();
+                                    String kota = object.getString("kota").trim();
+                                    String negara = object.getString("negara").trim();
+
+                                    Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                                    intent.putExtra("nama_siswa", nama_siswa);
+                                    intent.putExtra("email", email);
+                                    intent.putExtra("kota", kota);
+                                    intent.putExtra("negara", negara);
+                                    startActivity(intent);
+                                    finish();
+
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(ProfileActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ProfileActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
         {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-
-            HttpClient httpClient = new DefaultHttpClient();
-
-            // Adding HttpURL to my HttpPost oject.
-            HttpPost httpPost = new HttpPost(HttpURL1);
-
-            try {
-                httpResponse = httpClient.execute(httpPost);
-
-                StringHolder = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > params = new HashMap<>();
+                params.put("id_siswa", getId);
+                return params;
             }
+        };
 
-            try {
-                // Passing string holder variable to JSONArray.
-                JSONArray jsonArray = new JSONArray(StringHolder);
-                jsonObject = jsonArray.getJSONObject(0);
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return null;
-        }
-        protected void onPostExecute(Void result)
-        {
-            try {
-
-                // Adding JSOn string to textview after done loading.
-                mTxt_idP.setText(jsonObject.getString("id_siswa"));
-                mTxt_nameP.setText(jsonObject.getString("nama_siswa"));
-                mTxt_emailP.setText(jsonObject.getString("email"));
-                mTxt_cityP.setText(jsonObject.getString("kota"));
-                mTxt_countryP.setText(jsonObject.getString("negara"));
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }

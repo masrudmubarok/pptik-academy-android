@@ -87,14 +87,14 @@ public class LoginActivity extends AppCompatActivity {
                     JSONArray hasil = json.getJSONArray("login");
                     for (int i = 0; i < hasil.length(); i++) {
                         JSONObject c = hasil.getJSONObject(i);
-                        String name = c.getString("nama_siswa").trim();
+                        String nama_siswa = c.getString("nama_siswa").trim();
                         String username = c.getString("username").trim();
                         String password = c.getString("password").trim();
                         String email = c.getString("email").trim();
-                        String city = c.getString("kota").trim();
-                        String country = c.getString("negara").trim();
-                        String id = c.getString("id_siswa").trim();
-                        sessionManager.createLoginSession(name, username, password, email, city, country, id);
+                        String kota = c.getString("kota").trim();
+                        String negara = c.getString("negara").trim();
+                        String id_siswa = c.getString("id_siswa").trim();
+                        sessionManager.createLoginSession(nama_siswa, username, password, email, kota, negara, id_siswa);
                         Log.e("ok", " ambil = data");
                     }
                 } else {

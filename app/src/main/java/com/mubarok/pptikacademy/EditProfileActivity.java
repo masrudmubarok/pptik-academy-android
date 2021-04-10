@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.http.HttpResponse;
@@ -22,18 +31,24 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/profile-edit.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/profile-update.php";
     Button mBtn_savep, mBtn_cancelp;
     EditText mTxt_fullnamep, mTxt_emailp, mTxt_cityp, mTxt_countryp;
-    String TempFullnamep, TempEmailp, TempCityp, TempCountryp, Id;
+    String getId;
+
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +61,8 @@ public class EditProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        sessionManager = new SessionManager(this);
+
         //inisialisasi button & edit text
         mBtn_savep = (Button) findViewById(R.id.savebtnep);
         mBtn_cancelp = (Button) findViewById(R.id.cancelbtnep);
@@ -55,22 +72,22 @@ public class EditProfileActivity extends AppCompatActivity {
         mTxt_countryp = (EditText) findViewById(R.id.editTextCountryP);
 
         // Receive Data from ProfileActivity
-        Id = getIntent().getStringExtra("id");
-        mTxt_fullnamep.setText(getIntent().getStringExtra("name"));
+        mTxt_fullnamep.setText(getIntent().getStringExtra("nama_siswa"));
         mTxt_emailp.setText(getIntent().getStringExtra("email"));
-        mTxt_cityp.setText(getIntent().getStringExtra("city"));
-        mTxt_countryp.setText(getIntent().getStringExtra("country"));
+        mTxt_cityp.setText(getIntent().getStringExtra("kota"));
+        mTxt_countryp.setText(getIntent().getStringExtra("negara"));
 
-
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getId = user.get(sessionManager.KEY_ID);
 
         //function button
         mBtn_savep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                GetData();
-                UpdateData(Id, TempFullnamep, TempEmailp, TempCityp, TempCountryp);
-                reset();
+                Update();
+                Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
             }
 
         });
@@ -79,84 +96,74 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 reset();
+                Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
             }
 
         });
         
     }
 
-    public void GetData() {
+    //save
+    private void Update() {
 
-        TempFullnamep = mTxt_fullnamep.getText().toString();
-        TempEmailp = mTxt_emailp.getText().toString();
-        TempCityp = mTxt_cityp.getText().toString();
-        TempCountryp = mTxt_countryp.getText().toString();
-    }
+        final String nama_siswa = this.mTxt_fullnamep.getText().toString().trim();
+        final String email = this.mTxt_emailp.getText().toString().trim();
+        final String kota = this.mTxt_cityp.getText().toString().trim();
+        final String negara = this.mTxt_countryp.getText().toString().trim();
+        final String id_siswa = getId;
 
-    public void UpdateData(final String id, final String nama_siswa, final String email, final String kota, final String negara) {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving...");
+        progressDialog.show();
 
-        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
-            @SuppressLint("WrongThread")
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if (success.equals("1")){
+                                Toast.makeText(EditProfileActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                                sessionManager.updateProfileSession(nama_siswa, email, kota, negara, id_siswa);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(EditProfileActivity.this, "Error "+ e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(EditProfileActivity.this, "Error "+ error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
             @Override
-            protected String doInBackground(String... params) {
-
-                String IdHolder = id;
-                String FullnamepHolder = nama_siswa;
-                String EmailpHolder = email;
-                String CitypHolder = kota;
-                String CountrypHolder = negara;
-
-                Log.d(TAG, "doInBackground: IdHolder"+id);
-                Log.d(TAG, "doInBackground: FullnamepHolder"+nama_siswa);
-                Log.d(TAG, "doInBackground: EmailpHolder"+email);
-                Log.d(TAG, "doInBackground: CitypHolder"+kota);
-                Log.d(TAG, "doInBackground: CountrypHolder"+negara);
-
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-                nameValuePairs.add(new BasicNameValuePair("id_siswa", IdHolder));
-                nameValuePairs.add(new BasicNameValuePair("nama_siswa", FullnamepHolder));
-                nameValuePairs.add(new BasicNameValuePair("email", EmailpHolder));
-                nameValuePairs.add(new BasicNameValuePair("kota", CitypHolder));
-                nameValuePairs.add(new BasicNameValuePair("negara", CountrypHolder));
-                try {
-                    HttpClient httpClient = new DefaultHttpClient();
-
-                    HttpPost httpPost = new HttpPost(HttpURL);
-
-                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-                    HttpResponse httpResponse = httpClient.execute(httpPost);
-
-                    httpResponse.getEntity();
-                    Log.d(TAG, "doInBackground: "+httpResponse.toString());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getParams());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getAllHeaders().toString());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getAllHeaders());
-                    Log.d(TAG, "doInBackground: "+httpResponse.getEntity().getContent());
-
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                return "Data Inserted Successfully";
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("nama_siswa", nama_siswa);
+                params.put("email", email);
+                params.put("kota", kota);
+                params.put("negara", negara);
+                params.put("id_siswa", id_siswa);
+                return params;
             }
+        };
 
-            @Override
-            protected void onPostExecute(String result) {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
 
-                super.onPostExecute(result);
-                Log.d(TAG, "onPostExecute: "+result);
-                Toast.makeText(EditProfileActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
-
-            }
-        }
-
-        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-
-        sendPostReqAsyncTask.execute(id, nama_siswa, email, kota, negara);
     }
 
     public void reset(){
@@ -165,6 +172,4 @@ public class EditProfileActivity extends AppCompatActivity {
         mTxt_cityp.setText("");
         mTxt_countryp.setText("");
     }
-
-    private static final String TAG = "EditProfileActivity";
 }
