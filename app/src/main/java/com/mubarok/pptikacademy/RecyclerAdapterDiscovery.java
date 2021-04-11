@@ -104,7 +104,6 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
             namaKursus = (TextView) v.findViewById(R.id.textViewNamaKursus);
             harga = (TextView) v.findViewById(R.id.textViewHarga);
             relativeLayout = v.findViewById(R.id.relative);
-
         }
     }
 }

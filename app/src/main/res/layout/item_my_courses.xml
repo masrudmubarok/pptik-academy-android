@@ -53,7 +53,7 @@
                 android:id="@+id/iconImc"
                 android:layout_width="114dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginLeft="20dp"
                 android:src="@mipmap/ic_launcher" />
 
@@ -68,24 +68,14 @@
                     android:id="@+id/textViewNamaKursusImc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:text="Nama Kursus"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textColor="#f000"/>
 
-                <Button
-                    android:layout_width="82dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="55dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/bluebtn"
-                    android:text="Learn"
-                    android:textColor="@color/colorBackWhite"
-                    android:textSize="10dp" />
-
             </LinearLayout>
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
