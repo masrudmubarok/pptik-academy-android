@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,6 +39,9 @@ public class RecyclerAdapterMyCourses extends RecyclerView.Adapter<RecyclerAdapt
 
         holder.id.setText(listdata.get(position).get("id_kursus"));
         holder.namaKursus.setText(listdata.get(position).get("nama_kursus"));
+        Glide.with(context.getActivity())
+                .load(listdata.get(position).get("icon"))
+                .into(holder.icon);
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(final View v) {
@@ -94,7 +99,7 @@ public class RecyclerAdapterMyCourses extends RecyclerView.Adapter<RecyclerAdapt
         RelativeLayout relativeLayout;
         CardView cv;
         TextView id, namaKursus;
-        ImageView imgView;
+        ImageView icon;
         private Context context;
 
         public ViewHolder(View v) {
@@ -103,6 +108,7 @@ public class RecyclerAdapterMyCourses extends RecyclerView.Adapter<RecyclerAdapt
             id = (TextView) v.findViewById(R.id.textViewIdKursusImc);
             namaKursus = (TextView) v.findViewById(R.id.textViewNamaKursusImc);
             relativeLayout = v.findViewById(R.id.relativeImc);
+            icon = (ImageView) v.findViewById(R.id.iconImc);
 
         }
     }

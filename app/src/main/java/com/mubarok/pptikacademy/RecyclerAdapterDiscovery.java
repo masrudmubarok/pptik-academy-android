@@ -9,6 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,6 +40,9 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
         holder.id.setText(listdata.get(position).get("id_kursus"));
         holder.namaKursus.setText(listdata.get(position).get("nama_kursus"));
         holder.harga.setText(listdata.get(position).get("harga"));
+        Glide.with(context.getActivity())
+                .load(listdata.get(position).get("icon"))
+                .into(holder.icon);
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(final View v) {
@@ -94,8 +100,7 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
         RelativeLayout relativeLayout;
         CardView cv;
         TextView id, namaKursus, harga;
-        ImageView imgView;
-        private Context context;
+        ImageView icon;
 
         public ViewHolder(View v) {
             super(v);
@@ -104,6 +109,7 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
             namaKursus = (TextView) v.findViewById(R.id.textViewNamaKursus);
             harga = (TextView) v.findViewById(R.id.textViewHarga);
             relativeLayout = v.findViewById(R.id.relative);
+            icon = (ImageView) v.findViewById(R.id.icon);
         }
     }
 }
