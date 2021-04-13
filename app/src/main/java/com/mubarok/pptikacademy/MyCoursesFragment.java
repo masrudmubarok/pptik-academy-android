@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -41,11 +43,15 @@ public class MyCoursesFragment extends Fragment {
     JSONObject jsonObject = null ;
     String StringHolder = "" ;
 
+    private static final String TAG = MyCoursesFragment.class.getSimpleName(); //getting the info
     Context context;
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
     private RecyclerView recyclerView;
+    String getId;
     ArrayList<HashMap<String , String >> listdata;
+
+    SessionManager sessionManager;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/mycourses-read.php";
@@ -66,6 +72,13 @@ public class MyCoursesFragment extends Fragment {
         // --------------------
         // RecyclerView Kursus (My Courses)
         // --------------------
+
+        sessionManager = new SessionManager(getActivity().getApplicationContext());
+        sessionManager.loginCheck();
+
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getId = user.get(sessionManager.KEY_ID);
+
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewMycourses);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -75,10 +88,10 @@ public class MyCoursesFragment extends Fragment {
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         listdata = new ArrayList<HashMap<String, String>>();
 
-        stringRequest = new StringRequest(Request.Method.GET, HttpURL, new Response.Listener<String>() {
+        stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Respon", response);
+                Log.i(TAG, response.toString());
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("kursus");
@@ -101,9 +114,18 @@ public class MyCoursesFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }})
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > params = new HashMap<>();
+                params.put("id_siswa", getId);
+                return params;
             }
-        });
+        };
         requestQueue.add(stringRequest);
+
         return v;
     }
 
