@@ -84,6 +84,8 @@ public class DiscoveryFragment extends Fragment {
                         itemt.put("nama_kursus", json.getString("nama_kursus"));
                         itemt.put("harga", json.getString("harga"));
                         itemt.put("icon", json.getString("icon"));
+                        itemt.put("jumlah_video", json.getString("jumlah_video"));
+                        itemt.put("jumlah_modul", json.getString("jumlah_modul"));
                         listdata.add(itemt);
                         RecyclerAdapterDiscovery adapter = new RecyclerAdapterDiscovery(DiscoveryFragment.this, listdata);
                         recyclerView.setAdapter(adapter);

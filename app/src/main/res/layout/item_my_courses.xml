@@ -98,7 +98,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/jumlahModulText"
+                    android:id="@+id/jumlahModulTextImc"
                     android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_alignParentTop="true"
@@ -123,7 +123,7 @@
                     android:layout_marginTop="115dp"
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="22dp"
-                    android:layout_toStartOf="@+id/jumlahModulText"
+                    android:layout_toStartOf="@+id/jumlahModulTextImc"
                     android:src="@drawable/book" />
 
                 <TextView
@@ -135,13 +135,13 @@
                     android:layout_marginTop="115dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="22dp"
-                    android:layout_toStartOf="@+id/jumlahModulText"
+                    android:layout_toStartOf="@+id/jumlahModulTextImc"
                     android:text="Video"
                     android:textColor="#F000"
                     android:textSize="10dp" />
 
                 <TextView
-                    android:id="@+id/jumlahVideoText"
+                    android:id="@+id/jumlahVideoTextImc"
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
                     android:layout_alignParentTop="true"
@@ -165,7 +165,7 @@
                     android:layout_marginTop="115dp"
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="22dp"
-                    android:layout_toStartOf="@+id/jumlahVideoText"
+                    android:layout_toStartOf="@+id/jumlahVideoTextImc"
                     android:src="@drawable/play" />
 
             </RelativeLayout>

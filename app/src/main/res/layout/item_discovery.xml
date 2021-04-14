@@ -58,39 +58,138 @@
                 android:layout_marginLeft="20dp"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
                 android:orientation="vertical"
-                android:padding="5dp"
-                android:layout_marginLeft="130dp">
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/textViewNamaKursus"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
                     android:text="Nama Kursus"
-                    android:textSize="17sp"
-                    android:textColor="#f000"/>
+                    android:textColor="#f000"
+                    android:textSize="17sp" />
 
                 <com.hosle.libcurrencyview.CurrencyTextView
                     android:id="@+id/textViewHarga"
-                    android:layout_width="93dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="right"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="110dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginBottom="22dp"
                     android:text="Harga"
                     android:textColor="#f000"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     app:currencySymbol="Rp "
-                    app:currencySymbolSize="15dp"
-                    app:decimalTextSize="14dp"
-                    app:prefixSuffixTextSize="15dp" />
+                    app:currencySymbolSize="13dp"
+                    app:decimalTextSize="13dp"
+                    app:prefixSuffixTextSize="13dp" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/modulText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginEnd="113dp"
+                    android:layout_marginBottom="22dp"
+                    android:text="Modul"
+                    android:textColor="#f000"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/jumlahModulText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_toStartOf="@+id/modulText"
+                    android:text="0"
+                    android:textColor="#f000"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:id="@+id/imgModulText"
+                    android:layout_width="15dp"
+                    android:layout_height="13dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="187dp"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_toStartOf="@+id/jumlahModulText"
+                    android:src="@drawable/book" />
+
+                <TextView
+                    android:id="@+id/videoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_toStartOf="@+id/jumlahModulText"
+                    android:text="Video"
+                    android:textColor="#F000"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/jumlahVideoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_toStartOf="@+id/videoText"
+                    android:text="0"
+                    android:textColor="#f000"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:id="@+id/imgVideoText"
+                    android:layout_width="15dp"
+                    android:layout_height="13dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="187dp"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_toStartOf="@+id/jumlahVideoText"
+                    android:src="@drawable/play" />
+
+            </RelativeLayout>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

@@ -111,8 +111,8 @@ public class RecyclerAdapterMyCourses extends RecyclerView.Adapter<RecyclerAdapt
             namaKursus = (TextView) v.findViewById(R.id.textViewNamaKursusImc);
             relativeLayout = v.findViewById(R.id.relativeImc);
             icon = (ImageView) v.findViewById(R.id.iconImc);
-            video = (TextView) v.findViewById(R.id.jumlahVideoText);
-            modul = (TextView) v.findViewById(R.id.jumlahModulText);
+            video = (TextView) v.findViewById(R.id.jumlahVideoTextImc);
+            modul = (TextView) v.findViewById(R.id.jumlahModulTextImc);
 
         }
     }

@@ -40,6 +40,8 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
         holder.id.setText(listdata.get(position).get("id_kursus"));
         holder.namaKursus.setText(listdata.get(position).get("nama_kursus"));
         holder.harga.setText(listdata.get(position).get("harga"));
+        holder.video.setText(listdata.get(position).get("jumlah_video"));
+        holder.modul.setText(listdata.get(position).get("jumlah_modul"));
         Glide.with(context.getActivity())
                 .load(listdata.get(position).get("icon"))
                 .into(holder.icon);
@@ -99,7 +101,7 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
     public class ViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout relativeLayout;
         CardView cv;
-        TextView id, namaKursus, harga;
+        TextView id, namaKursus, harga, video, modul;
         ImageView icon;
 
         public ViewHolder(View v) {
@@ -110,6 +112,8 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
             harga = (TextView) v.findViewById(R.id.textViewHarga);
             relativeLayout = v.findViewById(R.id.relative);
             icon = (ImageView) v.findViewById(R.id.icon);
+            video = (TextView) v.findViewById(R.id.jumlahVideoText);
+            modul = (TextView) v.findViewById(R.id.jumlahModulText);
         }
     }
 }
