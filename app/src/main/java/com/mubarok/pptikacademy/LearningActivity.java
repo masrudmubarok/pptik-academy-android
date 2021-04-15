@@ -4,11 +4,9 @@ package com.mubarok.pptikacademy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +23,6 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +37,8 @@ public class LearningActivity extends AppCompatActivity {
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/mycourses-learn-read.php";
+
+    private Map<String, String> getParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,53 +65,61 @@ public class LearningActivity extends AppCompatActivity {
         iconTemp = getIntent().getStringExtra("icon");
 
         // Set Material
-        mTxt_deskripsi.setText(deskripsiTemp);
+//        mTxt_deskripsi.setText(deskripsiTemp);
+        mTxt_idKursus.setText(getId);
         Glide.with(this)
                 .load(iconTemp)
                 .into(icon);
+
     }
 
-//    private void getUserDetails() {
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.i(TAG, response.toString());
-//                try {
-//                    JSONObject jsonObject = new JSONObject(response);
-//                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject object = jsonArray.getJSONObject(i);
-//                        String nama_kursus = object.getString("nama_kursus").trim();
-//                        String deskripsi = object.getString("deskripsi").trim();
-//                        String harga = object.getString("harga").trim();
-//                        String icon = object.getString("icon").trim();
-//                        String jumlah_video = object.getString("jumlah_video").trim();
-//                        String jumlah_modul = object.getString("jumlah_modul").trim();
-//
-//                        iconTemp = icon;
-//
-//
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(LearningActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(LearningActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
-//            }})
-//
-//        {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String > params = new HashMap<>();
-//                params.put("id_kursus", getId);
-//                return params;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        requestQueue.add(stringRequest);
-//    }
+    private void getCourseDetail() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String nama_kursus = object.getString("nama_kursus").trim();
+                        String deskripsi = object.getString("deskripsi").trim();
+                        String harga = object.getString("harga").trim();
+                        String icon = object.getString("icon").trim();
+                        String jumlah_video = object.getString("jumlah_video").trim();
+                        String jumlah_modul = object.getString("jumlah_modul").trim();
+
+                        mTxt_deskripsi.setText(deskripsi);
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(LearningActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LearningActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+            }})
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCourseDetail();
+    }
 }
