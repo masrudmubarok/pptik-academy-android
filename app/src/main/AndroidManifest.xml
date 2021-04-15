@@ -15,7 +15,13 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <activity android:name=".LearningActivity"></activity>
+        <activity android:name=".LearningActivity"
+            android:parentActivityName=".CourseActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CourseActivity" />
+        </activity>
         <activity
             android:name=".AboutActivity"
             android:parentActivityName=".HelpActivity"

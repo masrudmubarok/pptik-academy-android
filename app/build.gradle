@@ -43,4 +43,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
     implementation 'com.hosle.libcurrencyview:libcurrencyview:1.0.2'
+    implementation 'me.biubiubiu.justifytext:library:1.1'
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.content.Intent;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,52 +44,16 @@ public class RecyclerAdapterMyCourses extends RecyclerView.Adapter<RecyclerAdapt
         Glide.with(context.getActivity())
                 .load(listdata.get(position).get("icon"))
                 .into(holder.icon);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(final View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//                final ProgressDialog dialog = new ProgressDialog(v.getContext());
-//                dialog.setMessage("Loading delete data");
-//                final CharSequence[] dialogitem = {"Edit", "Delete"};
-//                builder.setItems(dialogitem, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        switch (which){
-//                            case 0:
-//                                Intent iTransaksiedit = new Intent(v.getContext(), TransaksiEditActivity.class);
-//                                iTransaksiedit.putExtra("id_transaksi", listdata.get(position).get("id_transaksi"));
-//                                iTransaksiedit.putExtra("tanggal", listdata.get(position).get("tanggal"));
-//                                iTransaksiedit.putExtra("keterangan", listdata.get(position).get("keterangan"));
-//                                iTransaksiedit.putExtra("jenis", listdata.get(position).get("jenis"));
-//                                iTransaksiedit.putExtra("jumlah", listdata.get(position).get("jumlah"));
-//                                v.getContext().startActivity(iTransaksiedit);
-//                                break;
-//                            case 1:
-//                                AlertDialog.Builder builderDel = new AlertDialog.Builder(v.getContext());
-//                                builderDel.setTitle("Hapus Data");
-//                                builderDel.setMessage("Apakah anda yakin ingin menghapus data ini?");
-//                                builderDel.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        Id = listdata.get(position).get("id_transaksi");
-//                                        DeleteData(Id);
-//                                        Toast.makeText(v.getContext(),"Data deleted successfully",Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                                builderDel.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        dialog.dismiss();
-//                                    }
-//                                });
-//                                builderDel.create().show();
-//                                break;
-//                        }
-//                    }
-//                });
-//                builder.create().show();
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Intent intent = new Intent(v.getContext(), LearningActivity.class);
+                intent.putExtra("id_kursus", listdata.get(position).get("id_kursus"));
+                intent.putExtra("deskripsi", listdata.get(position).get("deskripsi"));
+                intent.putExtra("icon", listdata.get(position).get("icon"));
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
