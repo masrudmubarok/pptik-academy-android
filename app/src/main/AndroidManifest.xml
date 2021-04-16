@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ModulLearningActivity"></activity>
+        <activity android:name=".ModulViewActivity"></activity>
+        <activity android:name=".VideoViewActivity" />
+        <activity android:name=".ModulLearningActivity" />
         <activity android:name=".VideoLearningActivity" />
 
         <uses-library
