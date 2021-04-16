@@ -4,8 +4,10 @@ package com.mubarok.pptikacademy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,7 +38,7 @@ public class LearningActivity extends AppCompatActivity {
     String getId, deskripsiTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/mycourses-learn-read.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videolearning.php";
 
     private Map<String, String> getParams;
 
@@ -50,6 +52,7 @@ public class LearningActivity extends AppCompatActivity {
         setSupportActionBar(ToolBarLogin);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         //inisialisasi button & edit text
         mBtn_video = (Button) findViewById(R.id.buttonVideo);
@@ -59,21 +62,36 @@ public class LearningActivity extends AppCompatActivity {
         mTxt_deskripsi = (TextView) findViewById(R.id.textDeskripsi);
         icon = (ImageView) findViewById(R.id.imageViewIcon);
 
-        // Receive Data from TransaksiActivity
+        // Receive Data from MyCourseFragment
         getId = getIntent().getStringExtra("id_kursus");
         deskripsiTemp = getIntent().getStringExtra("deskripsi");
         iconTemp = getIntent().getStringExtra("icon");
 
         // Set Material
-//        mTxt_deskripsi.setText(deskripsiTemp);
+        mTxt_deskripsi.setText(deskripsiTemp);
         mTxt_idKursus.setText(getId);
         Glide.with(this)
                 .load(iconTemp)
                 .into(icon);
 
+        //function button
+        mBtn_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendCourseDetail();
+            }
+        });
+        mBtn_modul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iModul = new Intent(getApplicationContext(),ModulLearningActivity.class);
+                startActivity(iModul);
+            }
+        });
+
     }
 
-    private void getCourseDetail() {
+    private void sendCourseDetail() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -83,15 +101,32 @@ public class LearningActivity extends AppCompatActivity {
                     JSONArray jsonArray = jsonObject.getJSONArray("kursus");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
-                        String nama_kursus = object.getString("nama_kursus").trim();
-                        String deskripsi = object.getString("deskripsi").trim();
-                        String harga = object.getString("harga").trim();
-                        String icon = object.getString("icon").trim();
-                        String jumlah_video = object.getString("jumlah_video").trim();
-                        String jumlah_modul = object.getString("jumlah_modul").trim();
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo1 = object.getString("judulvid1").trim();
+                        String judulVideo2 = object.getString("judulvid2").trim();
+                        String judulVideo3 = object.getString("judulvid3").trim();
+                        String judulVideo4 = object.getString("judulvid4").trim();
+                        String judulVideo5 = object.getString("judulvid5").trim();
+                        String judulVideo6 = object.getString("judulvid6").trim();
+                        String judulVideo7 = object.getString("judulvid7").trim();
+                        String judulVideo8 = object.getString("judulvid8").trim();
+                        String judulVideo9 = object.getString("judulvid9").trim();
+                        String judulVideo10 = object.getString("judulvid10").trim();
 
-                        mTxt_deskripsi.setText(deskripsi);
-
+                        Intent intent = new Intent(getApplicationContext(), VideoLearningActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judulvid1", judulVideo1);
+                        intent.putExtra("judulvid2", judulVideo2);
+                        intent.putExtra("judulvid3", judulVideo3);
+                        intent.putExtra("judulvid4", judulVideo4);
+                        intent.putExtra("judulvid5", judulVideo5);
+                        intent.putExtra("judulvid6", judulVideo6);
+                        intent.putExtra("judulvid7", judulVideo7);
+                        intent.putExtra("judulvid8", judulVideo8);
+                        intent.putExtra("judulvid9", judulVideo9);
+                        intent.putExtra("judulvid10", judulVideo10);
+                        startActivity(intent);
+                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -115,11 +150,5 @@ public class LearningActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getCourseDetail();
     }
 }

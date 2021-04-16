@@ -14,15 +14,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ModulViewActivity"></activity>
-        <activity android:name=".VideoViewActivity" />
-        <activity android:name=".ModulLearningActivity" />
-        <activity android:name=".VideoLearningActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
+        <activity android:name=".ModulViewActivity"></activity>
+        <activity android:name=".VideoViewActivity" />
+        <activity
+            android:name=".ModulLearningActivity"
+            android:parentActivityName=".LearningActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LearningActivity" />
+        </activity>
+        <activity
+            android:name=".VideoLearningActivity"
+            android:parentActivityName=".LearningActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LearningActivity" />
+        </activity>
         <activity
             android:name=".LearningActivity"
             android:parentActivityName=".CourseActivity"
