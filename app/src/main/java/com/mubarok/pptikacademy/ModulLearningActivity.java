@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -82,6 +83,16 @@ public class ModulLearningActivity extends AppCompatActivity {
         mBtn_modul8.setText(modulTemp8);
         mBtn_modul9.setText(modulTemp9);
         mBtn_modul10.setText(modulTemp10);
+
+        // Function
+        mBtn_modul1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iModul1 = new Intent(getApplicationContext(), ModulViewActivity.class);
+                startActivity(iModul1);
+                finish();
+            }
+        });
     }
 
     private void sendCourseDetail() {

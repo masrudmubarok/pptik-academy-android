@@ -35,6 +35,7 @@ public class VideoLearningActivity extends AppCompatActivity {
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/videomodul-send-learning.php";
+    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/videolearning-send-videoview.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +86,17 @@ public class VideoLearningActivity extends AppCompatActivity {
         mBtn_video9.setText(video1Temp9);
         mBtn_video10.setText(video1Temp10);
 
-        // Function
+        // Method
         mBtn_video1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iVideo1 = new Intent(getApplicationContext(), VideoViewActivity.class);
-                startActivity(iVideo1);
-                finish();
+                sendCourseDetail();
             }
         });
 
     }
 
-    private void sendCourseDetail() {
+    private void sendBackCourseDetail() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -149,10 +148,56 @@ public class VideoLearningActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                sendCourseDetail();
+                sendBackCourseDetail();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void sendCourseDetail() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String nama_kursus = object.getString("nama_kursus").trim();
+                        String deskripsi = object.getString("deskripsi").trim();
+                        String harga = object.getString("harga").trim();
+                        String icon = object.getString("icon").trim();
+                        String jumlah_video = object.getString("jumlah_video").trim();
+                        String jumlah_modul = object.getString("jumlah_modul").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }

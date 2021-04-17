@@ -19,8 +19,22 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".ModulViewActivity"></activity>
-        <activity android:name=".VideoViewActivity" />
+        <activity
+            android:name=".ModulViewActivity"
+            android:parentActivityName=".ModulLearningActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ModulLearningActivity" />
+        </activity>
+        <activity
+            android:name=".VideoViewActivity"
+            android:parentActivityName=".VideoLearningActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".VideoLearningActivity" />
+        </activity>
         <activity
             android:name=".ModulLearningActivity"
             android:parentActivityName=".LearningActivity"

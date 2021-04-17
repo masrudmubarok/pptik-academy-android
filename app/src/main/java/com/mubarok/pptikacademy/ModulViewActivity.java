@@ -1,6 +1,7 @@
 package com.mubarok.pptikacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -23,6 +24,13 @@ public class ModulViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modul_view);
+
+        //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
+        Toolbar ToolBarLogin = (Toolbar)findViewById(R.id.toolbar_modulview);
+        setSupportActionBar(ToolBarLogin);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         pdfView = findViewById(R.id.pdfView);
 
