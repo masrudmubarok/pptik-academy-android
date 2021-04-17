@@ -27,7 +27,7 @@ public class ModulViewActivity extends AppCompatActivity {
         pdfView = findViewById(R.id.pdfView);
 
         //This is function read PDF from bytes
-        new RetrievePDFBytes().execute("http://ancestralauthor.com/download/sample.pdf");
+        new RetrievePDFBytes().execute("http://192.168.43.206/pptik-academy-web/assets/modul/modul-1-perkenalan-adobe-illustrator.pdf");
     }
 
     class RetrievePDFBytes extends AsyncTask<String,Void,byte[]>

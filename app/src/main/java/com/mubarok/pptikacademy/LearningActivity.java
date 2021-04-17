@@ -38,7 +38,7 @@ public class LearningActivity extends AppCompatActivity {
     String getId, deskripsiTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videolearning.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videomodul.php";
 
     private Map<String, String> getParams;
 
@@ -78,20 +78,19 @@ public class LearningActivity extends AppCompatActivity {
         mBtn_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendCourseDetail();
+                sendVideoDetail();
             }
         });
         mBtn_modul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iModul = new Intent(getApplicationContext(),ModulLearningActivity.class);
-                startActivity(iModul);
+                sendModulDetail();
             }
         });
 
     }
 
-    private void sendCourseDetail() {
+    private void sendVideoDetail() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -102,30 +101,91 @@ public class LearningActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo1 = object.getString("judulvid1").trim();
-                        String judulVideo2 = object.getString("judulvid2").trim();
-                        String judulVideo3 = object.getString("judulvid3").trim();
-                        String judulVideo4 = object.getString("judulvid4").trim();
-                        String judulVideo5 = object.getString("judulvid5").trim();
-                        String judulVideo6 = object.getString("judulvid6").trim();
-                        String judulVideo7 = object.getString("judulvid7").trim();
-                        String judulVideo8 = object.getString("judulvid8").trim();
-                        String judulVideo9 = object.getString("judulvid9").trim();
-                        String judulVideo10 = object.getString("judulvid10").trim();
+                        String judulVideo1 = object.getString("judul_video1").trim();
+                        String judulVideo2 = object.getString("judul_video2").trim();
+                        String judulVideo3 = object.getString("judul_video3").trim();
+                        String judulVideo4 = object.getString("judul_video4").trim();
+                        String judulVideo5 = object.getString("judul_video5").trim();
+                        String judulVideo6 = object.getString("judul_video6").trim();
+                        String judulVideo7 = object.getString("judul_video7").trim();
+                        String judulVideo8 = object.getString("judul_video8").trim();
+                        String judulVideo9 = object.getString("judul_video9").trim();
+                        String judulVideo10 = object.getString("judul_video10").trim();
 
-                        Intent intent = new Intent(getApplicationContext(), VideoLearningActivity.class);
-                        intent.putExtra("id_kursus", id_kursus);
-                        intent.putExtra("judulvid1", judulVideo1);
-                        intent.putExtra("judulvid2", judulVideo2);
-                        intent.putExtra("judulvid3", judulVideo3);
-                        intent.putExtra("judulvid4", judulVideo4);
-                        intent.putExtra("judulvid5", judulVideo5);
-                        intent.putExtra("judulvid6", judulVideo6);
-                        intent.putExtra("judulvid7", judulVideo7);
-                        intent.putExtra("judulvid8", judulVideo8);
-                        intent.putExtra("judulvid9", judulVideo9);
-                        intent.putExtra("judulvid10", judulVideo10);
-                        startActivity(intent);
+                        Intent iVideo = new Intent(getApplicationContext(),VideoLearningActivity.class);
+                        iVideo.putExtra("id_kursus", id_kursus);
+                        iVideo.putExtra("judul_video1", judulVideo1);
+                        iVideo.putExtra("judul_video2", judulVideo2);
+                        iVideo.putExtra("judul_video3", judulVideo3);
+                        iVideo.putExtra("judul_video4", judulVideo4);
+                        iVideo.putExtra("judul_video5", judulVideo5);
+                        iVideo.putExtra("judul_video6", judulVideo6);
+                        iVideo.putExtra("judul_video7", judulVideo7);
+                        iVideo.putExtra("judul_video8", judulVideo8);
+                        iVideo.putExtra("judul_video9", judulVideo9);
+                        iVideo.putExtra("judul_video10", judulVideo10);
+                        startActivity(iVideo);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(LearningActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LearningActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+            }})
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModulDetail() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul1 = object.getString("judul_modul1").trim();
+                        String judulModul2 = object.getString("judul_modul2").trim();
+                        String judulModul3 = object.getString("judul_modul3").trim();
+                        String judulModul4 = object.getString("judul_modul4").trim();
+                        String judulModul5 = object.getString("judul_modul5").trim();
+                        String judulModul6 = object.getString("judul_modul6").trim();
+                        String judulModul7 = object.getString("judul_modul7").trim();
+                        String judulModul8 = object.getString("judul_modul8").trim();
+                        String judulModul9 = object.getString("judul_modul9").trim();
+                        String judulModul10 = object.getString("judul_modul10").trim();
+
+                        Intent iModul = new Intent(getApplicationContext(),ModulLearningActivity.class);
+                        iModul.putExtra("id_kursus", id_kursus);
+                        iModul.putExtra("judul_modul1", judulModul1);
+                        iModul.putExtra("judul_modul2", judulModul2);
+                        iModul.putExtra("judul_modul3", judulModul3);
+                        iModul.putExtra("judul_modul4", judulModul4);
+                        iModul.putExtra("judul_modul5", judulModul5);
+                        iModul.putExtra("judul_modul6", judulModul6);
+                        iModul.putExtra("judul_modul7", judulModul7);
+                        iModul.putExtra("judul_modul8", judulModul8);
+                        iModul.putExtra("judul_modul9", judulModul9);
+                        iModul.putExtra("judul_modul10", judulModul10);
+                        startActivity(iModul);
                         finish();
 
                     }

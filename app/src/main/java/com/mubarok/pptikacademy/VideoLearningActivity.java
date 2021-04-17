@@ -33,7 +33,7 @@ public class VideoLearningActivity extends AppCompatActivity {
     String getId, video1Temp1, video1Temp2, video1Temp3, video1Temp4, video1Temp5, video1Temp6, video1Temp7, video1Temp8, video1Temp9, video1Temp10;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/videolearning-send-learning.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/videomodul-send-learning.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +61,16 @@ public class VideoLearningActivity extends AppCompatActivity {
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
-        video1Temp1 = getIntent().getStringExtra("judulvid1");
-        video1Temp2 = getIntent().getStringExtra("judulvid2");
-        video1Temp3 = getIntent().getStringExtra("judulvid3");
-        video1Temp4 = getIntent().getStringExtra("judulvid4");
-        video1Temp5 = getIntent().getStringExtra("judulvid5");
-        video1Temp6 = getIntent().getStringExtra("judulvid6");
-        video1Temp7 = getIntent().getStringExtra("judulvid7");
-        video1Temp8 = getIntent().getStringExtra("judulvid8");
-        video1Temp9 = getIntent().getStringExtra("judulvid9");
-        video1Temp10 = getIntent().getStringExtra("judulvid10");
+        video1Temp1 = getIntent().getStringExtra("judul_video1");
+        video1Temp2 = getIntent().getStringExtra("judul_video2");
+        video1Temp3 = getIntent().getStringExtra("judul_video3");
+        video1Temp4 = getIntent().getStringExtra("judul_video4");
+        video1Temp5 = getIntent().getStringExtra("judul_video5");
+        video1Temp6 = getIntent().getStringExtra("judul_video6");
+        video1Temp7 = getIntent().getStringExtra("judul_video7");
+        video1Temp8 = getIntent().getStringExtra("judul_video8");
+        video1Temp9 = getIntent().getStringExtra("judul_video9");
+        video1Temp10 = getIntent().getStringExtra("judul_video10");
 
         // Set Material
         mBtn_video1.setText(video1Temp1);
