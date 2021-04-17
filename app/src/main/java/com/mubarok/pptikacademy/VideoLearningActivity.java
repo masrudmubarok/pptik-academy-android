@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -83,6 +84,16 @@ public class VideoLearningActivity extends AppCompatActivity {
         mBtn_video8.setText(video1Temp8);
         mBtn_video9.setText(video1Temp9);
         mBtn_video10.setText(video1Temp10);
+
+        // Function
+        mBtn_video1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iVideo1 = new Intent(getApplicationContext(), VideoViewActivity.class);
+                startActivity(iVideo1);
+                finish();
+            }
+        });
 
     }
 

@@ -18,11 +18,11 @@ public class VideoViewActivity extends AppCompatActivity {
 
         videoView = (VideoView) findViewById(R.id.videoViewLearning);
 
+        String linkVideo = ("rise.mp4");
+        Uri videoUri = Uri.parse("http://192.168.43.206/pptik-academy-web/assets/video/"+linkVideo);
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
-
-        Uri videoUri = Uri.parse("https://www.youtube.com/watch?v=lbP1riigUIQ");
         videoView.setVideoURI(videoUri);
         videoView.start();
 
