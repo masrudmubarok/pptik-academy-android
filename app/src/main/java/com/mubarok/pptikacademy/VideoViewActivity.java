@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +32,9 @@ import java.util.Map;
 public class VideoViewActivity extends AppCompatActivity {
 
     private static final String TAG = VideoViewActivity.class.getSimpleName(); //getting the info
+    TextView textView;
     VideoView videoView;
-    String getId;
+    String getId, videoTemp, judulVideoTemp;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/videomodulview-send-videomodullearning.php";
@@ -48,13 +51,19 @@ public class VideoViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        // Receive Data from LearnignActivity
-        getId = getIntent().getStringExtra("id_kursus");
-
         // Declaration
         videoView = (VideoView) findViewById(R.id.videoViewLearning);
+        textView = (TextView) findViewById(R.id.textToolbarVideoView);
 
-        String linkVideo = ("rise.mp4");
+        // Receive Data from LearnignActivity
+        getId = getIntent().getStringExtra("id_kursus");
+        judulVideoTemp = getIntent().getStringExtra("judul_video");
+        videoTemp = getIntent().getStringExtra("video");
+
+        // Set material
+        textView.setText(judulVideoTemp);
+
+        String linkVideo = videoTemp;
         Uri videoUri = Uri.parse("http://192.168.43.206/pptik-academy-web/assets/video/"+linkVideo);
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);

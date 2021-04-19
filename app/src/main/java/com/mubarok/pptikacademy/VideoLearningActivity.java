@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VideoLearningActivity extends AppCompatActivity {
+public class VideoLearningActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = VideoLearningActivity.class.getSimpleName(); //getting the info
     Button mBtn_video1, mBtn_video2, mBtn_video3, mBtn_video4, mBtn_video5, mBtn_video6, mBtn_video7, mBtn_video8, mBtn_video9, mBtn_video10;
@@ -87,13 +87,53 @@ public class VideoLearningActivity extends AppCompatActivity {
         mBtn_video10.setText(video1Temp10);
 
         // Method
-        mBtn_video1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendCourseDetail();
-            }
-        });
+        mBtn_video1.setOnClickListener(this);
+        mBtn_video2.setOnClickListener(this);
+        mBtn_video3.setOnClickListener(this);
+        mBtn_video4.setOnClickListener(this);
+        mBtn_video5.setOnClickListener(this);
+        mBtn_video6.setOnClickListener(this);
+        mBtn_video7.setOnClickListener(this);
+        mBtn_video8.setOnClickListener(this);
+        mBtn_video9.setOnClickListener(this);
+        mBtn_video10.setOnClickListener(this);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonVideoC1:
+                sendVideo1();
+                break;
+            case R.id.buttonVideoC2:
+                sendVideo2();
+                break;
+            case R.id.buttonVideoC3:
+                sendVideo3();
+                break;
+            case R.id.buttonVideoC4:
+                sendVideo4();
+                break;
+            case R.id.buttonVideoC5:
+                sendVideo5();
+                break;
+            case R.id.buttonVideoC6:
+                sendVideo6();
+                break;
+            case R.id.buttonVideoC7:
+                sendVideo7();
+                break;
+            case R.id.buttonVideoC8:
+                sendVideo8();
+                break;
+            case R.id.buttonVideoC9:
+                sendVideo9();
+                break;
+            case R.id.buttonVideoC10:
+                sendVideo10();
+                break;
+        }
     }
 
     private void sendBackCourseDetail() {
@@ -155,7 +195,7 @@ public class VideoLearningActivity extends AppCompatActivity {
         }
     }
 
-    private void sendCourseDetail() {
+    private void sendVideo1() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -166,15 +206,409 @@ public class VideoLearningActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String nama_kursus = object.getString("nama_kursus").trim();
-                        String deskripsi = object.getString("deskripsi").trim();
-                        String harga = object.getString("harga").trim();
-                        String icon = object.getString("icon").trim();
-                        String jumlah_video = object.getString("jumlah_video").trim();
-                        String jumlah_modul = object.getString("jumlah_modul").trim();
+                        String judulVideo1 = object.getString("judul_video1").trim();
+                        String video1 = object.getString("video1").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo1);
+                        intent.putExtra("video", video1);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo2() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo2 = object.getString("judul_video2").trim();
+                        String video2 = object.getString("video2").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo2);
+                        intent.putExtra("video", video2);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo3() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo3 = object.getString("judul_video3").trim();
+                        String video3 = object.getString("video3").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo3);
+                        intent.putExtra("video", video3);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo4() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo4 = object.getString("judul_video4").trim();
+                        String video4 = object.getString("video4").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo4);
+                        intent.putExtra("video", video4);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo5() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo5 = object.getString("judul_video5").trim();
+                        String video5 = object.getString("video5").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo5);
+                        intent.putExtra("video", video5);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo6() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo6 = object.getString("judul_video6").trim();
+                        String video6 = object.getString("video6").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo6);
+                        intent.putExtra("video", video6);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo7() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo7 = object.getString("judul_video7").trim();
+                        String video7 = object.getString("video7").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo7);
+                        intent.putExtra("video", video7);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo8() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo8 = object.getString("judul_video8").trim();
+                        String video8 = object.getString("video8").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo8);
+                        intent.putExtra("video", video8);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo9() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo9 = object.getString("judul_video9").trim();
+                        String video9 = object.getString("video9").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo9);
+                        intent.putExtra("video", video9);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VideoLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendVideo10() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulVideo10 = object.getString("judul_video10").trim();
+                        String video10 = object.getString("video10").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_video", judulVideo10);
+                        intent.putExtra("video", video10);
                         startActivity(intent);
                         finish();
 
