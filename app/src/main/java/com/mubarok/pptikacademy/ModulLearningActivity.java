@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModulLearningActivity extends AppCompatActivity {
+public class ModulLearningActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = ModulLearningActivity.class.getSimpleName(); //getting the info
     Button mBtn_modul1, mBtn_modul2, mBtn_modul3, mBtn_modul4, mBtn_modul5, mBtn_modul6, mBtn_modul7, mBtn_modul8, mBtn_modul9, mBtn_modul10;
@@ -34,6 +34,7 @@ public class ModulLearningActivity extends AppCompatActivity {
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/videomodul-send-learning.php";
+    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/modullearning-send-modulview.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,18 +85,56 @@ public class ModulLearningActivity extends AppCompatActivity {
         mBtn_modul9.setText(modulTemp9);
         mBtn_modul10.setText(modulTemp10);
 
-        // Function
-        mBtn_modul1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent iModul1 = new Intent(getApplicationContext(), ModulViewActivity.class);
-                startActivity(iModul1);
-                finish();
-            }
-        });
+        // Method
+        mBtn_modul1.setOnClickListener(this);
+        mBtn_modul2.setOnClickListener(this);
+        mBtn_modul3.setOnClickListener(this);
+        mBtn_modul4.setOnClickListener(this);
+        mBtn_modul5.setOnClickListener(this);
+        mBtn_modul6.setOnClickListener(this);
+        mBtn_modul7.setOnClickListener(this);
+        mBtn_modul8.setOnClickListener(this);
+        mBtn_modul9.setOnClickListener(this);
+        mBtn_modul10.setOnClickListener(this);
     }
 
-    private void sendCourseDetail() {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.buttonModulC1:
+                sendModul1();
+                break;
+            case R.id.buttonModulC2:
+                sendModul2();
+                break;
+            case R.id.buttonModulC3:
+                sendModul3();
+                break;
+            case R.id.buttonModulC4:
+                sendModul4();
+                break;
+            case R.id.buttonModulC5:
+                sendModul5();
+                break;
+            case R.id.buttonModulC6:
+                sendModul6();
+                break;
+            case R.id.buttonModulC7:
+                sendModul7();
+                break;
+            case R.id.buttonModulC8:
+                sendModul8();
+                break;
+            case R.id.buttonModulC9:
+                sendModul9();
+                break;
+            case R.id.buttonModulC10:
+                sendModul10();
+                break;
+        }
+    }
+
+    private void sendBackCourseDetail() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -147,10 +186,450 @@ public class ModulLearningActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                sendCourseDetail();
+                sendBackCourseDetail();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void sendModul1() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul1 = object.getString("judul_modul1").trim();
+                        String modul1 = object.getString("modul1").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul1);
+                        intent.putExtra("modul", modul1);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul2() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul2 = object.getString("judul_modul2").trim();
+                        String modul2 = object.getString("modul2").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul2);
+                        intent.putExtra("modul", modul2);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul3() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul3 = object.getString("judul_modul3").trim();
+                        String modul3 = object.getString("modul3").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul3);
+                        intent.putExtra("modul", modul3);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul4() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul4 = object.getString("judul_modul4").trim();
+                        String modul4 = object.getString("modul4").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul4);
+                        intent.putExtra("modul", modul4);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul5() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul5 = object.getString("judul_modul5").trim();
+                        String modul5 = object.getString("modul5").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul5);
+                        intent.putExtra("modul", modul5);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul6() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul6 = object.getString("judul_modul6").trim();
+                        String modul6 = object.getString("modul6").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul6);
+                        intent.putExtra("modul", modul6);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul7() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul7 = object.getString("judul_modul7").trim();
+                        String modul7 = object.getString("modul7").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul7);
+                        intent.putExtra("modul", modul7);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul8() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul8 = object.getString("judul_modul8").trim();
+                        String modul8 = object.getString("modul8").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul8);
+                        intent.putExtra("modul", modul8);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul9() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul9 = object.getString("judul_modul9").trim();
+                        String modul9 = object.getString("modul9").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul9);
+                        intent.putExtra("modul", modul9);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendModul10() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul10 = object.getString("judul_modul10").trim();
+                        String modul10 = object.getString("modul10").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("judul_modul", judulModul10);
+                        intent.putExtra("modul", modul10);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulLearningActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }

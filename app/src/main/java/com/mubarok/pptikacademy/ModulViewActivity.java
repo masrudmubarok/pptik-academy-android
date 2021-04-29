@@ -2,20 +2,45 @@ package com.mubarok.pptikacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.barteksc.pdfviewer.PDFView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModulViewActivity extends AppCompatActivity {
 
+    private static final String TAG = ModulViewActivity.class.getSimpleName(); //getting the info
+    TextView textView;
     PDFView pdfView;
-    String modulTemp;
+    String getId, modulTemp, judulModulTemp;
+
+    // Adding HTTP Server URL to string variable.
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/videomodulview-send-videomodullearning.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +54,22 @@ public class ModulViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        modulTemp = ("http://192.168.43.206/pptik-academy-web/assets/modul/modul-1-perngenalan-adobe-illustrator.pdf");
+        // Declaration
         pdfView = findViewById(R.id.pdfView);
+        textView = (TextView) findViewById(R.id.textToolbarModulView);
+
+        // Receive Data from LearnignActivity
+        getId = getIntent().getStringExtra("id_kursus");
+        judulModulTemp = getIntent().getStringExtra("judul_modul");
+        modulTemp = getIntent().getStringExtra("modul");
+
+        // Set material
+        textView.setText(judulModulTemp);
+
 
         //This is function read PDF from URL
-        new RetrievePDFStream().execute(modulTemp); // Or any url direct PDF from internet
+        String linkModul = modulTemp;
+        new RetrievePDFStream().execute("http://192.168.43.206/pptik-academy-web/assets/modul/"+linkModul); // Or any url direct PDF from internet
 
     }
 
@@ -61,6 +97,77 @@ public class ModulViewActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(InputStream inputStream) {
             pdfView.fromStream(inputStream).load();
+        }
+    }
+
+    private void sendBackVideoDetail() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String judulModul1 = object.getString("judul_modul1").trim();
+                        String judulModul2 = object.getString("judul_modul2").trim();
+                        String judulModul3 = object.getString("judul_modul3").trim();
+                        String judulModul4 = object.getString("judul_modul4").trim();
+                        String judulModul5 = object.getString("judul_modul5").trim();
+                        String judulModul6 = object.getString("judul_modul6").trim();
+                        String judulModul7 = object.getString("judul_modul7").trim();
+                        String judulModul8 = object.getString("judul_modul8").trim();
+                        String judulModul9 = object.getString("judul_modul9").trim();
+                        String judulModul10 = object.getString("judul_modul10").trim();
+
+                        Intent iVideo = new Intent(getApplicationContext(),ModulLearningActivity.class);
+                        iVideo.putExtra("id_kursus", id_kursus);
+                        iVideo.putExtra("judul_modul1", judulModul1);
+                        iVideo.putExtra("judul_modul2", judulModul2);
+                        iVideo.putExtra("judul_modul3", judulModul3);
+                        iVideo.putExtra("judul_modul4", judulModul4);
+                        iVideo.putExtra("judul_modul5", judulModul5);
+                        iVideo.putExtra("judul_modul6", judulModul6);
+                        iVideo.putExtra("judul_modul7", judulModul7);
+                        iVideo.putExtra("judul_modul8", judulModul8);
+                        iVideo.putExtra("judul_modul9", judulModul9);
+                        iVideo.putExtra("judul_modul10", judulModul10);
+                        startActivity(iVideo);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ModulViewActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ModulViewActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                sendBackVideoDetail();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
