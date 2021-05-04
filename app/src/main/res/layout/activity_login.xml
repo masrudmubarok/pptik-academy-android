@@ -94,11 +94,11 @@
 
     <Button
         android:id="@+id/btnsignin2"
-        android:layout_width="293dp"
-        android:layout_height="50dp"
+        android:layout_width="351dp"
+        android:layout_height="43dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/bluebtn"
+        android:background="@color/colorPrimary"
         android:text="Sign In"
         android:textColor="@color/colorTextWhite"
         android:textSize="17dp"

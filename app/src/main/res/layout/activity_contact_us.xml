@@ -122,19 +122,19 @@
 
     <Button
         android:id="@+id/btn_send"
-        android:layout_width="318dp"
-        android:layout_height="54dp"
+        android:layout_width="363dp"
+        android:layout_height="56dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/bluebtn"
+        android:background="@color/colorPrimary"
         android:text="Send"
         android:textColor="@color/colorTextWhite"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_message"
-        app:layout_constraintVertical_bias="0.359" />
+        app:layout_constraintVertical_bias="0.282" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

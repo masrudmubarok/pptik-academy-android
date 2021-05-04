@@ -150,11 +150,11 @@
 
     <Button
         android:id="@+id/btn_createacc2"
-        android:layout_width="293dp"
-        android:layout_height="50dp"
+        android:layout_width="351dp"
+        android:layout_height="46dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/bluebtn"
+        android:background="@color/colorPrimary"
         android:text="Create Account"
         android:textColor="@color/colorTextWhite"
         android:textSize="17dp"
@@ -162,6 +162,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputCountryC"
-        app:layout_constraintVertical_bias="0.322" />
+        app:layout_constraintVertical_bias="0.271" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
