@@ -62,16 +62,16 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
-        modulTemp1 = getIntent().getStringExtra("judul_modul1");
-        modulTemp2 = getIntent().getStringExtra("judul_modul2");
-        modulTemp3 = getIntent().getStringExtra("judul_modul3");
-        modulTemp4 = getIntent().getStringExtra("judul_modul4");
-        modulTemp5 = getIntent().getStringExtra("judul_modul5");
-        modulTemp6 = getIntent().getStringExtra("judul_modul6");
-        modulTemp7 = getIntent().getStringExtra("judul_modul7");
-        modulTemp8 = getIntent().getStringExtra("judul_modul8");
-        modulTemp9 = getIntent().getStringExtra("judul_modul9");
-        modulTemp10 = getIntent().getStringExtra("judul_modul10");
+        modulTemp1 = getIntent().getStringExtra("judul1");
+        modulTemp2 = getIntent().getStringExtra("judul2");
+        modulTemp3 = getIntent().getStringExtra("judul3");
+        modulTemp4 = getIntent().getStringExtra("judul4");
+        modulTemp5 = getIntent().getStringExtra("judul5");
+        modulTemp6 = getIntent().getStringExtra("judul6");
+        modulTemp7 = getIntent().getStringExtra("judul7");
+        modulTemp8 = getIntent().getStringExtra("judul8");
+        modulTemp9 = getIntent().getStringExtra("judul9");
+        modulTemp10 = getIntent().getStringExtra("judul10");
 
         // Set Material
         mBtn_modul1.setText(modulTemp1);
@@ -204,7 +204,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul1 = object.getString("judul_modul1").trim();
+                        String judulModul1 = object.getString("judul1").trim();
                         String modul1 = object.getString("modul1").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -248,7 +248,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul2 = object.getString("judul_modul2").trim();
+                        String judulModul2 = object.getString("judul2").trim();
                         String modul2 = object.getString("modul2").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -292,7 +292,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul3 = object.getString("judul_modul3").trim();
+                        String judulModul3 = object.getString("judul3").trim();
                         String modul3 = object.getString("modul3").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -336,7 +336,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul4 = object.getString("judul_modul4").trim();
+                        String judulModul4 = object.getString("judul4").trim();
                         String modul4 = object.getString("modul4").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -380,7 +380,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul5 = object.getString("judul_modul5").trim();
+                        String judulModul5 = object.getString("judul5").trim();
                         String modul5 = object.getString("modul5").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -424,7 +424,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul6 = object.getString("judul_modul6").trim();
+                        String judulModul6 = object.getString("judul6").trim();
                         String modul6 = object.getString("modul6").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -468,7 +468,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul7 = object.getString("judul_modul7").trim();
+                        String judulModul7 = object.getString("judul7").trim();
                         String modul7 = object.getString("modul7").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -512,7 +512,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul8 = object.getString("judul_modul8").trim();
+                        String judulModul8 = object.getString("judul8").trim();
                         String modul8 = object.getString("modul8").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -556,7 +556,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul9 = object.getString("judul_modul9").trim();
+                        String judulModul9 = object.getString("judul9").trim();
                         String modul9 = object.getString("modul9").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
@@ -600,7 +600,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulModul10 = object.getString("judul_modul10").trim();
+                        String judulModul10 = object.getString("judul10").trim();
                         String modul10 = object.getString("modul10").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);

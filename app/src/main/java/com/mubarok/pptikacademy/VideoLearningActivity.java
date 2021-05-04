@@ -63,16 +63,16 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
-        video1Temp1 = getIntent().getStringExtra("judul_video1");
-        video1Temp2 = getIntent().getStringExtra("judul_video2");
-        video1Temp3 = getIntent().getStringExtra("judul_video3");
-        video1Temp4 = getIntent().getStringExtra("judul_video4");
-        video1Temp5 = getIntent().getStringExtra("judul_video5");
-        video1Temp6 = getIntent().getStringExtra("judul_video6");
-        video1Temp7 = getIntent().getStringExtra("judul_video7");
-        video1Temp8 = getIntent().getStringExtra("judul_video8");
-        video1Temp9 = getIntent().getStringExtra("judul_video9");
-        video1Temp10 = getIntent().getStringExtra("judul_video10");
+        video1Temp1 = getIntent().getStringExtra("judul1");
+        video1Temp2 = getIntent().getStringExtra("judul2");
+        video1Temp3 = getIntent().getStringExtra("judul3");
+        video1Temp4 = getIntent().getStringExtra("judul4");
+        video1Temp5 = getIntent().getStringExtra("judul5");
+        video1Temp6 = getIntent().getStringExtra("judul6");
+        video1Temp7 = getIntent().getStringExtra("judul7");
+        video1Temp8 = getIntent().getStringExtra("judul8");
+        video1Temp9 = getIntent().getStringExtra("judul9");
+        video1Temp10 = getIntent().getStringExtra("judul10");
 
         // Set Material
         mBtn_video1.setText(video1Temp1);
@@ -206,7 +206,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo1 = object.getString("judul_video1").trim();
+                        String judulVideo1 = object.getString("judul1").trim();
                         String video1 = object.getString("video1").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -250,7 +250,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo2 = object.getString("judul_video2").trim();
+                        String judulVideo2 = object.getString("judul2").trim();
                         String video2 = object.getString("video2").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -294,7 +294,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo3 = object.getString("judul_video3").trim();
+                        String judulVideo3 = object.getString("judul3").trim();
                         String video3 = object.getString("video3").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -338,7 +338,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo4 = object.getString("judul_video4").trim();
+                        String judulVideo4 = object.getString("judul4").trim();
                         String video4 = object.getString("video4").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -382,7 +382,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo5 = object.getString("judul_video5").trim();
+                        String judulVideo5 = object.getString("judul5").trim();
                         String video5 = object.getString("video5").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -426,7 +426,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo6 = object.getString("judul_video6").trim();
+                        String judulVideo6 = object.getString("judul6").trim();
                         String video6 = object.getString("video6").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -470,7 +470,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo7 = object.getString("judul_video7").trim();
+                        String judulVideo7 = object.getString("judul7").trim();
                         String video7 = object.getString("video7").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -514,7 +514,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo8 = object.getString("judul_video8").trim();
+                        String judulVideo8 = object.getString("judul8").trim();
                         String video8 = object.getString("video8").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -558,7 +558,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo9 = object.getString("judul_video9").trim();
+                        String judulVideo9 = object.getString("judul9").trim();
                         String video9 = object.getString("video9").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
@@ -602,7 +602,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
-                        String judulVideo10 = object.getString("judul_video10").trim();
+                        String judulVideo10 = object.getString("judul10").trim();
                         String video10 = object.getString("video10").trim();
 
                         Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
