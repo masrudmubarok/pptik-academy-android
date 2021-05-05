@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ModulViewActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_modulview"
@@ -27,7 +24,7 @@
         android:layout_below="@id/toolbar_modulview"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="15dp"
         android:width="@android:dimen/thumbnail_width"
         android:gravity="center_horizontal"
         android:text="Modul"
@@ -37,15 +34,17 @@
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
-        android:layout_height="605dp"
+        android:layout_height="903dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="555dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
