@@ -20,6 +20,14 @@
             android:required="false" />
 
         <activity
+            android:name=".VideoLearningOverviewActivity"
+            android:parentActivityName=".LearningOverviewActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LearningOverviewActivity" />
+        </activity>
+        <activity
             android:name=".LearningOverviewActivity"
             android:parentActivityName=".CourseActivity"
             android:theme="@style/AppTheme.NoActionBar">

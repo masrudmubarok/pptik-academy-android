@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackWhite"
+    tools:context=".VideoLearningOverviewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_videolearningO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textToolbarVideoLearningO"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_videolearningO"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
+        android:width="@android:dimen/thumbnail_width"
+        android:gravity="center_horizontal"
+        android:text="Video Learning Overview"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textIdLO"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonVideoC1O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:padding="15dp"
+        android:text="Section 1 : This is video section 1"
+        android:gravity="start"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_videolearningO" />
+
+    <Button
+        android:id="@+id/buttonVideoC2O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 2 : This is video section 2"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC1O" />
+
+    <Button
+        android:id="@+id/buttonVideoC3O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 3 : This is video section 3"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC2O" />
+
+    <Button
+        android:id="@+id/buttonVideoC4O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 4 : This is video section 4"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC3O" />
+
+    <Button
+        android:id="@+id/buttonVideoC5O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 5 : This is video section 5"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC4O" />
+
+    <Button
+        android:id="@+id/buttonVideoC6O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 6 : This is video section 6"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC5O" />
+
+    <Button
+        android:id="@+id/buttonVideoC7O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 7 : This is video section 7"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC6O" />
+
+    <Button
+        android:id="@+id/buttonVideoC8O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 8 : This is video section 8"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC7O" />
+
+    <Button
+        android:id="@+id/buttonVideoC9O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 9 : This is video section 9"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC8O" />
+
+    <Button
+        android:id="@+id/buttonVideoC10O"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Section 10 : This is video section 10"
+        android:padding="15dp"
+        android:gravity="start"
+        android:textSize="12dp"
+        android:textColor="#A6A9AA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVideoC9O" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

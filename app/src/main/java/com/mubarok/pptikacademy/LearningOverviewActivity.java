@@ -108,7 +108,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
                         String judulVideo9 = object.getString("judul9").trim();
                         String judulVideo10 = object.getString("judul10").trim();
 
-                        Intent iVideo = new Intent(getApplicationContext(),VideoLearningActivity.class);
+                        Intent iVideo = new Intent(getApplicationContext(),VideoLearningOverviewActivity.class);
                         iVideo.putExtra("id_kursus", id_kursus);
                         iVideo.putExtra("judul1", judulVideo1);
                         iVideo.putExtra("judul2", judulVideo2);
