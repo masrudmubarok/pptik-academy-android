@@ -207,7 +207,7 @@ public class VideoLearningOverviewActivity extends AppCompatActivity implements 
                         String judulVideo1 = object.getString("judul1").trim();
                         String video1 = object.getString("video1").trim();
 
-                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), VideoOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("judul_video", judulVideo1);
                         intent.putExtra("video", video1);
@@ -251,7 +251,7 @@ public class VideoLearningOverviewActivity extends AppCompatActivity implements 
                         String judulVideo2 = object.getString("judul2").trim();
                         String video2 = object.getString("video2").trim();
 
-                        Intent intent = new Intent(getApplicationContext(), VideoViewActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), VideoOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("judul_video", judulVideo2);
                         intent.putExtra("video", video2);

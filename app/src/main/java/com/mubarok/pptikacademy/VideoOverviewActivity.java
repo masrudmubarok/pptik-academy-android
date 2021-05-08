@@ -24,14 +24,13 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class VideoViewActivity extends AppCompatActivity {
+public class VideoOverviewActivity extends AppCompatActivity {
 
-    private static final String TAG = VideoViewActivity.class.getSimpleName(); //getting the info
+    private static final String TAG = VideoOverviewActivity.class.getSimpleName(); //getting the info
     TextView textView;
     VideoView videoView;
     String getId, videoTemp, judulVideoTemp;
@@ -42,18 +41,18 @@ public class VideoViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_view);
+        setContentView(R.layout.activity_video_overview);
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
-        Toolbar ToolBar = (Toolbar)findViewById(R.id.toolbar_videoview);
+        Toolbar ToolBar = (Toolbar)findViewById(R.id.toolbar_videooverview);
         setSupportActionBar(ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         // Declaration
-        videoView = (VideoView) findViewById(R.id.videoViewLearning);
-        textView = (TextView) findViewById(R.id.textToolbarVideoView);
+        videoView = (VideoView) findViewById(R.id.videoOverviewLearning);
+        textView = (TextView) findViewById(R.id.textToolbarVideoOverview);
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
@@ -70,7 +69,6 @@ public class VideoViewActivity extends AppCompatActivity {
         videoView.setMediaController(mediaController);
         videoView.setVideoURI(videoUri);
         videoView.start();
-
     }
 
     private void sendBackVideoDetail() {
@@ -95,7 +93,7 @@ public class VideoViewActivity extends AppCompatActivity {
                         String judulVideo9 = object.getString("judul9").trim();
                         String judulVideo10 = object.getString("judul10").trim();
 
-                        Intent iVideo = new Intent(getApplicationContext(),VideoLearningActivity.class);
+                        Intent iVideo = new Intent(getApplicationContext(),VideoLearningOverviewActivity.class);
                         iVideo.putExtra("id_kursus", id_kursus);
                         iVideo.putExtra("judul1", judulVideo1);
                         iVideo.putExtra("judul2", judulVideo2);
@@ -113,13 +111,13 @@ public class VideoViewActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(VideoViewActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VideoOverviewActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(VideoViewActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VideoOverviewActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
