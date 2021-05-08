@@ -82,6 +82,7 @@ public class DiscoveryFragment extends Fragment {
                         HashMap<String, String> itemt = new HashMap<String, String>();
                         itemt.put("id_kursus", json.getString("id_kursus"));
                         itemt.put("nama_kursus", json.getString("nama_kursus"));
+                        itemt.put("deskripsi", json.getString("deskripsi"));
                         itemt.put("harga", json.getString("harga"));
                         itemt.put("icon", json.getString("icon"));
                         itemt.put("jumlah_video", json.getString("jumlah_video"));

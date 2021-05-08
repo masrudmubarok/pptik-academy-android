@@ -29,18 +29,18 @@
 
     <me.biubiubiu.justifytext.library.JustifyTextView
         android:id="@+id/textDeskripsi"
-        android:layout_width="328dp"
-        android:layout_height="93dp"
+        android:layout_width="341dp"
+        android:layout_height="92dp"
         android:fontFamily="serif"
         android:text="PPTIK merupakan lembaga yang menyediakan pelatihan online course di bidang TIK dan sertifikasi internasional diantaranya :"
         android:textColor="#000"
-        android:textSize="19dp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintVertical_bias="0.211" />
 
     <TextView
         android:id="@+id/textDeskripsi2"
@@ -104,7 +104,7 @@
         android:layout_width="30dp"
         android:layout_height="21dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/web"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDeskripsi5" />
@@ -113,8 +113,8 @@
         android:id="@+id/textWeb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="63dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="serif"
         android:text="pptik.stiki.ac.id"
         android:textColor="#F000"
@@ -132,13 +132,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iconweb"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintVertical_bias="0.099" />
 
     <TextView
         android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="148dp"
         android:fontFamily="serif"
         android:text="pptik@stiki.ac.id"
@@ -147,14 +147,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iconemail"
         app:layout_constraintTop_toBottomOf="@+id/textWeb"
-        app:layout_constraintVertical_bias="0.257" />
+        app:layout_constraintVertical_bias="0.152" />
 
     <ImageView
         android:id="@+id/iconPhone"
         android:layout_width="32dp"
         android:layout_height="23dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/phone"
         app:layout_constraintStart_toEndOf="@+id/textWeb"
         app:layout_constraintTop_toBottomOf="@+id/textDeskripsi5" />
@@ -164,7 +164,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
         android:fontFamily="serif"
         android:text="(0341) 560823 ext.312"
@@ -179,13 +179,13 @@
         android:id="@+id/iconInstagram"
         android:layout_width="30dp"
         android:layout_height="21dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="244dp"
         android:src="@drawable/instagram"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textEmail"
         app:layout_constraintTop_toBottomOf="@+id/iconPhone"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textInstagram"
@@ -199,10 +199,10 @@
         android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toEndOf="@+id/iconInstagram"
         app:layout_constraintTop_toBottomOf="@+id/textPhone"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.203" />
 
     <Button
         android:id="@+id/btn_createacc"
@@ -227,9 +227,9 @@
         android:textColor="@color/colorTextWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintHorizontal_bias="0.826"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        app:layout_constraintVertical_bias="0.902" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
