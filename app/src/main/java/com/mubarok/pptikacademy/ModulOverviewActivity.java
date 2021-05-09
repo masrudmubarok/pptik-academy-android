@@ -32,9 +32,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModulViewActivity extends AppCompatActivity {
+public class ModulOverviewActivity extends AppCompatActivity {
 
-    private static final String TAG = ModulViewActivity.class.getSimpleName(); //getting the info
+    private static final String TAG = ModulOverviewActivity.class.getSimpleName(); //getting the info
     TextView textView;
     PDFView pdfView;
     String getId, modulTemp, judulModulTemp;
@@ -45,18 +45,18 @@ public class ModulViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modul_view);
+        setContentView(R.layout.activity_modul_overview);
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
-        Toolbar ToolBar = (Toolbar)findViewById(R.id.toolbar_modulview);
+        Toolbar ToolBar = (Toolbar)findViewById(R.id.toolbar_moduloverview);
         setSupportActionBar(ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         // Declaration
-        pdfView = findViewById(R.id.pdfView);
-        textView = (TextView) findViewById(R.id.textToolbarModulView);
+        pdfView = findViewById(R.id.pdfOverview);
+        textView = (TextView) findViewById(R.id.textToolbarModulOverview);
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
@@ -66,14 +66,12 @@ public class ModulViewActivity extends AppCompatActivity {
         // Set material
         textView.setText(judulModulTemp);
 
-
         //This is function read PDF from URL
         String linkModul = modulTemp;
-        new RetrievePDFStream().execute("http://192.168.43.206/pptik-academy-web/assets/modul/"+linkModul); // Or any url direct PDF from internet
-
+        new ModulOverviewActivity.RetrievePDFStream().execute("http://192.168.43.206/pptik-academy-web/assets/modul/"+linkModul); // Or any url direct PDF from internet
     }
 
-        class RetrievePDFStream extends AsyncTask<String,Void,InputStream>
+    class RetrievePDFStream extends AsyncTask<String,Void, InputStream>
     {
 
         @Override
@@ -122,7 +120,7 @@ public class ModulViewActivity extends AppCompatActivity {
                         String judulModul9 = object.getString("judul9").trim();
                         String judulModul10 = object.getString("judul10").trim();
 
-                        Intent iVideo = new Intent(getApplicationContext(),ModulLearningActivity.class);
+                        Intent iVideo = new Intent(getApplicationContext(),ModulLearningOverviewActivity.class);
                         iVideo.putExtra("id_kursus", id_kursus);
                         iVideo.putExtra("judul1", judulModul1);
                         iVideo.putExtra("judul2", judulModul2);
@@ -140,13 +138,13 @@ public class ModulViewActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(ModulViewActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ModulOverviewActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ModulViewActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ModulOverviewActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

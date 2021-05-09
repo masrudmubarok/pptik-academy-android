@@ -207,7 +207,7 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
                         String judulModul1 = object.getString("judul1").trim();
                         String modul1 = object.getString("modul1").trim();
 
-                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ModulOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("judul_modul", judulModul1);
                         intent.putExtra("modul", modul1);
@@ -251,7 +251,7 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
                         String judulModul2 = object.getString("judul2").trim();
                         String modul2 = object.getString("modul2").trim();
 
-                        Intent intent = new Intent(getApplicationContext(), ModulViewActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ModulOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("judul_modul", judulModul2);
                         intent.putExtra("modul", modul2);
