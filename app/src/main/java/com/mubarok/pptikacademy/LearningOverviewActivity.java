@@ -169,7 +169,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
                         String judulModul9 = object.getString("judul9").trim();
                         String judulModul10 = object.getString("judul10").trim();
 
-                        Intent iModul = new Intent(getApplicationContext(),ModulLearningActivity.class);
+                        Intent iModul = new Intent(getApplicationContext(),ModulLearningOverviewActivity.class);
                         iModul.putExtra("id_kursus", id_kursus);
                         iModul.putExtra("judul1", judulModul1);
                         iModul.putExtra("judul2", judulModul2);
