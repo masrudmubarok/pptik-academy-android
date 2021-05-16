@@ -68,7 +68,7 @@ public class ModulOverviewActivity extends AppCompatActivity {
 
         //This is function read PDF from URL
         String linkModul = modulTemp;
-        new ModulOverviewActivity.RetrievePDFStream().execute("http://192.168.43.206/pptik-academy-web/assets/modul/"+linkModul); // Or any url direct PDF from internet
+        new ModulOverviewActivity.RetrievePDFStream().execute("http://192.168.43.206/pptik-academy-web/assets/modul/overview/"+linkModul); // Or any url direct PDF from internet
     }
 
     class RetrievePDFStream extends AsyncTask<String,Void, InputStream>

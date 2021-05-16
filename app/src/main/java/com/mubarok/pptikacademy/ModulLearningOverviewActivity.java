@@ -205,7 +205,7 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
                         String judulModul1 = object.getString("judul1").trim();
-                        String modul1 = object.getString("modul1").trim();
+                        String modul1 = object.getString("moduloverview1").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
@@ -249,7 +249,7 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
                         String judulModul2 = object.getString("judul2").trim();
-                        String modul2 = object.getString("modul2").trim();
+                        String modul2 = object.getString("moduloverview2").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
