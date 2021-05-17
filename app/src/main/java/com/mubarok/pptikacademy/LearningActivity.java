@@ -32,13 +32,14 @@ import java.util.Map;
 public class LearningActivity extends AppCompatActivity {
 
     private static final String TAG = LearningActivity.class.getSimpleName(); //getting the info
-    Button mBtn_video, mBtn_modul, mBtn_certificate;
+    Button mBtn_video, mBtn_modul, mBtn_exam;
     TextView mTxt_idKursus, mTxt_deskripsi;
     ImageView icon;
     String getId, deskripsiTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videomodul.php";
+    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/learning-send-exam.php";
 
     private Map<String, String> getParams;
 
@@ -57,7 +58,7 @@ public class LearningActivity extends AppCompatActivity {
         //inisialisasi button & edit text
         mBtn_video = (Button) findViewById(R.id.buttonVideo);
         mBtn_modul = (Button) findViewById(R.id.buttonModul);
-//        mBtn_certificate = (Button) findViewById(R.id.buttonSertifikat);
+        mBtn_exam = (Button) findViewById(R.id.buttonExam);
         mTxt_idKursus = (TextView) findViewById(R.id.textIdL);
         mTxt_deskripsi = (TextView) findViewById(R.id.textDeskripsi);
         icon = (ImageView) findViewById(R.id.imageViewIcon);
@@ -85,6 +86,15 @@ public class LearningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendModulDetail();
+            }
+        });
+        mBtn_exam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(), "Under construction..", Toast.LENGTH_SHORT).show();
+                Intent iExam = new Intent(getApplicationContext(),ExamActivity.class);
+                startActivity(iExam);
+                finish();
             }
         });
 
@@ -186,6 +196,49 @@ public class LearningActivity extends AppCompatActivity {
                         iModul.putExtra("judul9", judulModul9);
                         iModul.putExtra("judul10", judulModul10);
                         startActivity(iModul);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(LearningActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LearningActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+            }})
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendExamData() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String namaKursus = object.getString("nama_kursus").trim();
+
+                        Intent iExam = new Intent(getApplicationContext(),ExamActivity.class);
+                        iExam.putExtra("id_kursus", id_kursus);
+                        iExam.putExtra("nama_kursus", namaKursus);
+                        startActivity(iExam);
                         finish();
 
                     }

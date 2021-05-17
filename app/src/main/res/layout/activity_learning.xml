@@ -58,7 +58,7 @@
         android:id="@+id/imageViewIcon"
         android:layout_width="181dp"
         android:layout_height="174dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="Ini bagian deskripsi"
         android:textColor="#F000"
@@ -83,7 +83,7 @@
         android:id="@+id/buttonVideo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/border"
         android:text="Video"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,16 +103,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideo" />
 
-<!--    <Button-->
-<!--        android:id="@+id/buttonSertifikat"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="1dp"-->
-<!--        android:background="@drawable/border"-->
-<!--        android:text="Certificate"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/buttonModul" />-->
+    <Button
+        android:id="@+id/buttonExam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/border"
+        android:text="Exam"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonModul" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
