@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,11 +47,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ExamActivity extends AppCompatActivity {
+public class ExamActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = ExamActivity.class.getSimpleName(); //getting the info
     String HttpURL = "http://192.168.43.206/pptik-academy-android/registerexam.php";
     String HttpURL1 = "http://192.168.43.206/pptik-academy-android/videomodul-send-learning.php";
+    String HttpURL2 = "http://192.168.43.206/pptik-academy-android/learning-send-exam.php";
 
     Button mBtn_register;
     TextInputLayout mExt_idSiswaE, mExt_idKursusE, mExt_nameE, mExt_emailE, mExt_dateE, mExt_subjectE;
@@ -103,18 +106,7 @@ public class ExamActivity extends AppCompatActivity {
         mExt_dateE.getEditText().setText(currentDate);
 
         // Function button
-        mBtn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                GetData();
-                InsertData(TempIdSiswa, TempIdKursus, TempDate);
-                Intent a = new Intent(ExamActivity.this, LearningActivity.class);
-                startActivity(a);
-                finish();
-            }
-
-        });
+        mBtn_register.setOnClickListener((View.OnClickListener) this);
 
     }
 
@@ -230,5 +222,77 @@ public class ExamActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_registerexam:
+                //Creating
+                AlertDialog.Builder alertRegisterExam = new AlertDialog.Builder(this);
+                //Setting Dialog
+                alertRegisterExam.setTitle("Register");
+                alertRegisterExam.setMessage("Are you sure to take the exam?");
+                alertRegisterExam.setIcon(R.drawable.exam);
+                alertRegisterExam.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        GetData();
+                        InsertData(TempIdSiswa, TempIdKursus, TempDate);
+                        Intent a = new Intent(ExamActivity.this, LearningActivity.class);
+                        startActivity(a);
+                        finish();
+                    }
+                });
+                alertRegisterExam.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendExamData();
+                    }
+                });
+                alertRegisterExam.show();
+                break;
+        }
+    }
+
+    private void sendExamData() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String namaKursus = object.getString("nama_kursus").trim();
+
+                        Intent iExam = new Intent(getApplicationContext(),ExamActivity.class);
+                        iExam.putExtra("id_kursus", id_kursus);
+                        iExam.putExtra("nama_kursus", namaKursus);
+                        startActivity(iExam);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ExamActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ExamActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+            }})
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }
