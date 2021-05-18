@@ -91,10 +91,7 @@ public class LearningActivity extends AppCompatActivity {
         mBtn_exam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "Under construction..", Toast.LENGTH_SHORT).show();
-                Intent iExam = new Intent(getApplicationContext(),ExamActivity.class);
-                startActivity(iExam);
-                finish();
+                sendExamData();
             }
         });
 
@@ -223,7 +220,7 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     private void sendExamData() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i(TAG, response.toString());
