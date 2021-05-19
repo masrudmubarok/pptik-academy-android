@@ -21,6 +21,14 @@
             android:required="false" />
 
         <activity
+            android:name=".PurchaseActivity"
+            android:parentActivityName=".LearningOverviewActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LearningOverviewActivity" />
+        </activity>
+        <activity
             android:name=".ExamActivity"
             android:parentActivityName=".LearningActivity"
             android:theme="@style/AppTheme.NoActionBar">
