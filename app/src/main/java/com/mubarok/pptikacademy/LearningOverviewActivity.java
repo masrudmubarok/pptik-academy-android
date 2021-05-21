@@ -38,6 +38,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videomodul.php";
+    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/learningoverview-send-purchse.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,12 @@ public class LearningOverviewActivity extends AppCompatActivity {
             }
         });
         mBtn_modul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendModulDetail();
+            }
+        });
+        mBtn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendModulDetail();
@@ -182,6 +189,51 @@ public class LearningOverviewActivity extends AppCompatActivity {
                         iModul.putExtra("judul9", judulModul9);
                         iModul.putExtra("judul10", judulModul10);
                         startActivity(iModul);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(LearningOverviewActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LearningOverviewActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+            }})
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void sendPurchaseData() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String namaKursus = object.getString("nama_kursus").trim();
+                        String harga = object.getString("harga").trim();
+
+                        Intent iExam = new Intent(getApplicationContext(),ExamActivity.class);
+                        iExam.putExtra("id_kursus", id_kursus);
+                        iExam.putExtra("nama_kursus", namaKursus);
+                        iExam.putExtra("harga", harga);
+                        startActivity(iExam);
                         finish();
 
                     }
