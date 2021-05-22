@@ -40,7 +40,7 @@ public class PurchaseActivity extends AppCompatActivity {
     TextInputLayout mExt_idSiswaPcs, mExt_idKursusPcs, mExt_qtyPcs, mExt_pricePcs, mExt_datePcs, mExt_namePcs, mExt_emailPcs;
     TextView mTxt_coursenamePcs, mTxt_qtyPcs, mTxt_pricePcs;
     ImageView mImg_iconPcs;
-    String getId, getName, getEmail;
+    String getIdIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKursus;
     String TempIdSiswa, TempIdKursus, TempDate;
 
     SessionManager sessionManager;
@@ -74,20 +74,24 @@ public class PurchaseActivity extends AppCompatActivity {
         mTxt_pricePcs = (TextView) findViewById(R.id.priceTPurchase);
         mImg_iconPcs = (ImageView) findViewById(R.id.imageViewIconPurchase);
 
+        // Receive Data from SessionManager
         HashMap<String, String> user = sessionManager.getUserDetail();
-        getId = user.get(sessionManager.KEY_ID);
+        getIdIdSiswa = user.get(sessionManager.KEY_ID);
         getName = user.get(sessionManager.KEY_NAME);
         getEmail = user.get(sessionManager.KEY_EMAIL);
 
-        // Receive Data from SessionManager
-        mExt_idSiswaPcs.getEditText().setText(getId);
+        // Receive Data from LearningOverviewActivity
+        getIdKursus = getIntent().getStringExtra("id_kursus");
+        getNamaKursus = getIntent().getStringExtra("nama_kursus");
+        getHargaKursus = getIntent().getStringExtra("harga");
+
+        // Set Material
+        mExt_idSiswaPcs.getEditText().setText(getIdIdSiswa);
         mExt_namePcs.getEditText().setText(getName);
         mExt_emailPcs.getEditText().setText(getEmail);
-
-        // Receive Data from LearningOverviewActivity
-        mExt_idKursusPcs.getEditText().setText(getIntent().getStringExtra("id_kursus"));
-        mTxt_coursenamePcs.setText(getIntent().getStringExtra("nama_kursus"));
-        mTxt_pricePcs.setText(getIntent().getStringExtra("harga"));
+        mExt_idKursusPcs.getEditText().setText(getIdKursus);
+        mTxt_coursenamePcs.setText(getNamaKursus);
+        mTxt_pricePcs.setText(getHargaKursus);
         Glide.with(this)
                 .load(getIntent().getStringExtra("icon"))
                 .into(mImg_iconPcs);
@@ -138,7 +142,7 @@ public class PurchaseActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
-                getParams.put("id_kursus", getId);
+                getParams.put("id_kursus", getIdKursus);
                 return getParams;
             }
         };

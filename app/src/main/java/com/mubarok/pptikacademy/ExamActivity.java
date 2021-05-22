@@ -9,7 +9,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -45,7 +43,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -62,7 +59,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
 
     Button mBtn_register;
     TextInputLayout mExt_idSiswaE, mExt_idKursusE, mExt_nameE, mExt_emailE, mExt_dateE, mExt_subjectE;
-    String getId, getName, getEmail;
+    String getIdSiswa, getName, getEmail, getIdKursus, getNamaKursus;
     String TempIdSiswa, TempIdKursus, TempDate;
 
     SessionManager sessionManager;
@@ -97,19 +94,22 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
         mExt_dateE = (TextInputLayout) findViewById(R.id.dateRegistExam);
         mExt_subjectE = (TextInputLayout) findViewById(R.id.subjectExam);
 
+        // Receive Data from SessionManager
         HashMap<String, String> user = sessionManager.getUserDetail();
-        getId = user.get(sessionManager.KEY_ID);
+        getIdSiswa = user.get(sessionManager.KEY_ID);
         getName = user.get(sessionManager.KEY_NAME);
         getEmail = user.get(sessionManager.KEY_EMAIL);
 
-        // Receive Data from SessionManager
-        mExt_idSiswaE.getEditText().setText(getId);
+        // Receive Data from LearningActivity
+        getIdKursus = getIntent().getStringExtra("id_kursus");
+        getNamaKursus = getIntent().getStringExtra("nama_kursus");
+
+        // Set material
+        mExt_idSiswaE.getEditText().setText(getIdSiswa);
         mExt_nameE.getEditText().setText(getName);
         mExt_emailE.getEditText().setText(getEmail);
-
-        // Receive Data from LearningActivity
-        mExt_idKursusE.getEditText().setText(getIntent().getStringExtra("id_kursus"));
-        mExt_subjectE.getEditText().setText(getIntent().getStringExtra("nama_kursus"));
+        mExt_idKursusE.getEditText().setText(getIdKursus);
+        mExt_subjectE.getEditText().setText(getNamaKursus);
 
         // Receive Data from Current Date
         Calendar calendar = Calendar.getInstance();
@@ -217,7 +217,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
-                getParams.put("id_kursus", getId);
+                getParams.put("id_kursus", getIdKursus);
                 return getParams;
             }
         };
@@ -299,7 +299,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String > getParams = new HashMap<>();
-                getParams.put("id_kursus", getId);
+                getParams.put("id_kursus", getIdKursus);
                 return getParams;
             }
         };
