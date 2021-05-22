@@ -3,17 +3,32 @@ package com.mubarok.pptikacademy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class PurchaseActivity extends AppCompatActivity {
 
@@ -85,6 +100,61 @@ public class PurchaseActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void sendBackCourseDetail() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String deskripsi = object.getString("deskripsi").trim();
+                        String icon = object.getString("icon").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), LearningOverviewActivity.class);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("deskripsi", deskripsi);
+                        intent.putExtra("icon", icon);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(PurchaseActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PurchaseActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getId);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                sendBackCourseDetail();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

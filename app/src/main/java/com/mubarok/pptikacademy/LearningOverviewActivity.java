@@ -38,7 +38,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videomodul.php";
-    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/learningoverview-send-purchse.php";
+    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/learningoverview-send-purchase.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
         mBtn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendModulDetail();
+                sendPurchaseData();
             }
         });
     }
@@ -228,11 +228,13 @@ public class LearningOverviewActivity extends AppCompatActivity {
                         String id_kursus = object.getString("id_kursus").trim();
                         String namaKursus = object.getString("nama_kursus").trim();
                         String harga = object.getString("harga").trim();
+                        String icon = object.getString("icon").trim();
 
-                        Intent iExam = new Intent(getApplicationContext(),ExamActivity.class);
+                        Intent iExam = new Intent(getApplicationContext(),PurchaseActivity.class);
                         iExam.putExtra("id_kursus", id_kursus);
                         iExam.putExtra("nama_kursus", namaKursus);
                         iExam.putExtra("harga", harga);
+                        iExam.putExtra("icon", icon);
                         startActivity(iExam);
                         finish();
 

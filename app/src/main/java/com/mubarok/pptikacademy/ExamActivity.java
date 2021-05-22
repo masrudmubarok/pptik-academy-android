@@ -2,18 +2,24 @@ package com.mubarok.pptikacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -74,7 +80,13 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(true);
+
+        //check channel notification
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel("PPTIK Academy", "PPTIK Academy", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
 
         //inisialisasi button & edit text
         mBtn_register = (Button) findViewById(R.id.btn_registerexam);
@@ -238,9 +250,8 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
                         GetData();
                         InsertData(TempIdSiswa, TempIdKursus, TempDate);
-                        Intent a = new Intent(ExamActivity.this, LearningActivity.class);
-                        startActivity(a);
-                        finish();
+                        sendBackCourseDetail();
+                        registerNotification();
                     }
                 });
                 alertRegisterExam.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -294,5 +305,18 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void registerNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                ExamActivity.this, "PPTIK Academy")
+                        .setSmallIcon(R.drawable.iconpptik)
+                        .setContentTitle("Registration Exam")
+                        .setContentText("This is a test notification")
+                        .setAutoCancel(true);
+
+        // Add as notification
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(ExamActivity.this);
+        managerCompat.notify(1, builder.build());
     }
 }
