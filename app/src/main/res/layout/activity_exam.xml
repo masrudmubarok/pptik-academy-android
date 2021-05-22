@@ -42,6 +42,50 @@
         app:layout_constraintVertical_bias="1.0"
         tools:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/idSiswaExam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginRight="20dp"
+            android:hint="Student ID"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subjectExam">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/idKursusExam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginRight="20dp"
+            android:hint="Course ID"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subjectExam">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/noteExam"
         android:layout_width="match_parent"
@@ -49,24 +93,69 @@
         android:layout_marginTop="22dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="15dp"
-        android:textSize="17dp"
-        android:text="Note : Please complete the course learning before taking the exam"
+        android:textSize="13dp"
+        android:text="NOTE"
+        android:textStyle="bold"
         android:textColor="#F000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_exam"/>
+
+    <TextView
+        android:id="@+id/note1Exam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"
+        android:textSize="14dp"
+        android:text="- Please complete the course learning video and modul first before taking the exam"
+        android:textColor="#F000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noteExam"/>
+
+    <TextView
+        android:id="@+id/note2Exam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"
+        android:textSize="14dp"
+        android:text="- The examination mechanism and detail information will be sent by email"
+        android:textColor="#F000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note1Exam"/>
+
+    <TextView
+        android:id="@+id/takingExam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        android:text="EXAM TAKING DETAILS"
+        android:textColor="#F000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/note2Exam"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameExam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="13dp"
         android:layout_marginRight="20dp"
         android:hint="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteExam">
+        app:layout_constraintTop_toBottomOf="@+id/takingExam">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -130,48 +219,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/idSiswaExam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginRight="20dp"
-        android:hint="Student ID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectExam">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/idKursusExam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginRight="20dp"
-        android:hint="Course ID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectExam">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/btn_registerexam"
         android:layout_width="374dp"
         android:layout_height="52dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="95dp"
         android:background="@color/colorPrimary"
         android:text="Register"
         android:textColor="@color/colorTextWhite"
