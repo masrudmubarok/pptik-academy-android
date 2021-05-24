@@ -101,6 +101,7 @@ public class MyCoursesFragment extends Fragment {
                         itemt.put("id_kursus", json.getString("id_kursus"));
                         itemt.put("nama_kursus", json.getString("nama_kursus"));
                         itemt.put("deskripsi", json.getString("deskripsi"));
+                        itemt.put("nama_tutor", json.getString("nama_tutor"));
                         itemt.put("harga", json.getString("harga"));
                         itemt.put("icon", json.getString("icon"));
                         itemt.put("jumlah_video", json.getString("jumlah_video"));

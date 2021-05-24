@@ -148,13 +148,15 @@ public class VideoLearningOverviewActivity extends AppCompatActivity implements 
                         String nama_kursus = object.getString("nama_kursus").trim();
                         String deskripsi = object.getString("deskripsi").trim();
                         String harga = object.getString("harga").trim();
+                        String nama_tutor = object.getString("nama_tutor").trim();
                         String icon = object.getString("icon").trim();
-                        String jumlah_video = object.getString("jumlah_video").trim();
-                        String jumlah_modul = object.getString("jumlah_modul").trim();
 
                         Intent intent = new Intent(getApplicationContext(), LearningOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("nama_kursus", nama_kursus);
                         intent.putExtra("deskripsi", deskripsi);
+                        intent.putExtra("nama_tutor", nama_tutor);
+                        intent.putExtra("harga", harga);
                         intent.putExtra("icon", icon);
                         startActivity(intent);
                         finish();

@@ -33,9 +33,9 @@ public class LearningActivity extends AppCompatActivity {
 
     private static final String TAG = LearningActivity.class.getSimpleName(); //getting the info
     Button mBtn_video, mBtn_modul, mBtn_exam;
-    TextView mTxt_idKursus, mTxt_deskripsi;
+    TextView mTxt_idKursus, mTxt_namaKursus, mTxt_deskripsi, mTxt_tutor;
     ImageView icon;
-    String getId, deskripsiTemp, iconTemp;
+    String getId, kursusTemp, deskripsiTemp, tutorTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videomodul.php";
@@ -60,16 +60,22 @@ public class LearningActivity extends AppCompatActivity {
         mBtn_modul = (Button) findViewById(R.id.buttonModul);
         mBtn_exam = (Button) findViewById(R.id.buttonExam);
         mTxt_idKursus = (TextView) findViewById(R.id.textIdL);
+        mTxt_namaKursus = (TextView) findViewById(R.id.textNamaKursus);
         mTxt_deskripsi = (TextView) findViewById(R.id.textDeskripsi);
+        mTxt_tutor = (TextView) findViewById(R.id.textTutor);
         icon = (ImageView) findViewById(R.id.imageViewIcon);
 
         // Receive Data from MyCourseFragment
         getId = getIntent().getStringExtra("id_kursus");
+        kursusTemp = getIntent().getStringExtra("nama_kursus");
         deskripsiTemp = getIntent().getStringExtra("deskripsi");
+        tutorTemp = getIntent().getStringExtra("nama_tutor");
         iconTemp = getIntent().getStringExtra("icon");
 
         // Set Material
+        mTxt_namaKursus.setText(kursusTemp);
         mTxt_deskripsi.setText(deskripsiTemp);
+        mTxt_tutor.setText(tutorTemp);
         mTxt_idKursus.setText(getId);
         Glide.with(this)
                 .load(iconTemp)

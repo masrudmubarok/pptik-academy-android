@@ -56,40 +56,122 @@
 
     <ImageView
         android:id="@+id/imageViewIconO"
-        android:layout_width="181dp"
-        android:layout_height="174dp"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_learning_overview" />
 
+    <TextView
+        android:id="@+id/textTutorLO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:text="Nama Tutor"
+        android:textColor="#F000"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/iconTutorLO"
+        app:layout_constraintTop_toBottomOf="@+id/textNamaKursusO" />
+
+    <com.hosle.libcurrencyview.CurrencyTextView
+        android:id="@+id/textHargaLO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Harga"
+        android:textColor="#F000"
+        android:textSize="14dp"
+        app:currencySymbol="Rp "
+        app:currencySymbolSize="14dp"
+        app:decimalTextSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toEndOf="@+id/iconPriceLO"
+        app:layout_constraintTop_toBottomOf="@+id/textTutorLO"
+        app:prefixSuffixTextSize="14dp" />
+
+    <TextView
+        android:id="@+id/textNamaKursusO"
+        android:layout_width="223dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="20dp"
+        android:text="Course Name"
+        android:textColor="#F000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIconO"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_learning_overview" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="DESCRIPTION"
+        android:textSize="13dp"
+        android:textColor="#F000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIconO" />
+
+    <ImageView
+        android:id="@+id/iconTutorLO"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIconO"
+        app:layout_constraintTop_toBottomOf="@+id/textNamaKursusO"
+        app:srcCompat="@drawable/tutor" />
+
+    <ImageView
+        android:id="@+id/iconPriceLO"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIconO"
+        app:layout_constraintTop_toBottomOf="@+id/iconTutorLO"
+        app:srcCompat="@drawable/price" />
+
     <me.biubiubiu.justifytext.library.JustifyTextView
         android:id="@+id/textDeskripsiO"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_width="385dp"
+        android:layout_height="200dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="Ini bagian deskripsi"
         android:textColor="#F000"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIconO" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Button
         android:id="@+id/buttonVideoO"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="456dp"
         android:background="@drawable/border"
         android:text="Video"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDeskripsiO" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_learning_overview" />
 
     <Button
         android:id="@+id/buttonModulO"

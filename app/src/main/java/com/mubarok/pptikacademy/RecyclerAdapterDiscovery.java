@@ -51,7 +51,10 @@ public class RecyclerAdapterDiscovery extends RecyclerView.Adapter<RecyclerAdapt
             public void onClick(final View v) {
                 Intent intent = new Intent(v.getContext(), LearningOverviewActivity.class);
                 intent.putExtra("id_kursus", listdata.get(position).get("id_kursus"));
+                intent.putExtra("nama_kursus", listdata.get(position).get("nama_kursus"));
                 intent.putExtra("deskripsi", listdata.get(position).get("deskripsi"));
+                intent.putExtra("nama_tutor", listdata.get(position).get("nama_tutor"));
+                intent.putExtra("harga", listdata.get(position).get("harga"));
                 intent.putExtra("icon", listdata.get(position).get("icon"));
                 v.getContext().startActivity(intent);
             }

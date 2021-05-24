@@ -117,12 +117,18 @@ public class PurchaseActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
+                        String nama_kursus = object.getString("nama_kursus").trim();
                         String deskripsi = object.getString("deskripsi").trim();
+                        String harga = object.getString("harga").trim();
+                        String nama_tutor = object.getString("nama_tutor").trim();
                         String icon = object.getString("icon").trim();
 
                         Intent intent = new Intent(getApplicationContext(), LearningOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("nama_kursus", nama_kursus);
                         intent.putExtra("deskripsi", deskripsi);
+                        intent.putExtra("nama_tutor", nama_tutor);
+                        intent.putExtra("harga", harga);
                         intent.putExtra("icon", icon);
                         startActivity(intent);
                         finish();

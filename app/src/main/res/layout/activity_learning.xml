@@ -56,20 +56,75 @@
 
     <ImageView
         android:id="@+id/imageViewIcon"
-        android:layout_width="181dp"
-        android:layout_height="174dp"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_learning" />
+
+    <TextView
+        android:id="@+id/textNamaKursus"
+        android:layout_width="223dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="20dp"
+        android:text="Course Name"
+        android:textColor="#F000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_learning" />
+
+    <ImageView
+        android:id="@+id/iconTutor"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
+        app:layout_constraintTop_toBottomOf="@+id/textNamaKursus"
+        app:srcCompat="@drawable/tutor" />
+
+    <TextView
+        android:id="@+id/textTutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:text="Nama Tutor"
+        android:textColor="#F000"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/iconTutor"
+        app:layout_constraintTop_toBottomOf="@+id/textNamaKursus" />
+
+    <TextView
+        android:id="@+id/textDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="DESCRIPTION"
+        android:textSize="13dp"
+        android:textColor="#F000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon" />
 
     <me.biubiubiu.justifytext.library.JustifyTextView
         android:id="@+id/textDeskripsi"
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="Ini bagian deskripsi"
         android:textColor="#F000"
@@ -77,19 +132,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon" />
+        app:layout_constraintTop_toBottomOf="@+id/textDesc" />
 
     <Button
         android:id="@+id/buttonVideo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="460dp"
         android:background="@drawable/border"
         android:text="Video"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDeskripsi" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_learning" />
 
     <Button
         android:id="@+id/buttonModul"
