@@ -22,15 +22,28 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputLayout;
+import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback;
+import com.midtrans.sdk.corekit.core.MidtransSDK;
+import com.midtrans.sdk.corekit.core.PaymentMethod;
+import com.midtrans.sdk.corekit.core.TransactionRequest;
+import com.midtrans.sdk.corekit.core.themes.CustomColorTheme;
+import com.midtrans.sdk.corekit.models.BankType;
+import com.midtrans.sdk.corekit.models.CustomerDetails;
+import com.midtrans.sdk.corekit.models.ItemDetails;
+import com.midtrans.sdk.corekit.models.snap.Authentication;
+import com.midtrans.sdk.corekit.models.snap.CreditCard;
+import com.midtrans.sdk.corekit.models.snap.TransactionResult;
+import com.midtrans.sdk.uikit.SdkUIFlowBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PurchaseActivity extends AppCompatActivity {
+public class PurchaseActivity extends AppCompatActivity implements TransactionFinishedCallback {
 
     private static final String TAG = PurchaseActivity.class.getSimpleName(); //getting the info
     String HttpURL = "http://192.168.43.206/pptik-academy-android/registerexam.php";
@@ -40,7 +53,8 @@ public class PurchaseActivity extends AppCompatActivity {
     TextInputLayout mExt_idSiswaPcs, mExt_idKursusPcs, mExt_qtyPcs, mExt_pricePcs, mExt_datePcs, mExt_namePcs, mExt_emailPcs;
     TextView mTxt_coursenamePcs, mTxt_qtyPcs, mTxt_pricePcs;
     ImageView mImg_iconPcs;
-    String getIdIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKursus;
+    String getIdIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKrs;
+    int getHargaKursus;
     String TempIdSiswa, TempIdKursus, TempDate;
 
     SessionManager sessionManager;
@@ -83,7 +97,8 @@ public class PurchaseActivity extends AppCompatActivity {
         // Receive Data from LearningOverviewActivity
         getIdKursus = getIntent().getStringExtra("id_kursus");
         getNamaKursus = getIntent().getStringExtra("nama_kursus");
-        getHargaKursus = getIntent().getStringExtra("harga");
+        getHargaKrs = getIntent().getStringExtra("harga");
+        getHargaKursus = Integer.parseInt(getHargaKrs);
 
         // Set Material
         mExt_idSiswaPcs.getEditText().setText(getIdIdSiswa);
@@ -91,19 +106,99 @@ public class PurchaseActivity extends AppCompatActivity {
         mExt_emailPcs.getEditText().setText(getEmail);
         mExt_idKursusPcs.getEditText().setText(getIdKursus);
         mTxt_coursenamePcs.setText(getNamaKursus);
-        mTxt_pricePcs.setText(getHargaKursus);
+        mTxt_pricePcs.setText(getHargaKrs);
         Glide.with(this)
                 .load(getIntent().getStringExtra("icon"))
                 .into(mImg_iconPcs);
+
+        // Midtrans
+        initMidtransSdk();
 
         //function button
         mBtn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PurchaseActivity.this, "Under construction..", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(PurchaseActivity.this, "Under construction..", Toast.LENGTH_SHORT).show();
+                actionButton();
             }
         });
 
+    }
+
+    private TransactionRequest initTransactionRequest(String id, int price, int qty, String name ) {
+        // Create new Transaction Request
+        TransactionRequest transactionRequestNew = new
+                TransactionRequest(System.currentTimeMillis() + "", Integer.parseInt(getIntent().getStringExtra("harga")));
+        transactionRequestNew.setCustomerDetails(initCustomerDetails());
+        ItemDetails details = new ItemDetails(id, price, qty, name);
+
+        ArrayList<ItemDetails> itemDetails = new ArrayList<>();
+        itemDetails.add(details);
+        transactionRequestNew.setItemDetails(itemDetails);
+
+        CreditCard creditCard = new CreditCard();
+        creditCard.setSaveCard(false);
+        creditCard.setAuthentication(Authentication.AUTH_RBA);
+        creditCard.setBank(BankType.BRI);
+        transactionRequestNew.setCreditCard(creditCard);
+        return transactionRequestNew;
+    }
+
+    private CustomerDetails initCustomerDetails() {
+        //define customer detail (mandatory for coreflow)
+        CustomerDetails mCustomerDetails = new CustomerDetails();
+        mCustomerDetails.setFirstName(getName);
+        mCustomerDetails.setEmail(getEmail);
+        mCustomerDetails.setCustomerIdentifier(getEmail);
+        return mCustomerDetails;
+    }
+
+    private void initMidtransSdk() {
+        SdkUIFlowBuilder.init()
+                .setContext(this)
+                .setMerchantBaseUrl(BuildConfig.BASE_URL)
+                .setClientKey(BuildConfig.CLIENT_KEY)
+                .setTransactionFinishedCallback(this)
+                .enableLog(true)
+                .setColorTheme(new CustomColorTheme("#FFE51255","#4383CB", "#FFE51255" ))
+                .buildSDK();
+    }
+
+    private void actionButton() {
+        MidtransSDK.getInstance().setTransactionRequest(initTransactionRequest(
+                getIntent().getStringExtra("id_kursus"),
+                Integer.parseInt(getIntent().getStringExtra("harga")),
+                1,
+                getIntent().getStringExtra("nama_kursus")
+        ));
+
+        MidtransSDK.getInstance().startPaymentUiFlow(this);
+    }
+
+    @Override
+    public void onTransactionFinished(TransactionResult result) {
+        if (result.getResponse() != null) {
+            switch (result.getStatus()) {
+                case TransactionResult.STATUS_SUCCESS:
+                    Toast.makeText(this, "Transaction Finished. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+                    break;
+                case TransactionResult.STATUS_PENDING:
+                    Toast.makeText(this, "Transaction Pending. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+                    break;
+                case TransactionResult.STATUS_FAILED:
+                    Toast.makeText(this, "Transaction Failed. ID: " + result.getResponse().getTransactionId() + ". Message: " + result.getResponse().getStatusMessage(), Toast.LENGTH_LONG).show();
+                    break;
+            }
+            result.getResponse().getValidationMessages();
+        } else if (result.isTransactionCanceled()) {
+            Toast.makeText(this, "Transaction Canceled", Toast.LENGTH_LONG).show();
+        } else {
+            if (result.getStatus().equalsIgnoreCase(TransactionResult.STATUS_INVALID)) {
+                Toast.makeText(this, "Transaction Invalid", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Transaction Finished with failure.", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void sendBackCourseDetail() {
@@ -166,6 +261,5 @@ public class PurchaseActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }
