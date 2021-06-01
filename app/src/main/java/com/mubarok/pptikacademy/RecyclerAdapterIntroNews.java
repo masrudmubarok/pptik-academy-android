@@ -41,7 +41,7 @@ public class RecyclerAdapterIntroNews extends RecyclerView.Adapter<RecyclerAdapt
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Intent intent = new Intent(v.getContext(), LearningActivity.class);
+                Intent intent = new Intent(v.getContext(), NewsActivity.class);
                 intent.putExtra("id_berita", listdata.get(position).get("id_berita"));
                 intent.putExtra("judul_berita", listdata.get(position).get("judul_berita"));
                 intent.putExtra("keterangan", listdata.get(position).get("keterangan"));
