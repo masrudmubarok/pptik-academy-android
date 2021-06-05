@@ -33,7 +33,7 @@ android {
         sandbox {
             applicationId = "com.mubarok.pptikacademy.sandbox"
             buildConfigField "String", "BASE_URL", "\"http://pptikacademy-merchant.herokuapp.com/index.php/\""
-            buildConfigField "String", "CLIENT_KEY", "\"SB-Mid-client-92qe4v0Vd6ltptPG\""
+            buildConfigField "String", "CLIENT_KEY", "\"SB-Mid-client-EtV4rxOVFgknLwbE\""
         }
 
 //        production {

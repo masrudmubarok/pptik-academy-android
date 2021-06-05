@@ -59,7 +59,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
 
     Button mBtn_register;
     TextInputLayout mExt_idSiswaE, mExt_idKursusE, mExt_nameE, mExt_emailE, mExt_dateE, mExt_subjectE;
-    String getIdSiswa, getName, getEmail, getIdKursus, getNamaKursus;
+    String url, getIdSiswa, getName, getEmail, getIdKursus, getNamaKursus;
     String TempIdSiswa, TempIdKursus, TempDate;
 
     SessionManager sessionManager;
@@ -252,10 +252,16 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                 alertRegisterExam.setIcon(R.drawable.exam);
                 alertRegisterExam.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        GetData();
-                        InsertData(TempIdSiswa, TempIdKursus, TempDate);
-                        sendBackCourseDetail();
-                        registerNotification();
+                        url = "http://192.168.43.206/pptik-academy-android/validationexam.php?" + "id_siswa=" + mExt_idSiswaE.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusE.getEditText().getText().toString();
+                        if (mExt_idSiswaE.getEditText().getText().toString().trim().length() > 0 && mExt_idKursusE.getEditText().getText().toString().trim().length() > 0) {
+                            Toast.makeText(getApplicationContext(), "Anda telah mendaftar ujian gan.!!", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            GetData();
+                            InsertData(TempIdSiswa, TempIdKursus, TempDate);
+                            sendBackCourseDetail();
+                            registerNotification();
+                        }
                     }
                 });
                 alertRegisterExam.setNegativeButton("No", new DialogInterface.OnClickListener() {

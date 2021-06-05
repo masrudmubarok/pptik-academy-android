@@ -3,7 +3,9 @@ package com.mubarok.pptikacademy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -35,12 +37,25 @@ import com.midtrans.sdk.corekit.models.snap.CreditCard;
 import com.midtrans.sdk.corekit.models.snap.TransactionResult;
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PurchaseActivity extends AppCompatActivity implements TransactionFinishedCallback {
@@ -111,6 +126,12 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
                 .load(getIntent().getStringExtra("icon"))
                 .into(mImg_iconPcs);
 
+        // Receive Data from Current Date
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String currentDate = dateFormat.format(calendar.getTime());
+        mExt_datePcs.getEditText().setText(currentDate);
+
         // Midtrans
         initMidtransSdk();
 
@@ -123,6 +144,65 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
             }
         });
 
+    }
+
+    public void GetData() {
+
+        TempIdSiswa = mExt_idSiswaPcs.getEditText().getText().toString();
+        TempIdKursus = mExt_idKursusPcs.getEditText().getText().toString();
+        TempDate = mExt_datePcs.getEditText().getText().toString();
+    }
+
+    public void InsertData(final String id_siswa, final String id_kursus, final String tanggal_ambilkursus) {
+
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @SuppressLint("WrongThread")
+            @Override
+            protected String doInBackground(String... params) {
+
+                String IdSiswaHolder = id_siswa;
+                String IdKursusHolder = id_kursus;
+                String DateHolder = tanggal_ambilkursus;
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                nameValuePairs.add(new BasicNameValuePair("id_siswa", IdSiswaHolder));
+                nameValuePairs.add(new BasicNameValuePair("id_kursus", IdKursusHolder));
+                nameValuePairs.add(new BasicNameValuePair("tanggal_ambilkursus", DateHolder));
+
+                try {
+                    HttpClient httpClient = new DefaultHttpClient();
+
+                    HttpPost httpPost = new HttpPost(HttpURL);
+
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                    HttpResponse httpResponse = httpClient.execute(httpPost);
+
+                    HttpEntity httpEntity = httpResponse.getEntity();
+
+
+                } catch (ClientProtocolException e) {
+
+                } catch (IOException e) {
+
+                }
+                return "Data Inserted Successfully";
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+
+                super.onPostExecute(result);
+
+                Toast.makeText(PurchaseActivity.this, "Taking Course Successfully", Toast.LENGTH_LONG).show();
+
+            }
+        }
+
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+
+        sendPostReqAsyncTask.execute(id_siswa, id_kursus, tanggal_ambilkursus);
     }
 
     private TransactionRequest initTransactionRequest(String id, int price, int qty, String name ) {
@@ -181,6 +261,8 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
             switch (result.getStatus()) {
                 case TransactionResult.STATUS_SUCCESS:
                     Toast.makeText(this, "Transaction Finished. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+                    GetData();
+                    InsertData(TempIdSiswa, TempIdKursus, TempDate);
                     break;
                 case TransactionResult.STATUS_PENDING:
                     Toast.makeText(this, "Transaction Pending. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
