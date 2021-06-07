@@ -60,7 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="serif"
         android:text="Username     : "
         android:textAllCaps="false"
         android:textSize="15dp"
@@ -74,14 +73,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="serif"
+        android:gravity="left"
         android:text="Username from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
-        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toEndOf="@+id/textUsernameS"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_securtiy" />
 
     <TextView
@@ -89,8 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="serif"
-        android:text="Password      : "
+        android:text="Password     : "
         android:textAllCaps="false"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,46 +98,50 @@
         android:id="@+id/textPasswordSD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="serif"
+        android:layout_marginTop="24dp"
+        android:gravity="left"
         android:text="Password from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
-        android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toEndOf="@+id/textPasswordS"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textUsernameSD" />
 
-    <TextView
-        android:id="@+id/textIdS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="serif"
-        android:text="ID                   : "
-        android:textAllCaps="false"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPasswordS" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textIdSD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="serif"
-        android:text="ID from DB"
-        android:textAllCaps="false"
-        android:textSize="15dp"
-        android:textAlignment="textStart"
-        app:layout_constraintBottom_toBottomOf="@+id/textToolbarProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toEndOf="@+id/textIdS"
-        app:layout_constraintTop_toBottomOf="@+id/textPasswordSD"
-        app:layout_constraintVertical_bias="0.002" />
+        <TextView
+            android:id="@+id/textIdS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="ID                   : "
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.114"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textPasswordS" />
+
+        <TextView
+            android:id="@+id/textIdSD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="ID from DB"
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@+id/textToolbarProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toEndOf="@+id/textIdS"
+            app:layout_constraintTop_toBottomOf="@+id/textPasswordSD"
+            app:layout_constraintVertical_bias="0.002" />
+
+    </LinearLayout>/
 
 </androidx.constraintlayout.widget.ConstraintLayout>

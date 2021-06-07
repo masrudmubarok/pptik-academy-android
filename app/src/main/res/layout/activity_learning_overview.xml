@@ -146,13 +146,13 @@
         app:layout_constraintTop_toBottomOf="@+id/iconTutorLO"
         app:srcCompat="@drawable/price" />
 
-    <me.biubiubiu.justifytext.library.JustifyTextView
+    <TextView
         android:id="@+id/textDeskripsiO"
         android:layout_width="385dp"
         android:layout_height="200dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="12dp"
-        android:gravity="center"
+        android:gravity="left"
         android:text="Ini bagian deskripsi"
         android:textColor="#F000"
         android:textSize="16dp"

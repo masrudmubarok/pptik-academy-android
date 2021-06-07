@@ -60,7 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="serif"
         android:text="Name      : "
         android:textAllCaps="false"
         android:textSize="15dp"
@@ -74,13 +73,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="serif"
+        android:gravity="left"
         android:text="Name from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toEndOf="@+id/textNameP"
+        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_profile" />
 
     <TextView
@@ -88,7 +87,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="serif"
         android:text="Email      : "
         android:textAllCaps="false"
         android:textSize="15dp"
@@ -101,14 +99,14 @@
         android:id="@+id/textEmailPD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="serif"
+        android:layout_marginTop="24dp"
+        android:gravity="left"
         android:text="Email from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toEndOf="@+id/textEmailP"
+        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textNamePD" />
 
     <TextView
@@ -116,7 +114,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="serif"
         android:text="City         : "
         android:textAllCaps="false"
         android:textSize="15dp"
@@ -130,13 +127,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="serif"
+        android:gravity="left"
         android:text="City from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toEndOf="@+id/textCityP"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmailPD" />
 
     <TextView
@@ -144,8 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="serif"
-        android:text="Country : "
+        android:text="Country  : "
         android:textAllCaps="false"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -158,46 +154,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="serif"
+        android:gravity="left"
         android:text="Country from DB"
         android:textAllCaps="false"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/textToolbarProfile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toEndOf="@+id/textCountryP"
+        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCityPD"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textIdP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="serif"
-        android:text="ID             : "
-        android:textAllCaps="false"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCountryP" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textIdPD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="serif"
-        android:text="ID from DB"
-        android:textAllCaps="false"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textToolbarProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintStart_toEndOf="@+id/textIdP"
-        app:layout_constraintTop_toBottomOf="@+id/textCountryPD"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/textIdP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="ID             : "
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.114"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCountryP" />
 
+        <TextView
+            android:id="@+id/textIdPD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="left"
+            android:text="ID from DB"
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textToolbarProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.377"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCountryPD"
+            app:layout_constraintVertical_bias="0.002" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

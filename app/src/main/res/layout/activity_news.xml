@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_news"/>
 
-    <me.biubiubiu.justifytext.library.JustifyTextView
+    <TextView
         android:id="@+id/keteranganNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

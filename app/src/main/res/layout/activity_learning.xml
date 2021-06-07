@@ -119,13 +119,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewIcon" />
 
-    <me.biubiubiu.justifytext.library.JustifyTextView
+    <TextView
         android:id="@+id/textDeskripsi"
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="12dp"
-        android:gravity="center"
+        android:gravity="left"
         android:text="Ini bagian deskripsi"
         android:textColor="#F000"
         android:textSize="16dp"
