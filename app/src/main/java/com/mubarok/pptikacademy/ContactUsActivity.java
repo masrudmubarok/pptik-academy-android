@@ -47,11 +47,11 @@ public class ContactUsActivity extends AppCompatActivity {
         String[] recipients = recipientList.split(",");
         String subject = mEditTextSubject.getText().toString();
         String message = mEditTextMessage.getText().toString();
-        Intent intent = new Intent(Intent.ACTION_SEND);
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
-        intent.setType("message/rfc822");
+        intent.setType("text/plain");
         startActivity(Intent.createChooser(intent, "Choose an email client"));
     }
 }
