@@ -2,10 +2,15 @@ package com.mubarok.pptikacademy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -61,14 +66,14 @@ import java.util.Map;
 public class PurchaseActivity extends AppCompatActivity implements TransactionFinishedCallback {
 
     private static final String TAG = PurchaseActivity.class.getSimpleName(); //getting the info
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/registerexam.php";
+    String HttpURL = "http://192.168.43.206/pptik-academy-android/takingcourse.php";
     String HttpURL1 = "http://192.168.43.206/pptik-academy-android/videomodul-send-learning.php";
 
     Button mBtn_checkout;
     TextInputLayout mExt_idSiswaPcs, mExt_idKursusPcs, mExt_qtyPcs, mExt_pricePcs, mExt_datePcs, mExt_namePcs, mExt_emailPcs;
     TextView mTxt_coursenamePcs, mTxt_qtyPcs, mTxt_pricePcs;
     ImageView mImg_iconPcs;
-    String getIdIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKrs;
+    String url, getIdIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKrs;
     int getHargaKursus;
     String TempIdSiswa, TempIdKursus, TempDate;
 
@@ -88,6 +93,13 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        //check channel notification
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel("PPTIK Academy", "PPTIK Academy", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
 
         //inisialisasi button & edit text
         mBtn_checkout = (Button) findViewById(R.id.btn_checkout);
@@ -140,7 +152,13 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
             @Override
             public void onClick(View v) {
 //                Toast.makeText(PurchaseActivity.this, "Under construction..", Toast.LENGTH_SHORT).show();
-                actionButton();
+                url = "http://192.168.43.206/pptik-academy-android/validationpurchase.php?" + "id_siswa=" + mExt_idSiswaPcs.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusPcs.getEditText().getText().toString();
+                if (mExt_idSiswaPcs.getEditText().getText().toString().trim().length() > 0 && mExt_idKursusPcs.getEditText().getText().toString().trim().length() > 0) {
+                    Toast.makeText(getApplicationContext(), "You've already take this course", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    actionButton();
+                }
             }
         });
 
@@ -195,7 +213,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
 
                 super.onPostExecute(result);
 
-                Toast.makeText(PurchaseActivity.this, "Taking Course Successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(PurchaseActivity.this, "Transaction is in process", Toast.LENGTH_LONG).show();
 
             }
         }
@@ -261,11 +279,13 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
             switch (result.getStatus()) {
                 case TransactionResult.STATUS_SUCCESS:
                     Toast.makeText(this, "Transaction Finished. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
-                    GetData();
-                    InsertData(TempIdSiswa, TempIdKursus, TempDate);
                     break;
                 case TransactionResult.STATUS_PENDING:
-                    Toast.makeText(this, "Transaction Pending. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this, "Transaction Pending. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+                    GetData();
+                    InsertData(TempIdSiswa, TempIdKursus, TempDate);
+                    sendBackCourseDetail();
+                    purchaseNotification();
                     break;
                 case TransactionResult.STATUS_FAILED:
                     Toast.makeText(this, "Transaction Failed. ID: " + result.getResponse().getTransactionId() + ". Message: " + result.getResponse().getStatusMessage(), Toast.LENGTH_LONG).show();
@@ -342,6 +362,19 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void purchaseNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                PurchaseActivity.this, "PPTIK Academy")
+                .setSmallIcon(R.drawable.iconpptik)
+                .setContentTitle("Course Purchase")
+                .setContentText("Please check your email to make sure the payment has been completed. If you have finished, then your course will appear within a maximum of 24 hours after payment. (CS : pptik@stiki.ac.id)")
+                .setAutoCancel(true);
+
+        // Add as notification
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(PurchaseActivity.this);
+        managerCompat.notify(1, builder.build());
     }
 
 }

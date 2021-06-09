@@ -254,7 +254,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
                         url = "http://192.168.43.206/pptik-academy-android/validationexam.php?" + "id_siswa=" + mExt_idSiswaE.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusE.getEditText().getText().toString();
                         if (mExt_idSiswaE.getEditText().getText().toString().trim().length() > 0 && mExt_idKursusE.getEditText().getText().toString().trim().length() > 0) {
-                            Toast.makeText(getApplicationContext(), "Anda telah mendaftar ujian gan.!!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "You've already register the exam", Toast.LENGTH_LONG).show();
                         }
                         else {
                             GetData();
@@ -322,7 +322,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                 ExamActivity.this, "PPTIK Academy")
                         .setSmallIcon(R.drawable.iconpptik)
                         .setContentTitle("Registration Exam")
-                        .setContentText("This is a test notification")
+                        .setContentText("Please wait for the exam information (CS : pptik@stiki.ac.id)")
                         .setAutoCancel(true);
 
         // Add as notification
