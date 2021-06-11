@@ -36,7 +36,7 @@ public class VideoOverviewActivity extends AppCompatActivity {
     String getId, videoTemp, judulVideoTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/videomodulview-send-videomodullearning.php";
+    String HttpURL = "https://zyralebags.000webhostapp.com/api/videomodulview-send-videomodullearning.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class VideoOverviewActivity extends AppCompatActivity {
         textView.setText(judulVideoTemp);
 
         String linkVideo = videoTemp;
-        Uri videoUri = Uri.parse("http://192.168.43.206/pptik-academy-web/assets/video/"+linkVideo);
+        Uri videoUri = Uri.parse("https://zyralebags.000webhostapp.com/assets/video/"+linkVideo);
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);

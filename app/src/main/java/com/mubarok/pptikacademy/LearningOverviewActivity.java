@@ -37,8 +37,8 @@ public class LearningOverviewActivity extends AppCompatActivity {
     String getId, kursusTemp, deskripsiTemp, tutorTemp, hargaTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/learning-send-videomodul.php";
-    String HttpURL1 = "http://192.168.43.206/pptik-academy-android/learningoverview-send-purchase.php";
+    String HttpURL = "https://zyralebags.000webhostapp.com/api/learning-send-videomodul.php";
+    String HttpURL1 = "https://zyralebags.000webhostapp.com/api/learningoverview-send-purchase.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
         mTxt_harga.setText(hargaTemp);
         mTxt_idKursus.setText(getId);
         Glide.with(this)
-                .load(iconTemp)
+                .load("https://zyralebags.000webhostapp.com/assets/icon/"+iconTemp)
                 .into(icon);
 
         //function button

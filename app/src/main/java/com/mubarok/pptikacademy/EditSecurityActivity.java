@@ -41,7 +41,7 @@ import java.util.Map;
 
 public class EditSecurityActivity extends AppCompatActivity {
 
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/security-update.php";
+    String HttpURL = "https://zyralebags.000webhostapp.com/api/security-update.php";
     Button mBtn_saves, mBtn_cancels;
     TextInputLayout mTxt_usernames, mTxt_passwords;
     String getId;

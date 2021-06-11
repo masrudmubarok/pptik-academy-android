@@ -42,7 +42,7 @@ public class DiscoveryFragment extends Fragment {
     ArrayList<HashMap<String , String >> listdata;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/discovery-read.php";
+    String HttpURL = "https://zyralebags.000webhostapp.com/api/discovery-read.php";
 
     public DiscoveryFragment() {
         // Required empty public constructor

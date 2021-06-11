@@ -40,7 +40,7 @@ public class ModulOverviewActivity extends AppCompatActivity {
     String getId, modulTemp, judulModulTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "http://192.168.43.206/pptik-academy-android/videomodulview-send-videomodullearning.php";
+    String HttpURL = "https://zyralebags.000webhostapp.com/api/videomodulview-send-videomodullearning.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
