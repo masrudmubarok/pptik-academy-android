@@ -75,7 +75,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
     ImageView mImg_iconPcs;
     String url, getIdIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKrs;
     int getHargaKursus;
-    String TempIdSiswa, TempIdKursus, TempDate;
+    String TempIdTransaksi, TempIdOrder, TempJenisPembayaran, TempJumlah, TempDate, TempStatusTransaksi, TempIdSiswa, TempIdKursus;
 
     SessionManager sessionManager;
 
@@ -168,25 +168,34 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
 
         TempIdSiswa = mExt_idSiswaPcs.getEditText().getText().toString();
         TempIdKursus = mExt_idKursusPcs.getEditText().getText().toString();
-        TempDate = mExt_datePcs.getEditText().getText().toString();
     }
 
-    public void InsertData(final String id_siswa, final String id_kursus, final String tanggal_ambilkursus) {
+    public void InsertData(final String transaction_id, final String order_id, final String payment_type, final String gross_amount, final String transaction_time, final String transaction_status, final String id_siswa, final String id_kursus) {
 
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @SuppressLint("WrongThread")
             @Override
             protected String doInBackground(String... params) {
 
+                String IdTransaksiHolder = transaction_id;
+                String IdOrderHolder = order_id;
+                String PaymentTypeHolder = payment_type;
+                String GrossAmountHolder = gross_amount;
+                String TransactionTimeHolder = transaction_time;
+                String TransactionStatusHolder = transaction_status;
                 String IdSiswaHolder = id_siswa;
                 String IdKursusHolder = id_kursus;
-                String DateHolder = tanggal_ambilkursus;
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
+                nameValuePairs.add(new BasicNameValuePair("transaction_id", IdTransaksiHolder));
+                nameValuePairs.add(new BasicNameValuePair("order_id", IdOrderHolder));
+                nameValuePairs.add(new BasicNameValuePair("payment_type", PaymentTypeHolder));
+                nameValuePairs.add(new BasicNameValuePair("gross_amount", GrossAmountHolder));
+                nameValuePairs.add(new BasicNameValuePair("transaction_time", TransactionTimeHolder));
+                nameValuePairs.add(new BasicNameValuePair("transaction_status", TransactionStatusHolder));
                 nameValuePairs.add(new BasicNameValuePair("id_siswa", IdSiswaHolder));
                 nameValuePairs.add(new BasicNameValuePair("id_kursus", IdKursusHolder));
-                nameValuePairs.add(new BasicNameValuePair("tanggal_ambilkursus", DateHolder));
 
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
@@ -220,7 +229,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
 
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-        sendPostReqAsyncTask.execute(id_siswa, id_kursus, tanggal_ambilkursus);
+        sendPostReqAsyncTask.execute(transaction_id, order_id, payment_type, gross_amount, transaction_time, transaction_status, id_siswa, id_kursus);
     }
 
     private TransactionRequest initTransactionRequest(String id, int price, int qty, String name ) {
@@ -278,12 +287,28 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         if (result.getResponse() != null) {
             switch (result.getStatus()) {
                 case TransactionResult.STATUS_SUCCESS:
-                    Toast.makeText(this, "Transaction Finished. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this, "Transaction Finished. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+                    TempIdTransaksi = result.getResponse().getTransactionId();
+                    TempIdOrder = result.getResponse().getOrderId();
+                    TempJenisPembayaran = result.getResponse().getPaymentType();
+                    TempJumlah = result.getResponse().getGrossAmount();
+                    TempDate = result.getResponse().getTransactionTime();
+                    TempStatusTransaksi = result.getResponse().getTransactionStatus();
+                    GetData();
+                    InsertData(TempIdTransaksi, TempIdOrder, TempJenisPembayaran, TempJumlah, TempDate, TempStatusTransaksi, TempIdSiswa, TempIdKursus);
+                    sendBackCourseDetail();
+                    purchaseNotification();
                     break;
                 case TransactionResult.STATUS_PENDING:
 //                    Toast.makeText(this, "Transaction Pending. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+                    TempIdTransaksi = result.getResponse().getTransactionId();
+                    TempIdOrder = result.getResponse().getOrderId();
+                    TempJumlah = result.getResponse().getGrossAmount();
+                    TempJenisPembayaran = result.getResponse().getPaymentType();
+                    TempDate = result.getResponse().getTransactionTime();
+                    TempStatusTransaksi = result.getResponse().getTransactionStatus();
                     GetData();
-                    InsertData(TempIdSiswa, TempIdKursus, TempDate);
+                    InsertData(TempIdTransaksi, TempIdOrder, TempJenisPembayaran, TempJumlah, TempDate, TempStatusTransaksi, TempIdSiswa, TempIdKursus);
                     sendBackCourseDetail();
                     purchaseNotification();
                     break;
@@ -369,7 +394,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
                 PurchaseActivity.this, "PPTIK Academy")
                 .setSmallIcon(R.drawable.iconpptik)
                 .setContentTitle("Course Purchase")
-                .setContentText("Please check your email to make sure the payment has been completed. If you have finished, then your course will appear within a maximum of 24 hours after payment. (CS : pptik@stiki.ac.id)")
+                .setContentText("Please check your email to make sure the payment has been completed. If it's finished, then your course will appear within a maximum of 24 hours after payment. (CS : pptik@stiki.ac.id)")
                 .setAutoCancel(true);
 
         // Add as notification
