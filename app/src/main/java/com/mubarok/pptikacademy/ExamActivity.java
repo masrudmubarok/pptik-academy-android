@@ -56,6 +56,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
     String HttpURL = "https://pptikacademy01.000webhostapp.com/api/registerexam.php";
     String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
     String HttpURL2 = "https://pptikacademy01.000webhostapp.com/api/learning-send-exam.php";
+    String HttpURL3 = "https://pptikacademy01.000webhostapp.com/api/validationexam.php";
 
     Button mBtn_register;
     TextInputLayout mExt_idSiswaE, mExt_idKursusE, mExt_nameE, mExt_emailE, mExt_dateE, mExt_subjectE;
@@ -252,16 +253,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                 alertRegisterExam.setIcon(R.drawable.exam);
                 alertRegisterExam.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        url = "https://pptikacademy01.000webhostapp.com/api/validationexam.php?" + "id_siswa=" + mExt_idSiswaE.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusE.getEditText().getText().toString();
-                        if (mExt_idSiswaE.getEditText().getText().toString().trim().length() > 0 && mExt_idKursusE.getEditText().getText().toString().trim().length() > 0) {
-                            Toast.makeText(getApplicationContext(), "You've already register the exam", Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            GetData();
-                            InsertData(TempIdSiswa, TempIdKursus, TempDate);
-                            sendBackCourseDetail();
-                            registerNotification();
-                        }
+                        examCheck();
                     }
                 });
                 alertRegisterExam.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -315,6 +307,61 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void examCheck() {
+        // Setting POST request ke server
+        StringRequest purchaseRequest = new StringRequest(Request.Method.POST, HttpURL3,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle response dari server ketika sukses dengan mengkonvert menjadi JSON
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            // Mengambil variable status pada response
+                            String status = json.getString("success");
+                            String message1 = json.getString("id_siswa");
+                            String message2 = json.getString("id_kursus");
+
+                            if(status.equals("1")){
+                                Log.e("ok", "ambil data nilai sukses =" + status);
+                                Log.e("ok", "id siswa =" + message1);
+                                Log.e("ok", "id kursus =" + message2);
+                                Toast.makeText(getApplicationContext(), "You've already registered this exam", Toast.LENGTH_LONG).show();
+                            } else {
+                                Log.e("error", "tidak bisa ambil data nilai sukses =" + status);
+                                Log.e("error", "id siswa =" + message1);
+                                Log.e("error", "id kursus =" + message2);
+                                GetData();
+                                InsertData(TempIdSiswa, TempIdKursus, TempDate);
+                                sendBackCourseDetail();
+                                registerNotification();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle response dari server ketika gagal
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id_siswa", getIdSiswa);
+                params.put("id_kursus", getIdKursus);
+                return params;
+            }
+        };
+        // Buat antrian request pada cache android
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Tambahkan Request pada antrian request
+        requestQueue.add(purchaseRequest);
     }
 
     private void registerNotification() {

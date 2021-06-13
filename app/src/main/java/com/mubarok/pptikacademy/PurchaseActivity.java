@@ -68,14 +68,16 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
     private static final String TAG = PurchaseActivity.class.getSimpleName(); //getting the info
     String HttpURL = "https://pptikacademy01.000webhostapp.com/api/takingcourse.php";
     String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL2 = "https://pptikacademy01.000webhostapp.com/api/validationpurchase.php";
 
     Button mBtn_checkout;
     TextInputLayout mExt_idSiswaPcs, mExt_idKursusPcs, mExt_qtyPcs, mExt_pricePcs, mExt_datePcs, mExt_namePcs, mExt_emailPcs;
     TextView mTxt_coursenamePcs, mTxt_qtyPcs, mTxt_pricePcs;
     ImageView mImg_iconPcs;
-    String url, getIdIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKrs;
+    String url, getIdSiswa, getName, getEmail, getIdKursus, getNamaKursus, getHargaKrs;
     int getHargaKursus;
     String TempIdTransaksi, TempIdOrder, TempJenisPembayaran, TempJumlah, TempDate, TempStatusTransaksi, TempIdSiswa, TempIdKursus;
+    String id_siswa, id_kursus;
 
     SessionManager sessionManager;
 
@@ -117,7 +119,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
 
         // Receive Data from SessionManager
         HashMap<String, String> user = sessionManager.getUserDetail();
-        getIdIdSiswa = user.get(sessionManager.KEY_ID);
+        getIdSiswa = user.get(sessionManager.KEY_ID);
         getName = user.get(sessionManager.KEY_NAME);
         getEmail = user.get(sessionManager.KEY_EMAIL);
 
@@ -128,7 +130,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         getHargaKursus = Integer.parseInt(getHargaKrs);
 
         // Set Material
-        mExt_idSiswaPcs.getEditText().setText(getIdIdSiswa);
+        mExt_idSiswaPcs.getEditText().setText(getIdSiswa);
         mExt_namePcs.getEditText().setText(getName);
         mExt_emailPcs.getEditText().setText(getEmail);
         mExt_idKursusPcs.getEditText().setText(getIdKursus);
@@ -144,6 +146,12 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         String currentDate = dateFormat.format(calendar.getTime());
         mExt_datePcs.getEditText().setText(currentDate);
 
+        // Testing
+        id_siswa = mExt_idSiswaPcs.getEditText().getText().toString();
+        id_kursus = mExt_idKursusPcs.getEditText().getText().toString();
+        Log.e(TAG, "id siswa: "+id_siswa);
+        Log.e(TAG, "id kursus: "+id_kursus);
+
         // Midtrans
         initMidtransSdk();
 
@@ -151,14 +159,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         mBtn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(PurchaseActivity.this, "Under construction..", Toast.LENGTH_SHORT).show();
-//                url = "https://pptikacademy01.000webhostapp.com/api/validationpurchase.php?" + "id_siswa=" + mExt_idSiswaPcs.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusPcs.getEditText().getText().toString();
-//                if (mExt_idSiswaPcs.getEditText().getText().toString().trim().length() > 0 && mExt_idKursusPcs.getEditText().getText().toString().trim().length() > 0) {
-//                    Toast.makeText(getApplicationContext(), "You've already take this course", Toast.LENGTH_LONG).show();
-//                }
-//                else {
-                    actionButton();
-//                }
+                purchaseCheck();
             }
         });
 
@@ -387,6 +388,58 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void purchaseCheck() {
+        // Setting POST request ke server
+        StringRequest purchaseRequest = new StringRequest(Request.Method.POST, HttpURL2,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle response dari server ketika sukses dengan mengkonvert menjadi JSON
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            // Mengambil variable status pada response
+                            String status = json.getString("success");
+                            String message1 = json.getString("id_siswa");
+                            String message2 = json.getString("id_kursus");
+
+                            if(status.equals("1")){
+                                Log.e("ok", "ambil data nilai sukses =" + status);
+                                Log.e("ok", "id siswa =" + message1);
+                                Log.e("ok", "id kursus =" + message2);
+                                Toast.makeText(getApplicationContext(), "You've already take this course", Toast.LENGTH_LONG).show();
+                            } else {
+                                actionButton();
+                                Log.e("error", "tidak bisa ambil data nilai sukses =" + status);
+                                Log.e("error", "id siswa =" + message1);
+                                Log.e("error", "id kursus =" + message2);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle response dari server ketika gagal
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id_siswa", getIdSiswa);
+                params.put("id_kursus", getIdKursus);
+                return params;
+            }
+        };
+        // Buat antrian request pada cache android
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Tambahkan Request pada antrian request
+        requestQueue.add(purchaseRequest);
     }
 
     private void purchaseNotification() {
