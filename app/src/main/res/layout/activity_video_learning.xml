@@ -63,17 +63,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_videolearning" />
 
-    <ImageView
-        android:id="@+id/progressVideo1"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC1"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC1"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo1"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC1"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC1"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC2"
@@ -90,17 +90,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC1" />
 
-    <ImageView
-        android:id="@+id/progressVideo2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC2"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC2"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo2"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC3"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC2"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC3"
@@ -117,17 +117,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC2" />
 
-    <ImageView
-        android:id="@+id/progressVideo3"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC3"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC3"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo3"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC4"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC3"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC3"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC4"
@@ -144,17 +144,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC3" />
 
-    <ImageView
-        android:id="@+id/progressVideo4"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC4"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC4"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo4"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC5"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC4"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC4"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC5"
@@ -171,17 +171,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC4" />
 
-    <ImageView
-        android:id="@+id/progressVideo5"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC5"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC5"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo5"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC6"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC5"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC5"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC6"
@@ -198,17 +198,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC5" />
 
-    <ImageView
-        android:id="@+id/progressVideo6"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC6"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC6"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo6"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC7"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC6"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC6"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC7"
@@ -225,17 +225,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC6" />
 
-    <ImageView
-        android:id="@+id/progressVideo7"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC7"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC7"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo7"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC8"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC7"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC7"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC8"
@@ -252,17 +252,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC7" />
 
-    <ImageView
-        android:id="@+id/progressVideo8"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC8"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC8"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo8"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC9"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC8"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC8"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC9"
@@ -279,17 +279,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC8" />
 
-    <ImageView
-        android:id="@+id/progressVideo9"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC9"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC9"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo9"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonVideoC10"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC9"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC9"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <Button
         android:id="@+id/buttonVideoC10"
@@ -306,17 +306,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonVideoC9" />
 
-    <ImageView
-        android:id="@+id/progressVideo10"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/centang_abu"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonVideoC10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.959"
-        app:layout_constraintStart_toStartOf="@+id/buttonVideoC10"
-        app:layout_constraintTop_toTopOf="@+id/buttonVideoC10"
-        app:layout_constraintVertical_bias="0.448" />
+<!--    <ImageView-->
+<!--        android:id="@+id/progressVideo10"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/centang_abu"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/buttonVideoC10"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.959"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/buttonVideoC10"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonVideoC10"-->
+<!--        app:layout_constraintVertical_bias="0.448" />-->
 
     <TextView
         android:id="@+id/textIdL"
