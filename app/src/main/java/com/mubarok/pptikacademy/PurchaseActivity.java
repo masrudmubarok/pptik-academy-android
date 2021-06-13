@@ -66,8 +66,8 @@ import java.util.Map;
 public class PurchaseActivity extends AppCompatActivity implements TransactionFinishedCallback {
 
     private static final String TAG = PurchaseActivity.class.getSimpleName(); //getting the info
-    String HttpURL = "https://zyralebags.000webhostapp.com/api/takingcourse.php";
-    String HttpURL1 = "https://zyralebags.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/takingcourse.php";
+    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
 
     Button mBtn_checkout;
     TextInputLayout mExt_idSiswaPcs, mExt_idKursusPcs, mExt_qtyPcs, mExt_pricePcs, mExt_datePcs, mExt_namePcs, mExt_emailPcs;
@@ -135,7 +135,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         mTxt_coursenamePcs.setText(getNamaKursus);
         mTxt_pricePcs.setText(getHargaKrs);
         Glide.with(this)
-                .load("https://zyralebags.000webhostapp.com/assets/icon/"+getIntent().getStringExtra("icon"))
+                .load("https://pptikacademy01.000webhostapp.com/assets/icon/"+getIntent().getStringExtra("icon"))
                 .into(mImg_iconPcs);
 
         // Receive Data from Current Date
@@ -152,7 +152,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
             @Override
             public void onClick(View v) {
 //                Toast.makeText(PurchaseActivity.this, "Under construction..", Toast.LENGTH_SHORT).show();
-//                url = "https://zyralebags.000webhostapp.com/api/validationpurchase.php?" + "id_siswa=" + mExt_idSiswaPcs.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusPcs.getEditText().getText().toString();
+//                url = "https://pptikacademy01.000webhostapp.com/api/validationpurchase.php?" + "id_siswa=" + mExt_idSiswaPcs.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusPcs.getEditText().getText().toString();
 //                if (mExt_idSiswaPcs.getEditText().getText().toString().trim().length() > 0 && mExt_idKursusPcs.getEditText().getText().toString().trim().length() > 0) {
 //                    Toast.makeText(getApplicationContext(), "You've already take this course", Toast.LENGTH_LONG).show();
 //                }

@@ -42,7 +42,7 @@ public class RecyclerAdapterMyCourses extends RecyclerView.Adapter<RecyclerAdapt
         holder.video.setText(listdata.get(position).get("jumlah_video"));
         holder.modul.setText(listdata.get(position).get("jumlah_modul"));
         Glide.with(context.getActivity())
-                .load("https://zyralebags.000webhostapp.com/assets/icon/"+listdata.get(position).get("icon"))
+                .load("https://pptikacademy01.000webhostapp.com/assets/icon/"+listdata.get(position).get("icon"))
                 .into(holder.icon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

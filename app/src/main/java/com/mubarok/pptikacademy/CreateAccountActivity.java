@@ -25,7 +25,7 @@ import java.util.List;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    String HttpURL = "https://zyralebags.000webhostapp.com/api/createaccount.php";
+    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/createaccount.php";
     TextInputLayout mTxt_fullnamec, mTxt_usernamec, mTxt_passwordc, mTxt_emailc, mTxt_cityc, mTxt_countryc;
     Button mBtn_create;
     String TempFullname, TempUsername, TempPassword, TempEmail, TempCity, TempCountry;

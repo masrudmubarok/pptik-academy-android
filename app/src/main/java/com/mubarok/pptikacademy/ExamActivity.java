@@ -53,9 +53,9 @@ import java.util.Map;
 public class ExamActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = ExamActivity.class.getSimpleName(); //getting the info
-    String HttpURL = "https://zyralebags.000webhostapp.com/api/registerexam.php";
-    String HttpURL1 = "https://zyralebags.000webhostapp.com/api/videomodul-send-learning.php";
-    String HttpURL2 = "https://zyralebags.000webhostapp.com/api/learning-send-exam.php";
+    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/registerexam.php";
+    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL2 = "https://pptikacademy01.000webhostapp.com/api/learning-send-exam.php";
 
     Button mBtn_register;
     TextInputLayout mExt_idSiswaE, mExt_idKursusE, mExt_nameE, mExt_emailE, mExt_dateE, mExt_subjectE;
@@ -252,7 +252,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                 alertRegisterExam.setIcon(R.drawable.exam);
                 alertRegisterExam.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        url = "https://zyralebags.000webhostapp.com/api/validationexam.php?" + "id_siswa=" + mExt_idSiswaE.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusE.getEditText().getText().toString();
+                        url = "https://pptikacademy01.000webhostapp.com/api/validationexam.php?" + "id_siswa=" + mExt_idSiswaE.getEditText().getText().toString() + "&id_kursus=" + mExt_idKursusE.getEditText().getText().toString();
                         if (mExt_idSiswaE.getEditText().getText().toString().trim().length() > 0 && mExt_idKursusE.getEditText().getText().toString().trim().length() > 0) {
                             Toast.makeText(getApplicationContext(), "You've already register the exam", Toast.LENGTH_LONG).show();
                         }

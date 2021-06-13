@@ -34,7 +34,7 @@ public class SecurityActivity extends AppCompatActivity {
     String StringHolder = "" ;
     String getId;
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://zyralebags.000webhostapp.com/api/security-read.php";
+    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/security-read.php";
 
     SessionManager sessionManager;
 

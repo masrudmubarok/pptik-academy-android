@@ -54,7 +54,7 @@ public class MyCoursesFragment extends Fragment {
     SessionManager sessionManager;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://zyralebags.000webhostapp.com/api/mycourses-read.php";
+    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/mycourses-read.php";
 
     public MyCoursesFragment() {
         // Required empty public constructor

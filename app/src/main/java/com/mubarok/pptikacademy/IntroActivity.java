@@ -39,7 +39,7 @@ public class IntroActivity extends Activity {
     ArrayList<HashMap<String , String >> listdata;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://zyralebags.000webhostapp.com/api/newsintro-read.php";
+    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/newsintro-read.php";
     private Button mBtn_createacc, mBtn_login;
 
     @Override
