@@ -38,8 +38,8 @@ public class LearningActivity extends AppCompatActivity {
     String getId, kursusTemp, deskripsiTemp, tutorTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/learning-send-videomodul.php";
-    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/learning-send-exam.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/learning-send-videomodul.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/learning-send-exam.php";
 
     private Map<String, String> getParams;
 
@@ -78,7 +78,7 @@ public class LearningActivity extends AppCompatActivity {
         mTxt_tutor.setText(tutorTemp);
         mTxt_idKursus.setText(getId);
         Glide.with(this)
-                .load("https://pptikacademy01.000webhostapp.com/assets/icon/"+iconTemp)
+                .load("https://pptikacademy.000webhostapp.com/assets/icon/"+iconTemp)
                 .into(icon);
 
         //function button

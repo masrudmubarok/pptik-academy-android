@@ -43,7 +43,7 @@ import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/profile-update.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/profile-update.php";
     Button mBtn_savep, mBtn_cancelp;
     EditText mTxt_fullnamep, mTxt_emailp, mTxt_cityp, mTxt_countryp;
     String getId;

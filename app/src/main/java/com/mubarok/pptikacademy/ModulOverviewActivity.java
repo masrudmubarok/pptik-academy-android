@@ -40,7 +40,7 @@ public class ModulOverviewActivity extends AppCompatActivity {
     String getId, modulTemp, judulModulTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/videomodulview-send-videomodullearning.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodulview-send-videomodullearning.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class ModulOverviewActivity extends AppCompatActivity {
 
         //This is function read PDF from URL
         String linkModul = modulTemp;
-        new ModulOverviewActivity.RetrievePDFStream().execute("http://pptikacademy01.000webhost.com/assets/modul/overview/"+linkModul); // Or any url direct PDF from internet
+        new ModulOverviewActivity.RetrievePDFStream().execute("http://pptikacademy.000webhost.com/assets/modul/overview/"+linkModul); // Or any url direct PDF from internet
     }
 
     class RetrievePDFStream extends AsyncTask<String,Void, InputStream>

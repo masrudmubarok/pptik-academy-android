@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                url = "https://pptikacademy01.000webhostapp.com/api/login.php?" + "username=" + mTxt_username.getEditText().getText().toString() + "&password=" + mTxt_password.getEditText().getText().toString();
+                url = "https://pptikacademy.000webhostapp.com/api/login.php?" + "username=" + mTxt_username.getEditText().getText().toString() + "&password=" + mTxt_password.getEditText().getText().toString();
                 if (mTxt_username.getEditText().getText().toString().trim().length() > 0 && mTxt_password.getEditText().getText().toString().trim().length() > 0) {
                     new Masuk(getApplicationContext()).execute();
                 }

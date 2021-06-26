@@ -34,8 +34,8 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
     String getId, video1Temp1, video1Temp2, video1Temp3, video1Temp4, video1Temp5, video1Temp6, video1Temp7, video1Temp8, video1Temp9, video1Temp10;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
-    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/videolearning-send-videoview.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videolearning-send-videoview.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

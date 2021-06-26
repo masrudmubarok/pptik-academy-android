@@ -33,8 +33,8 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
     String getId, modulTemp1, modulTemp2, modulTemp3, modulTemp4, modulTemp5, modulTemp6, modulTemp7, modulTemp8, modulTemp9, modulTemp10;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
-    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/modullearning-send-modulview.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/modullearning-send-modulview.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

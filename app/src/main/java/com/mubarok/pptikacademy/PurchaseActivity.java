@@ -66,9 +66,9 @@ import java.util.Map;
 public class PurchaseActivity extends AppCompatActivity implements TransactionFinishedCallback {
 
     private static final String TAG = PurchaseActivity.class.getSimpleName(); //getting the info
-    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/takingcourse.php";
-    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
-    String HttpURL2 = "https://pptikacademy01.000webhostapp.com/api/validationpurchase.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/takingcourse.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL2 = "https://pptikacademy.000webhostapp.com/api/validationpurchase.php";
 
     Button mBtn_checkout;
     TextInputLayout mExt_idSiswaPcs, mExt_idKursusPcs, mExt_qtyPcs, mExt_pricePcs, mExt_datePcs, mExt_namePcs, mExt_emailPcs;
@@ -137,7 +137,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         mTxt_coursenamePcs.setText(getNamaKursus);
         mTxt_pricePcs.setText(getHargaKrs);
         Glide.with(this)
-                .load("https://pptikacademy01.000webhostapp.com/assets/icon/"+getIntent().getStringExtra("icon"))
+                .load("https://pptikacademy.000webhostapp.com/assets/icon/"+getIntent().getStringExtra("icon"))
                 .into(mImg_iconPcs);
 
         // Receive Data from Current Date

@@ -53,10 +53,10 @@ import java.util.Map;
 public class ExamActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = ExamActivity.class.getSimpleName(); //getting the info
-    String HttpURL = "https://pptikacademy01.000webhostapp.com/api/registerexam.php";
-    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/videomodul-send-learning.php";
-    String HttpURL2 = "https://pptikacademy01.000webhostapp.com/api/learning-send-exam.php";
-    String HttpURL3 = "https://pptikacademy01.000webhostapp.com/api/validationexam.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/registerexam.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL2 = "https://pptikacademy.000webhostapp.com/api/learning-send-exam.php";
+    String HttpURL3 = "https://pptikacademy.000webhostapp.com/api/validationexam.php";
 
     Button mBtn_register;
     TextInputLayout mExt_idSiswaE, mExt_idKursusE, mExt_nameE, mExt_emailE, mExt_dateE, mExt_subjectE;

@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView mTxt_idP, mTxt_nameP, mTxt_emailP, mTxt_cityP, mTxt_countryP;
     String getId;
     // Adding HTTP Server URL to string variable.
-    String HttpURL1 = "https://pptikacademy01.000webhostapp.com/api/profile-read.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/profile-read.php";
 
     SessionManager sessionManager;
 
