@@ -42,7 +42,7 @@
         android:layout_marginTop="15dp"
         android:width="@android:dimen/thumbnail_width"
         android:gravity="center_horizontal"
-        android:text="Sign in &amp; Security"
+        android:text="Security"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorTextWhite"

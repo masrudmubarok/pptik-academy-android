@@ -79,6 +79,9 @@ public class EditSecurityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Update();
+                Intent intent = new Intent(EditSecurityActivity.this, SecurityActivity.class);
+                startActivity(intent);
+                finish();
             }
 
         });
