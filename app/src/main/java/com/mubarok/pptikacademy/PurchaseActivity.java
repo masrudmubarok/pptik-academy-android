@@ -301,7 +301,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
                     purchaseNotification();
                     break;
                 case TransactionResult.STATUS_PENDING:
-//                    Toast.makeText(this, "Transaction Pending. ID: " + result.getResponse().getTransactionId(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Transaction in process: ", Toast.LENGTH_LONG).show();
                     TempIdTransaksi = result.getResponse().getTransactionId();
                     TempIdOrder = result.getResponse().getOrderId();
                     TempJumlah = result.getResponse().getGrossAmount();
