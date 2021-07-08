@@ -116,7 +116,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 } catch (IOException e) {
 
                 }
-                return "Data Inserted Successfully";
+                return "Registered successfully";
             }
 
             @Override
@@ -124,7 +124,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 super.onPostExecute(result);
 
-                Toast.makeText(CreateAccountActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreateAccountActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
 
             }
         }

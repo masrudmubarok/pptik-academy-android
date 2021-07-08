@@ -39,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         sessionManager = new SessionManager(getApplicationContext());
-        Toast.makeText(getApplicationContext(),
-                "User Login Status: " + sessionManager.isLoggedIn(), Toast.LENGTH_LONG).show();
 
         //inisialisasi button & text input
         mBtn_signin = (Button) findViewById(R.id.btnsignin2);
@@ -57,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     new Masuk(getApplicationContext()).execute();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Username/password masih kosong gan.!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Username or password is empty", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -122,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Username/password salah gan.!!", Toast.LENGTH_LONG).show();
+                        "Username or password is wrong, please try again!", Toast.LENGTH_LONG).show();
             }
         }
     }
