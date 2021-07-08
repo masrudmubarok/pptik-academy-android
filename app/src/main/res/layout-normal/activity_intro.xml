@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackWhite"
     tools:context=".IntroActivity">
 
     <ImageView
@@ -37,14 +38,14 @@
         android:textColor="@color/colorTextBlue"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="185dp"
         android:layout_centerHorizontal="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerNews"
         android:layout_width="match_parent"
         android:layout_height="149dp"
-        android:layout_marginTop="195dp"
+        android:layout_marginTop="215dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:scrollbars="vertical"
@@ -58,7 +59,7 @@
         android:textColor="@color/colorTextBlue"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="355dp"
+        android:layout_marginTop="390dp"
         android:layout_centerHorizontal="true"/>
 
     <ImageView
@@ -66,14 +67,14 @@
         android:layout_width="30dp"
         android:layout_height="21dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="435dp"
         android:src="@drawable/web"/>
 
     <TextView
         android:id="@+id/textWeb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="435dp"
         android:layout_marginStart="65dp"
         android:text="pptik.stiki.ac.id"
         android:textColor="#F000"
@@ -83,7 +84,7 @@
         android:id="@+id/iconemail"
         android:layout_width="30dp"
         android:layout_height="21dp"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="475dp"
         android:layout_marginLeft="30dp"
         android:src="@drawable/email"/>
 
@@ -91,7 +92,7 @@
         android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="475dp"
         android:layout_marginStart="65dp"
         android:text="pptik@stiki.ac.id"
         android:textColor="#F000"
@@ -101,7 +102,7 @@
         android:id="@+id/iconPhone"
         android:layout_width="32dp"
         android:layout_height="23dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="435dp"
         android:layout_marginStart="200dp"
         android:src="@drawable/phone"/>
 
@@ -109,7 +110,7 @@
         android:id="@+id/textPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="402dp"
+        android:layout_marginTop="437dp"
         android:layout_marginStart="235dp"
         android:text="(0341)560823 ext.312"
         android:textColor="#F000"
@@ -119,7 +120,7 @@
         android:id="@+id/iconInstagram"
         android:layout_width="30dp"
         android:layout_height="21dp"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="475dp"
         android:layout_marginStart="200dp"
         android:src="@drawable/instagram"/>
 
@@ -127,7 +128,7 @@
         android:id="@+id/textInstagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="475dp"
         android:layout_marginStart="235dp"
         android:text="pptik_stiki"
         android:textColor="#F000"
