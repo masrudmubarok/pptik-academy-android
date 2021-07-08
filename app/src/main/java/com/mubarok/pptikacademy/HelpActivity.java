@@ -33,6 +33,7 @@ public class HelpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent iContactus = new Intent(getApplicationContext(),ContactUsActivity.class);
                 startActivity(iContactus);
+                finish();
             }
         });
         mBtn_about.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +41,7 @@ public class HelpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent iAbout = new Intent(getApplicationContext(),AboutActivity.class);
                 startActivity(iAbout);
+                finish();
             }
         });
     }

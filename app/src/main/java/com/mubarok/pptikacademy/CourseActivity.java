@@ -28,6 +28,7 @@ public class CourseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent iAccount = new Intent(getApplicationContext(),AccountActivity.class);
                 startActivity(iAccount);
+
             }
         });
 

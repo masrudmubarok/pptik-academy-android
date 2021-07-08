@@ -115,6 +115,9 @@ public class LoginActivity extends AppCompatActivity {
 
             if (success!=null && success.equals("1")) {
                 a = new Intent(LoginActivity.this, CourseActivity.class);
+                a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(a);
                 finish();
             } else {
