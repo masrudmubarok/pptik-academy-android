@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LearningOverviewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_learning_overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textToolbarLearningOverview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:text="Overview"
+        android:textAllCaps="true"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="17dp"
+        tools:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textIdLO"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollearning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageViewIconO"
+                android:layout_width="122dp"
+                android:layout_height="122dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/textNamaKursusO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="165dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="20dp"
+                android:text="Course Name"
+                android:textColor="#F000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iconTutorLO"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="90dp"
+                android:layout_marginLeft="165dp"
+                app:srcCompat="@drawable/tutor" />
+
+            <TextView
+                android:id="@+id/textTutorLO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="195dp"
+                android:layout_marginTop="90dp"
+                android:text="Nama Tutor"
+                android:textColor="#F000"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/iconPriceLO"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="165dp"
+                android:layout_marginTop="125dp"
+                app:srcCompat="@drawable/price" />
+
+            <com.hosle.libcurrencyview.CurrencyTextView
+                android:id="@+id/textHargaLO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="125dp"
+                android:layout_marginLeft="195dp"
+                android:text="Harga"
+                android:textColor="#F000"
+                android:textSize="14dp"
+                app:currencySymbol="Rp "
+                app:currencySymbolSize="14dp"
+                app:decimalTextSize="14dp"
+                app:prefixSuffixTextSize="14dp" />
+
+            <TextView
+                android:id="@+id/textDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="180dp"
+                android:layout_marginLeft="25dp"
+                android:text="DESCRIPTION"
+                android:textColor="#F000"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textDeskripsiO"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="212dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="left"
+                android:text="Ini bagian deskripsi"
+                android:textColor="#F000"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttonVideoO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonModulO"
+        android:background="@drawable/border"
+        android:text="Video" />
+
+    <Button
+        android:id="@+id/buttonModulO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonBuy"
+        android:background="@drawable/border"
+        android:text="Modul" />
+
+    <Button
+        android:id="@+id/buttonBuy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignBottom="@+id/scrollearning"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:textSize="17dp"
+        android:text="Buy Now" />
+
+</RelativeLayout>

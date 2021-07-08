@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/intro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backwhite"
+    tools:context=".IntroActivity">
+
+    <ImageView
+        android:id="@+id/logoPPTIK2"
+        android:layout_width="148dp"
+        android:layout_height="61dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="TODO"
+        android:scaleType="fitCenter"
+        android:src="@drawable/pptik_academy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <TextView
+        android:id="@+id/textDeskripsi"
+        android:layout_width="515dp"
+        android:layout_height="60dp"
+        android:text="PPTIK merupakan lembaga yang menyediakan pelatihan online course dan sertifikasi interna- sional di bidang TIK."
+        android:textColor="#000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.211" />
+
+    <ImageView
+        android:id="@+id/iconweb"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="372dp"
+        android:src="@drawable/web"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDeskripsi" />
+
+    <TextView
+        android:id="@+id/textWeb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="384dp"
+        android:text="pptik.stiki.ac.id"
+        android:textColor="#F000"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/iconweb"
+        app:layout_constraintTop_toBottomOf="@+id/textDeskripsi" />
+
+    <ImageView
+        android:id="@+id/iconemail"
+        android:layout_width="46dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="140dp"
+        android:src="@drawable/email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconweb"
+        app:layout_constraintVertical_bias="0.318" />
+
+    <TextView
+        android:id="@+id/textEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="pptik@stiki.ac.id"
+        android:textColor="#F000"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconemail"
+        app:layout_constraintTop_toBottomOf="@+id/textWeb"
+        app:layout_constraintVertical_bias="0.135" />
+
+    <ImageView
+        android:id="@+id/iconPhone"
+        android:layout_width="40dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="372dp"
+        android:src="@drawable/phone"
+        app:layout_constraintStart_toEndOf="@+id/textWeb"
+        app:layout_constraintTop_toBottomOf="@+id/textDeskripsi" />
+
+    <TextView
+        android:id="@+id/textPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="384dp"
+        android:layout_marginEnd="36dp"
+        android:text="(0341)560823 ext.312"
+        android:textColor="#F000"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/iconPhone"
+        app:layout_constraintTop_toBottomOf="@+id/textDeskripsi" />
+
+    <ImageView
+        android:id="@+id/iconInstagram"
+        android:layout_width="38dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/instagram"
+        app:layout_constraintStart_toEndOf="@+id/textEmail"
+        app:layout_constraintTop_toBottomOf="@+id/iconPhone" />
+
+    <TextView
+        android:id="@+id/textInstagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:text="pptik_stiki"
+        android:textColor="#F000"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/iconInstagram"
+        app:layout_constraintTop_toBottomOf="@+id/textPhone"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <Button
+        android:id="@+id/btn_createacc"
+        android:layout_width="258dp"
+        android:layout_height="73dp"
+        android:background="@drawable/outbluebtn"
+        android:text="Create an Account"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.928" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="171dp"
+        android:layout_height="70dp"
+        android:background="@color/colorPrimary"
+        android:text="Sign In"
+        android:textSize="20dp"
+        android:textColor="@color/colorTextWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926" />
+
+    <TextView
+        android:id="@+id/textContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact"
+        android:textColor="@color/colorTextBlue"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <TextView
+        android:id="@+id/textNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="News"
+        android:textColor="@color/colorTextBlue"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.316" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerNews"
+        android:layout_width="497dp"
+        android:layout_height="203dp"
+        android:layout_marginTop="4dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.627"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNews" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

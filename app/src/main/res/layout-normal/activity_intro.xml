@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IntroActivity">
+
+    <ImageView
+        android:id="@+id/logoPPTIK2"
+        android:layout_width="103dp"
+        android:layout_height="41dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="TODO"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/pptik_academy" />
+
+    <TextView
+        android:id="@+id/textDeskripsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PPTIK merupakan lembaga yang menyediakan pelatihan online course dan sertifikasi interna- sional di bidang TIK."
+        android:textColor="#000"
+        android:textSize="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="95dp"/>
+
+    <TextView
+        android:id="@+id/textNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="News"
+        android:textColor="@color/colorTextBlue"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="165dp"
+        android:layout_centerHorizontal="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerNews"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:layout_marginTop="195dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:scrollbars="vertical"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact"
+        android:textColor="@color/colorTextBlue"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="355dp"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/iconweb"
+        android:layout_width="30dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="400dp"
+        android:src="@drawable/web"/>
+
+    <TextView
+        android:id="@+id/textWeb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="65dp"
+        android:text="pptik.stiki.ac.id"
+        android:textColor="#F000"
+        android:textSize="14dp"/>
+
+    <ImageView
+        android:id="@+id/iconemail"
+        android:layout_width="30dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/email"/>
+
+    <TextView
+        android:id="@+id/textEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440dp"
+        android:layout_marginStart="65dp"
+        android:text="pptik@stiki.ac.id"
+        android:textColor="#F000"
+        android:textSize="14dp" />
+
+    <ImageView
+        android:id="@+id/iconPhone"
+        android:layout_width="32dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="200dp"
+        android:src="@drawable/phone"/>
+
+    <TextView
+        android:id="@+id/textPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="402dp"
+        android:layout_marginStart="235dp"
+        android:text="(0341)560823 ext.312"
+        android:textColor="#F000"
+        android:textSize="13dp" />
+
+    <ImageView
+        android:id="@+id/iconInstagram"
+        android:layout_width="30dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginStart="200dp"
+        android:src="@drawable/instagram"/>
+
+    <TextView
+        android:id="@+id/textInstagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440dp"
+        android:layout_marginStart="235dp"
+        android:text="pptik_stiki"
+        android:textColor="#F000"
+        android:textSize="14dp"/>
+
+    <Button
+        android:id="@+id/btn_createacc"
+        android:layout_width="165dp"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/outbluebtn"
+        android:text="Create Account"
+        android:textColor="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="130dp"
+        android:layout_height="46dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="35dp"
+        android:background="@color/colorPrimary"
+        android:text="Sign In"
+        android:textColor="@color/colorTextWhite" />
+
+</RelativeLayout>
