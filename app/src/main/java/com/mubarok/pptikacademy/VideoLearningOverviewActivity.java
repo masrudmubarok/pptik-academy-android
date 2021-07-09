@@ -33,8 +33,8 @@ public class VideoLearningOverviewActivity extends AppCompatActivity implements 
     String getId, video1Temp1, video1Temp2, video1Temp3, video1Temp4, video1Temp5, video1Temp6, video1Temp7, video1Temp8, video1Temp9, video1Temp10;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
-    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videolearning-send-videoview.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learningoverview.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videolearningoverview-send-videoview.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,11 +152,12 @@ public class VideoLearningOverviewActivity extends AppCompatActivity implements 
                         String icon = object.getString("icon").trim();
 
                         Intent intent = new Intent(getApplicationContext(), LearningOverviewActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("nama_kursus", nama_kursus);
                         intent.putExtra("deskripsi", deskripsi);
                         intent.putExtra("nama_tutor", nama_tutor);
-                        intent.putExtra("harga", harga);
                         intent.putExtra("icon", icon);
                         startActivity(intent);
                         finish();
@@ -214,7 +215,6 @@ public class VideoLearningOverviewActivity extends AppCompatActivity implements 
                         intent.putExtra("judul_video", judulVideo1);
                         intent.putExtra("video", video1);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -258,7 +258,6 @@ public class VideoLearningOverviewActivity extends AppCompatActivity implements 
                         intent.putExtra("judul_video", judulVideo2);
                         intent.putExtra("video", video2);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {

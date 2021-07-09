@@ -34,15 +34,20 @@ public class VideoViewActivity extends AppCompatActivity {
     private static final String TAG = VideoViewActivity.class.getSimpleName(); //getting the info
     TextView textView;
     VideoView videoView;
-    String getId, videoTemp, judulVideoTemp;
+    String getId, getIdSiswa, videoTemp, judulVideoTemp;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodulview-send-videomodullearning.php";
+
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_view);
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.loginCheck();
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar ToolBar = (Toolbar)findViewById(R.id.toolbar_videoview);
@@ -54,6 +59,10 @@ public class VideoViewActivity extends AppCompatActivity {
         // Declaration
         videoView = (VideoView) findViewById(R.id.videoViewLearning);
         textView = (TextView) findViewById(R.id.textToolbarVideoView);
+
+        // Receive Data from SessionManager
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getIdSiswa = user.get(sessionManager.KEY_ID);
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
@@ -96,6 +105,8 @@ public class VideoViewActivity extends AppCompatActivity {
                         String judulVideo10 = object.getString("judul10").trim();
 
                         Intent iVideo = new Intent(getApplicationContext(),VideoLearningActivity.class);
+                        iVideo.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        iVideo.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         iVideo.putExtra("id_kursus", id_kursus);
                         iVideo.putExtra("judul1", judulVideo1);
                         iVideo.putExtra("judul2", judulVideo2);
@@ -126,6 +137,7 @@ public class VideoViewActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };

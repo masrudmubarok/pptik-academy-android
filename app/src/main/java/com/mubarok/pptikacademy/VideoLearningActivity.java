@@ -31,16 +31,21 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
 
     private static final String TAG = VideoLearningActivity.class.getSimpleName(); //getting the info
     Button mBtn_video1, mBtn_video2, mBtn_video3, mBtn_video4, mBtn_video5, mBtn_video6, mBtn_video7, mBtn_video8, mBtn_video9, mBtn_video10;
-    String getId, video1Temp1, video1Temp2, video1Temp3, video1Temp4, video1Temp5, video1Temp6, video1Temp7, video1Temp8, video1Temp9, video1Temp10;
+    String getId, getIdSiswa, video1Temp1, video1Temp2, video1Temp3, video1Temp4, video1Temp5, video1Temp6, video1Temp7, video1Temp8, video1Temp9, video1Temp10;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
     String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videolearning-send-videoview.php";
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_learning);
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.loginCheck();
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar ToolBarLogin = (Toolbar)findViewById(R.id.toolbar_videolearning);
@@ -60,6 +65,10 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
         mBtn_video8 = (Button) findViewById(R.id.buttonVideoC8);
         mBtn_video9 = (Button) findViewById(R.id.buttonVideoC9);
         mBtn_video10 = (Button) findViewById(R.id.buttonVideoC10);
+
+        // Receive Data from SessionManager
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getIdSiswa = user.get(sessionManager.KEY_ID);
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
@@ -153,6 +162,8 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         String icon = object.getString("icon").trim();
 
                         Intent intent = new Intent(getApplicationContext(), LearningActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("nama_kursus", nama_kursus);
                         intent.putExtra("deskripsi", deskripsi);
@@ -177,6 +188,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -214,7 +226,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo1);
                         intent.putExtra("video", video1);
                         startActivity(intent);
-                        finish();
+
 
                     }
                 } catch (JSONException e) {
@@ -232,6 +244,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -258,7 +271,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo2);
                         intent.putExtra("video", video2);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -276,6 +288,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -302,7 +315,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo3);
                         intent.putExtra("video", video3);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -320,6 +332,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -346,7 +359,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo4);
                         intent.putExtra("video", video4);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -364,6 +376,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -390,7 +403,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo5);
                         intent.putExtra("video", video5);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -408,6 +420,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -434,7 +447,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo6);
                         intent.putExtra("video", video6);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -452,6 +464,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -478,7 +491,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo7);
                         intent.putExtra("video", video7);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -496,6 +508,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -522,8 +535,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo8);
                         intent.putExtra("video", video8);
                         startActivity(intent);
-                        finish();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -540,6 +551,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -566,7 +578,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo9);
                         intent.putExtra("video", video9);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -584,6 +595,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -610,7 +622,6 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_video", judulVideo10);
                         intent.putExtra("video", video10);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -628,6 +639,7 @@ public class VideoLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };

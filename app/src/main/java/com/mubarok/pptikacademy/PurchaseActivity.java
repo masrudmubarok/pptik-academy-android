@@ -67,7 +67,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
 
     private static final String TAG = PurchaseActivity.class.getSimpleName(); //getting the info
     String HttpURL = "https://pptikacademy.000webhostapp.com/api/takingcourse.php";
-    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learningoverview.php";
     String HttpURL2 = "https://pptikacademy.000webhostapp.com/api/validationpurchase.php";
 
     Button mBtn_checkout;
@@ -297,11 +297,9 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
                     TempStatusTransaksi = result.getResponse().getTransactionStatus();
                     GetData();
                     InsertData(TempIdTransaksi, TempIdOrder, TempJenisPembayaran, TempJumlah, TempDate, TempStatusTransaksi, TempIdSiswa, TempIdKursus);
-                    sendBackCourseDetail();
                     purchaseNotification();
                     break;
                 case TransactionResult.STATUS_PENDING:
-                    Toast.makeText(this, "Transaction in process: ", Toast.LENGTH_LONG).show();
                     TempIdTransaksi = result.getResponse().getTransactionId();
                     TempIdOrder = result.getResponse().getOrderId();
                     TempJumlah = result.getResponse().getGrossAmount();
@@ -310,7 +308,6 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
                     TempStatusTransaksi = result.getResponse().getTransactionStatus();
                     GetData();
                     InsertData(TempIdTransaksi, TempIdOrder, TempJenisPembayaran, TempJumlah, TempDate, TempStatusTransaksi, TempIdSiswa, TempIdKursus);
-                    sendBackCourseDetail();
                     purchaseNotification();
                     break;
                 case TransactionResult.STATUS_FAILED:
@@ -329,7 +326,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
         }
     }
 
-    private void sendBackCourseDetail() {
+    private void sendBackCourseDetailPcs() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -346,14 +343,16 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
                         String nama_tutor = object.getString("nama_tutor").trim();
                         String icon = object.getString("icon").trim();
 
-                        Intent intent = new Intent(getApplicationContext(), LearningOverviewActivity.class);
-                        intent.putExtra("id_kursus", id_kursus);
-                        intent.putExtra("nama_kursus", nama_kursus);
-                        intent.putExtra("deskripsi", deskripsi);
-                        intent.putExtra("nama_tutor", nama_tutor);
-                        intent.putExtra("harga", harga);
-                        intent.putExtra("icon", icon);
-                        startActivity(intent);
+                        Intent iBackPcs = new Intent(getApplicationContext(), LearningOverviewActivity.class);
+                        iBackPcs.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        iBackPcs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        iBackPcs.putExtra("id_kursus", id_kursus);
+                        iBackPcs.putExtra("nama_kursus", nama_kursus);
+                        iBackPcs.putExtra("deskripsi", deskripsi);
+                        iBackPcs.putExtra("nama_tutor", nama_tutor);
+                        iBackPcs.putExtra("harga", harga);
+                        iBackPcs.putExtra("icon", icon);
+                        startActivity(iBackPcs);
                         finish();
 
                     }
@@ -383,7 +382,7 @@ public class PurchaseActivity extends AppCompatActivity implements TransactionFi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                sendBackCourseDetail();
+                sendBackCourseDetailPcs();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -78,6 +78,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         //check channel notification
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -182,65 +183,6 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
         sendPostReqAsyncTask.execute(id_siswa, id_kursus, tanggal_daftar);
     }
 
-    private void sendBackCourseDetail() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i(TAG, response.toString());
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject object = jsonArray.getJSONObject(i);
-                        String id_kursus = object.getString("id_kursus").trim();
-                        String nama_kursus = object.getString("nama_kursus").trim();
-                        String deskripsi = object.getString("deskripsi").trim();
-                        String nama_tutor = object.getString("nama_tutor").trim();
-                        String icon = object.getString("icon").trim();
-
-                        Intent intent = new Intent(getApplicationContext(), LearningActivity.class);
-                        intent.putExtra("id_kursus", id_kursus);
-                        intent.putExtra("nama_kursus", nama_kursus);
-                        intent.putExtra("deskripsi", deskripsi);
-                        intent.putExtra("nama_tutor", nama_tutor);
-                        intent.putExtra("icon", icon);
-                        startActivity(intent);
-                        finish();
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(ExamActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ExamActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> getParams = new HashMap<>();
-                getParams.put("id_kursus", getIdKursus);
-                return getParams;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                sendBackCourseDetail();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -267,7 +209,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void sendExamData() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL2, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i(TAG, response.toString());
@@ -302,11 +244,74 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String > getParams = new HashMap<>();
                 getParams.put("id_kursus", getIdKursus);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void sendBackCourseDetailExm() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpURL1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, response.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("kursus");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String id_kursus = object.getString("id_kursus").trim();
+                        String nama_kursus = object.getString("nama_kursus").trim();
+                        String deskripsi = object.getString("deskripsi").trim();
+                        String nama_tutor = object.getString("nama_tutor").trim();
+                        String icon = object.getString("icon").trim();
+
+                        Intent intent = new Intent(getApplicationContext(), LearningActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("nama_kursus", nama_kursus);
+                        intent.putExtra("deskripsi", deskripsi);
+                        intent.putExtra("nama_tutor", nama_tutor);
+                        intent.putExtra("icon", icon);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ExamActivity.this, "Error Reading Detail " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ExamActivity.this, "Error Reading Detail " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> getParams = new HashMap<>();
+                getParams.put("id_kursus", getIdKursus);
+                getParams.put("id_siswa", getIdSiswa);
+                return getParams;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                sendBackCourseDetailExm();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void examCheck() {
@@ -334,7 +339,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                                 Log.e("error", "id kursus =" + message2);
                                 GetData();
                                 InsertData(TempIdSiswa, TempIdKursus, TempDate);
-                                sendBackCourseDetail();
+                                sendBackCourseDetailExm();
                                 registerNotification();
                             }
                         } catch (JSONException e) {

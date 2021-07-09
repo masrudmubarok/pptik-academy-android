@@ -30,16 +30,21 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
 
     private static final String TAG = ModulLearningActivity.class.getSimpleName(); //getting the info
     Button mBtn_modul1, mBtn_modul2, mBtn_modul3, mBtn_modul4, mBtn_modul5, mBtn_modul6, mBtn_modul7, mBtn_modul8, mBtn_modul9, mBtn_modul10;
-    String getId, modulTemp1, modulTemp2, modulTemp3, modulTemp4, modulTemp5, modulTemp6, modulTemp7, modulTemp8, modulTemp9, modulTemp10;
+    String getId, getIdSiswa, modulTemp1, modulTemp2, modulTemp3, modulTemp4, modulTemp5, modulTemp6, modulTemp7, modulTemp8, modulTemp9, modulTemp10;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
     String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/modullearning-send-modulview.php";
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modul_learning);
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.loginCheck();
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar ToolBarLogin = (Toolbar)findViewById(R.id.toolbar_modullearning);
@@ -59,6 +64,10 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
         mBtn_modul8 = (Button) findViewById(R.id.buttonModulC8);
         mBtn_modul9 = (Button) findViewById(R.id.buttonModulC9);
         mBtn_modul10 = (Button) findViewById(R.id.buttonModulC10);
+
+        // Receive Data from SessionManager
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getIdSiswa = user.get(sessionManager.KEY_ID);
 
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
@@ -97,6 +106,12 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
         mBtn_modul9.setOnClickListener(this);
         mBtn_modul10.setOnClickListener(this);
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        Log.e("ok", "destroy task");
+//    }
 
     @Override
     public void onClick(View v) {
@@ -145,12 +160,21 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
+                        String nama_kursus = object.getString("nama_kursus").trim();
+                        String deskripsi = object.getString("deskripsi").trim();
+                        String nama_tutor = object.getString("nama_tutor").trim();
+                        String icon = object.getString("icon").trim();
 
                         Intent intent = new Intent(getApplicationContext(), LearningActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("id_kursus", id_kursus);
+                        intent.putExtra("nama_kursus", nama_kursus);
+                        intent.putExtra("deskripsi", deskripsi);
+                        intent.putExtra("nama_tutor", nama_tutor);
+                        intent.putExtra("icon", icon);
                         startActivity(intent);
-//                        finish();
+                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -168,6 +192,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -179,7 +204,10 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-//                sendBackCourseDetail();
+                sendBackCourseDetail();
+//                Intent intent = new Intent(getApplicationContext(), LearningActivity.class);
+//                startActivity(intent);
+//                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -205,7 +233,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul1);
                         intent.putExtra("modul", modul1);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -223,6 +250,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -249,7 +277,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul2);
                         intent.putExtra("modul", modul2);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -267,6 +294,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -293,7 +321,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul3);
                         intent.putExtra("modul", modul3);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -311,6 +338,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -337,7 +365,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul4);
                         intent.putExtra("modul", modul4);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -355,6 +382,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -381,7 +409,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul5);
                         intent.putExtra("modul", modul5);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -399,6 +426,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -425,7 +453,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul6);
                         intent.putExtra("modul", modul6);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -443,6 +470,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -469,7 +497,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul7);
                         intent.putExtra("modul", modul7);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -487,6 +514,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -513,7 +541,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul8);
                         intent.putExtra("modul", modul8);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -531,6 +558,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -557,7 +585,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul9);
                         intent.putExtra("modul", modul9);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -575,6 +602,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -601,7 +629,6 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
                         intent.putExtra("judul_modul", judulModul10);
                         intent.putExtra("modul", modul10);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -619,6 +646,7 @@ public class ModulLearningActivity extends AppCompatActivity implements View.OnC
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };

@@ -94,6 +94,8 @@ public class VideoOverviewActivity extends AppCompatActivity {
                         String judulVideo10 = object.getString("judul10").trim();
 
                         Intent iVideo = new Intent(getApplicationContext(),VideoLearningOverviewActivity.class);
+                        iVideo.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        iVideo.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         iVideo.putExtra("id_kursus", id_kursus);
                         iVideo.putExtra("judul1", judulVideo1);
                         iVideo.putExtra("judul2", judulVideo2);

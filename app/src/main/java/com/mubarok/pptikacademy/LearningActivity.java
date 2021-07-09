@@ -35,18 +35,21 @@ public class LearningActivity extends AppCompatActivity {
     Button mBtn_video, mBtn_modul, mBtn_exam;
     TextView mTxt_idKursus, mTxt_namaKursus, mTxt_deskripsi, mTxt_tutor;
     ImageView icon;
-    String getId, kursusTemp, deskripsiTemp, tutorTemp, iconTemp;
+    String getId, getIdSiswa, kursusTemp, deskripsiTemp, tutorTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
     String HttpURL = "https://pptikacademy.000webhostapp.com/api/learning-send-videomodul.php";
     String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/learning-send-exam.php";
 
-    private Map<String, String> getParams;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning);
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.loginCheck();
 
         //menerapkan tool bar sesuai id toolbar | ToolBarAtas adalah variabel buatan sndiri
         Toolbar ToolBarLogin = (Toolbar)findViewById(R.id.toolbar_learning);
@@ -64,6 +67,10 @@ public class LearningActivity extends AppCompatActivity {
         mTxt_deskripsi = (TextView) findViewById(R.id.textDeskripsi);
         mTxt_tutor = (TextView) findViewById(R.id.textTutor);
         icon = (ImageView) findViewById(R.id.imageViewIcon);
+
+        // Receive Data from SessionManager
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getIdSiswa = user.get(sessionManager.KEY_ID);
 
         // Receive Data from MyCourseFragment
         getId = getIntent().getStringExtra("id_kursus");
@@ -138,7 +145,7 @@ public class LearningActivity extends AppCompatActivity {
                         iVideo.putExtra("judul9", judulVideo9);
                         iVideo.putExtra("judul10", judulVideo10);
                         startActivity(iVideo);
-                        finish();
+
 
                     }
                 } catch (JSONException e) {
@@ -157,6 +164,7 @@ public class LearningActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String > getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -199,7 +207,6 @@ public class LearningActivity extends AppCompatActivity {
                         iModul.putExtra("judul9", judulModul9);
                         iModul.putExtra("judul10", judulModul10);
                         startActivity(iModul);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -218,6 +225,7 @@ public class LearningActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String > getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };
@@ -242,7 +250,6 @@ public class LearningActivity extends AppCompatActivity {
                         iExam.putExtra("id_kursus", id_kursus);
                         iExam.putExtra("nama_kursus", namaKursus);
                         startActivity(iExam);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -261,6 +268,7 @@ public class LearningActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String > getParams = new HashMap<>();
                 getParams.put("id_kursus", getId);
+                getParams.put("id_siswa", getIdSiswa);
                 return getParams;
             }
         };

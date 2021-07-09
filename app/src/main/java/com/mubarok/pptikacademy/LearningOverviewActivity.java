@@ -37,7 +37,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
     String getId, kursusTemp, deskripsiTemp, tutorTemp, hargaTemp, iconTemp;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://pptikacademy.000webhostapp.com/api/learning-send-videomodul.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/learningoverview-send-videomodul.php";
     String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/learningoverview-send-purchase.php";
 
     @Override
@@ -137,7 +137,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
                         iVideo.putExtra("judul9", judulVideo9);
                         iVideo.putExtra("judul10", judulVideo10);
                         startActivity(iVideo);
-                        finish();
+
 
                     }
                 } catch (JSONException e) {
@@ -198,7 +198,7 @@ public class LearningOverviewActivity extends AppCompatActivity {
                         iModul.putExtra("judul9", judulModul9);
                         iModul.putExtra("judul10", judulModul10);
                         startActivity(iModul);
-                        finish();
+
 
                     }
                 } catch (JSONException e) {
@@ -239,13 +239,13 @@ public class LearningOverviewActivity extends AppCompatActivity {
                         String harga = object.getString("harga").trim();
                         String icon = object.getString("icon").trim();
 
-                        Intent iExam = new Intent(getApplicationContext(),PurchaseActivity.class);
-                        iExam.putExtra("id_kursus", id_kursus);
-                        iExam.putExtra("nama_kursus", namaKursus);
-                        iExam.putExtra("harga", harga);
-                        iExam.putExtra("icon", icon);
-                        startActivity(iExam);
-                        finish();
+                        Intent iPcs = new Intent(getApplicationContext(),PurchaseActivity.class);
+                        iPcs.putExtra("id_kursus", id_kursus);
+                        iPcs.putExtra("nama_kursus", namaKursus);
+                        iPcs.putExtra("harga", harga);
+                        iPcs.putExtra("icon", icon);
+                        startActivity(iPcs);
+
 
                     }
                 } catch (JSONException e) {

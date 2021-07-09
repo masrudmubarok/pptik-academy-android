@@ -33,8 +33,8 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
     String getId, modulTemp1, modulTemp2, modulTemp3, modulTemp4, modulTemp5, modulTemp6, modulTemp7, modulTemp8, modulTemp9, modulTemp10;
 
     // Adding HTTP Server URL to string variable.
-    String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learning.php";
-    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/modullearning-send-modulview.php";
+    String HttpURL = "https://pptikacademy.000webhostapp.com/api/videomodul-send-learningoverview.php";
+    String HttpURL1 = "https://pptikacademy.000webhostapp.com/api/modullearningoverview-send-modulview.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +152,8 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
                         String icon = object.getString("icon").trim();
 
                         Intent intent = new Intent(getApplicationContext(), LearningOverviewActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("nama_kursus", nama_kursus);
                         intent.putExtra("deskripsi", deskripsi);
@@ -207,14 +209,13 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
                         String judulModul1 = object.getString("judul1").trim();
-                        String modul1 = object.getString("moduloverview1").trim();
+                        String moduloverview1 = object.getString("moduloverview1").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("judul_modul", judulModul1);
-                        intent.putExtra("modul", modul1);
+                        intent.putExtra("moduloverview", moduloverview1);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {
@@ -251,14 +252,13 @@ public class ModulLearningOverviewActivity extends AppCompatActivity implements 
                         JSONObject object = jsonArray.getJSONObject(i);
                         String id_kursus = object.getString("id_kursus").trim();
                         String judulModul2 = object.getString("judul2").trim();
-                        String modul2 = object.getString("moduloverview2").trim();
+                        String moduloverview2 = object.getString("moduloverview2").trim();
 
                         Intent intent = new Intent(getApplicationContext(), ModulOverviewActivity.class);
                         intent.putExtra("id_kursus", id_kursus);
                         intent.putExtra("judul_modul", judulModul2);
-                        intent.putExtra("modul", modul2);
+                        intent.putExtra("moduloverview", moduloverview2);
                         startActivity(intent);
-                        finish();
 
                     }
                 } catch (JSONException e) {

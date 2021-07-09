@@ -61,14 +61,14 @@ public class ModulOverviewActivity extends AppCompatActivity {
         // Receive Data from LearnignActivity
         getId = getIntent().getStringExtra("id_kursus");
         judulModulTemp = getIntent().getStringExtra("judul_modul");
-        modulTemp = getIntent().getStringExtra("modul");
+        modulTemp = getIntent().getStringExtra("moduloverview");
 
         // Set material
         textView.setText(judulModulTemp);
 
         //This is function read PDF from URL
         String linkModul = modulTemp;
-        new ModulOverviewActivity.RetrievePDFStream().execute("http://pptikacademy.000webhost.com/assets/modul/overview/"+linkModul); // Or any url direct PDF from internet
+        new ModulOverviewActivity.RetrievePDFStream().execute("https://pptikacademy.000webhostapp.com/assets/modul/overview/"+linkModul); // Or any url direct PDF from internet
     }
 
     class RetrievePDFStream extends AsyncTask<String,Void, InputStream>
@@ -121,6 +121,8 @@ public class ModulOverviewActivity extends AppCompatActivity {
                         String judulModul10 = object.getString("judul10").trim();
 
                         Intent iVideo = new Intent(getApplicationContext(),ModulLearningOverviewActivity.class);
+                        iVideo.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        iVideo.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         iVideo.putExtra("id_kursus", id_kursus);
                         iVideo.putExtra("judul1", judulModul1);
                         iVideo.putExtra("judul2", judulModul2);
