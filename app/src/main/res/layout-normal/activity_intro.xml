@@ -20,17 +20,6 @@
         android:src="@drawable/pptik_academy" />
 
     <TextView
-        android:id="@+id/textDeskripsi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PPTIK merupakan lembaga yang menyediakan pelatihan online course dan sertifikasi interna- sional di bidang TIK."
-        android:textColor="#000"
-        android:textSize="16dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="95dp"/>
-
-    <TextView
         android:id="@+id/textNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,14 +27,14 @@
         android:textColor="@color/colorTextBlue"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="185dp"
+        android:layout_marginTop="105dp"
         android:layout_centerHorizontal="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerNews"
         android:layout_width="match_parent"
-        android:layout_height="149dp"
-        android:layout_marginTop="215dp"
+        android:layout_height="229dp"
+        android:layout_marginTop="135dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:scrollbars="vertical"
